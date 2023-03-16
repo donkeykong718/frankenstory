@@ -12,6 +12,7 @@ Link to Notion Board: https://www.notion.so/dbb5f835d2994af69a167987e78fc603?v=c
 
 ### Story Schema
 
+```js
 const frameSchema = new mongoose.Schema({
   text: { type: String },
   img: { type: String },
@@ -28,9 +29,11 @@ const storySchema = new mongoose.Schema({
 });
 
 const Story = mongoose.model('Story', storySchema);
+```
 
 ### User Schema
 
+```js
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
@@ -39,5 +42,5 @@ const userSchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-
+```
 
