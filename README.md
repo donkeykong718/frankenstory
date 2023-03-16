@@ -6,7 +6,15 @@ Frankstory is a collaborative story-telling game in the "exquisite corpse" style
 
 ## MVP: 
 
-Link to Notion Board: https://www.notion.so/dbb5f835d2994af69a167987e78fc603?v=c26e23393ab94b5080a93af181441818
+Link to Notion task board: https://www.notion.so/dbb5f835d2994af69a167987e78fc603?v=c26e23393ab94b5080a93af181441818
+
+## Team Expectations: 
+https://docs.google.com/document/d/1yNniUc770E-AUxs5e1zzaWsffG8WdcLaqHQcKjs-fC8/edit?usp=sharing
+
+## Whimsical 
+
+![Whimsical](https://user-images.githubusercontent.com/122040169/225676106-3e43cf96-d787-4cc3-9e0a-ab3a5439ee64.jpg)
+
 
 ## Schemas
 
