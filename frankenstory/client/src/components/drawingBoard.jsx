@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
+import { CirclePicker } from 'react-color';
 
 const createElement = (id, x1, y1, x2, y2, type) => {
   switch (type) {
@@ -96,7 +97,7 @@ const resizedCoordinates = (clientX, clientY, position, coordinates) => {
     case "end":
       return { x1, y1, x2: clientX, y2: clientY };
     default:
-      return null; //should not really get here...
+      return null;
   }
 };
 
@@ -143,6 +144,7 @@ const drawElement = (roughCanvas, context, element) => {
   switch (element.type) {
     case "pencil":
       const stroke = getSvgPathFromStroke(getStroke(element.points));
+      context.fillstyle = "blue";
       context.fill(new Path2D(stroke));
       break;
     case "text":
@@ -157,7 +159,9 @@ const drawElement = (roughCanvas, context, element) => {
 
 const adjustmentRequired = type => ["line", "rectangle"].includes(type);
 
-const App = () => {
+const DrawingApp = () => {
+  const canvasRef = useRef(null);
+  const [color, setColor] = useState('#FF0000');
   const [elements, setElements, undo, redo] = useHistory([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("text");
@@ -166,15 +170,18 @@ const App = () => {
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas");
-    const context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    if (canvas) {
+      const context = canvas.getContext("2d");
+      context.strokeStyle = "blue";
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
-    const roughCanvas = rough.canvas(canvas);
+      const roughCanvas = rough.canvas(canvas);
 
-    elements.forEach(element => {
-      if (action === "writing" && selectedElement.id === element.id) return;
-      drawElement(roughCanvas, context, element);
-    });
+      elements.forEach(element => {
+        if (action === "writing" && selectedElement.id === element.id) return;
+        drawElement(roughCanvas, context, element);
+      });
+    }
   }, [elements, action, selectedElement]);
 
   useEffect(() => {
@@ -210,8 +217,9 @@ const App = () => {
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
         break;
       case "text":
-        const textWidth = document
-          .getElementById("canvas")
+        const canvas = document.getElementById("canvas")
+        if (!canvas) return
+        const textWidth = canvas
           .getContext("2d")
           .measureText(options.text).width;
         const textHeight = 24;
@@ -265,6 +273,8 @@ const App = () => {
     const { clientX, clientY } = event;
 
     if (action === "drawing") {
+      if (!canvasRef.current) return
+      const context = canvasRef.current.getContext("2d");
       const index = elements.length - 1;
       const { x1, y1 } = elements[index];
       updateElement(index, x1, y1, clientX, clientY, tool);
@@ -329,9 +339,17 @@ const App = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
+  const [selectedColor, setSelectedColor] = useState("#000000");
+
+  function handleColorChange(newColor) {
+    console.log(newColor)
+    setColor(newColor.hex);
+  }
+
   return (
     <div>
       <div style={{ position: "fixed" }}>
+        <CirclePicker onChange={handleColorChange} color={color} />
         <input
           type="radio"
           id="pencil"
@@ -365,6 +383,7 @@ const App = () => {
         />
       ) : null}
       <canvas
+        ref={canvasRef}
         id="canvas"
         width={window.innerWidth}
         height={window.innerHeight}
@@ -378,4 +397,5 @@ const App = () => {
   );
 };
 
-export default App;
+
+export default DrawingApp;
