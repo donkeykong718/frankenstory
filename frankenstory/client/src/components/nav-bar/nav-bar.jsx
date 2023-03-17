@@ -1,9 +1,10 @@
-import './App.css';
+import React from 'react';
+import DrawingBoard from "./components/drawingBoard";
 
 function App() {
   return (
-    <div className="App">
-      Hello World
+    <div>
+      <DrawingBoard />
     </div>
   );
 }
