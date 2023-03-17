@@ -1,18 +1,25 @@
 @url = http://localhost:3000
 
-@name CreateStory
+# @name GetStories
 
-POST {{url}}/api/story/
+GET {{url}}/
+
+###
+
+# @name CreateStory
+
+POST {{url}}/
 Content-Type: application/json
 
 {
-    "frames": [{
-        "img": "",
+  "prompt": "Anything",
+  "completed": false,
+  "turn": 1,
+  "frame1": {
         "text": "",
-        "prompt": "Initial Prompt",
+        "img": "",
         "user": "dummyuser"
-     }],
-    "turn": 1,
-    "completed": false,
-
+     }
 }
+
+###

@@ -1,0 +1,27 @@
+[
+  {
+    "prompt": "Dogs playing poker",
+    "completed": false,
+    "turn": 1,
+    "frame1": {
+      "text": "",
+      "img": "",
+      "user": ""
+    },
+    "frame2": {
+      "text": "",
+      "img": "",
+      "user": ""
+    },
+    "frame3": {
+      "text": "",
+      "img": "",
+      "user": ""
+    },
+    "frame4": {
+      "text": "",
+      "img": "",
+      "user": ""
+    }
+  }
+]

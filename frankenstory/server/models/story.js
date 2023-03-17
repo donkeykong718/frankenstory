@@ -14,12 +14,32 @@ const frameSchema = new mongoose.Schema({
 });
 
 const storySchema = new mongoose.Schema({
-  frames: [frameSchema, frameSchema, frameSchema, frameSchema],
-  turn: { type: Number, min: 1, max: 8 },
-  // Try to implement turn logic on frontend if possible
+  prompt: String,
   completed: { type: Boolean, default: false },
-});
+  turn: { type: Number, min: 1, max: 8 },
+  frame1: {
+    text: String,
+    img: String,
+    user: String
+  },
+  frame2: {
+    text: String,
+    img: String,
+    user: String
+  },
+  frame3: {
+    text: String,
+    img: String,
+    user: String
+  },
+  frame4: {
+    text: String,
+    img: String,
+    user: String
+  }
 
-const Story = mongoose.model("Story", storySchema);
+})
 
-export default Story;
+// Try to implement turn logic on frontend if possible
+
+export default mongoose.model("Story", storySchema);
