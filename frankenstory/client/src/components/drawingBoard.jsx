@@ -320,61 +320,61 @@ const DrawingBoard = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
-  function MyComponent() {
-    const [color, setColor] = useState('#000');
+  // function MyComponent() {
+  //   const [color, setColor] = useState('#000');
 
-    function handleColorChange(newColor) {
-      setColor(newColor.hex);
-    }
-    return (
-      <div>
-        <div style={{ position: "fixed" }}>
-          {/* <canvas id="canvas" ref={canvasRef} width={500} height={500} /> */}
-          {/* <CirclePicker onChange={handleColorChange} color={color} /> */}
-          <input
-            type="radio"
-            id="pencil"
-            checked={tool === "pencil"}
-            onChange={() => setTool("pencil")}
-          />
-          <label htmlFor="pencil">Pencil</label>
-        </div>
-        <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
-          <button onClick={undo}>Undo</button>
-          <button onClick={redo}>Redo</button>
-        </div>
-        {action === "writing" ? (
-          <textarea
-            ref={textAreaRef}
-            onBlur={handleBlur}
-            style={{
-              position: "fixed",
-              top: selectedElement.y1 - 2,
-              left: selectedElement.x1,
-              font: "24px sans-serif",
-              margin: 0,
-              padding: 0,
-              border: 0,
-              outline: 0,
-              resize: "auto",
-              overflow: "hidden",
-              whiteSpace: "pre",
-              background: "transparent",
-            }}
-          />
-        ) : null}
-        <canvas
-          id="canvas"
-          width={window.innerWidth}
-          height={window.innerHeight}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
-          Canvas
-        </canvas>
+  //   function handleColorChange(newColor) {
+  //     setColor(newColor.hex);
+  //   }
+  return (
+    <div>
+      <div style={{ position: "fixed" }}>
+        {/* <canvas id="canvas" ref={canvasRef} width={500} height={500} /> */}
+        {/* <CirclePicker onChange={handleColorChange} color={color} /> */}
+        <input
+          type="radio"
+          id="pencil"
+          checked={tool === "pencil"}
+          onChange={() => setTool("pencil")}
+        />
+        <label htmlFor="pencil">Pencil</label>
       </div>
-    );
-  };
-}
+      <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
+        <button onClick={undo}>Undo</button>
+        <button onClick={redo}>Redo</button>
+      </div>
+      {action === "writing" ? (
+        <textarea
+          ref={textAreaRef}
+          onBlur={handleBlur}
+          style={{
+            position: "fixed",
+            top: selectedElement.y1 - 2,
+            left: selectedElement.x1,
+            font: "24px sans-serif",
+            margin: 0,
+            padding: 0,
+            border: 0,
+            outline: 0,
+            resize: "auto",
+            overflow: "hidden",
+            whiteSpace: "pre",
+            background: "transparent",
+          }}
+        />
+      ) : null}
+      <canvas
+        id="canvas"
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+      >
+        Canvas
+      </canvas>
+    </div>
+  );
+};
+
 export default DrawingBoard;
