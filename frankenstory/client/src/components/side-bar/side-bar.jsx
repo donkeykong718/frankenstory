@@ -7,6 +7,10 @@ import CompletionCircle_4 from '../side-bar/side-bar assets/CompletionCircle_4.s
 import CompletionCircle_5 from '../side-bar/side-bar assets/CompletionCircle_5.svg'
 import CompletionCircle_6 from '../side-bar/side-bar assets/CompletionCircle_6.svg'
 import CompletionCircle_7 from '../side-bar/side-bar assets/CompletionCircle_7.svg'
+import CloseSidebarImg from '../side-bar/side-bar assets/CloseSidebarImg.svg'
+import FrankAddNew from '../side-bar/side-bar assets/FrankAddNew2.svg'
+
+
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +33,9 @@ function Sidebar() {
     <>
       <button onClick={toggleSidebar}>Open Sidebar</button>
     <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
-      <ul>
+        <ul>
+        <li><img src={FrankAddNew} className="addNew" alt="Create New"/> </li>
+
           <li><img src={CompletionCircle_1} className="completionCircle"/></li>
           <li><img src={CompletionCircle_2} className="completionCircle"/></li>
           <li><img src={CompletionCircle_3} className="completionCircle"/></li>
@@ -38,7 +44,10 @@ function Sidebar() {
           <li><img src={CompletionCircle_6} className="completionCircle"/></li>
           <li><img src={CompletionCircle_7} className="completionCircle"/></li>
           
-          <li>      <button onClick={toggleSidebar}>Close Sidebar</button></li>
+          {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
+          {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
+
+          <img src={CloseSidebarImg} className="closeSidebarImg" onClick={toggleSidebar} alt="Close Sidebar"/>
       </ul>
     </div>
     </>
