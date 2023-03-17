@@ -16,8 +16,8 @@ const frameSchema = new mongoose.Schema({
 const storySchema = new mongoose.Schema({
   frames: [frameSchema, frameSchema, frameSchema, frameSchema],
   turn: { type: Number, min: 1, max: 8 },
+  // Try to implement turn logic on frontend if possible
   completed: { type: Boolean, default: false },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 
 const Story = mongoose.model("Story", storySchema);
