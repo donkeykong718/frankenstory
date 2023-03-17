@@ -1,0 +1,18 @@
+@url = http://localhost:3000
+
+@name CreateStory
+
+POST {{url}}/api/story/
+Content-Type: application/json
+
+{
+    "frames": [{
+        "img": "",
+        "text": "",
+        "prompt": "Initial Prompt",
+        "user": "dummyuser"
+     }],
+    "turn": 1,
+    "completed": false,
+
+}
