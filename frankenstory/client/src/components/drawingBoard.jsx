@@ -1,8 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import rough from 'roughjs';
+import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
-import { CirclePicker } from 'react-color';
-
 
 const createElement = (id, x1, y1, x2, y2, type) => {
   switch (type) {
@@ -13,6 +11,10 @@ const createElement = (id, x1, y1, x2, y2, type) => {
     default:
       throw new Error(`Type not recognised: ${type}`);
   }
+};
+
+const nearPoint = (x, y, x1, y1, name) => {
+  return Math.abs(x - x1) < 5 && Math.abs(y - y1) < 5 ? name : null;
 };
 
 const onLine = (x1, y1, x2, y2, x, y, maxDistance = 1) => {
@@ -50,7 +52,7 @@ const getElementAtPosition = (x, y, elements) => {
 
 const adjustElementCoordinates = element => {
   const { type, x1, y1, x2, y2 } = element;
-  if (type === "") {
+  if (type === "rectangle") {
     const minX = Math.min(x1, x2);
     const maxX = Math.max(x1, x2);
     const minY = Math.min(y1, y2);
@@ -62,6 +64,21 @@ const adjustElementCoordinates = element => {
     } else {
       return { x1: x2, y1: y2, x2: x1, y2: y1 };
     }
+  }
+};
+
+const cursorForPosition = position => {
+  switch (position) {
+    case "tl":
+    case "br":
+    case "start":
+    case "end":
+      return "nwse-resize";
+    case "tr":
+    case "bl":
+      return "nesw-resize";
+    default:
+      return "move";
   }
 };
 
@@ -79,7 +96,7 @@ const resizedCoordinates = (clientX, clientY, position, coordinates) => {
     case "end":
       return { x1, y1, x2: clientX, y2: clientY };
     default:
-      return null;
+      return null; //should not really get here...
   }
 };
 
@@ -88,8 +105,7 @@ const useHistory = initialState => {
   const [history, setHistory] = useState([initialState]);
 
   const setState = (action, overwrite = false) => {
-    const currentState = history[index] || {};
-    const newState = typeof action === "function" ? action(currentState) : action;
+    const newState = typeof action === "function" ? action(history[index]) : action;
     if (overwrite) {
       const historyCopy = [...history];
       historyCopy[index] = newState;
@@ -141,18 +157,15 @@ const drawElement = (roughCanvas, context, element) => {
 
 const adjustmentRequired = type => ["line", "rectangle"].includes(type);
 
-const DrawingBoard = () => {
+const App = () => {
   const [elements, setElements, undo, redo] = useHistory([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("text");
   const [selectedElement, setSelectedElement] = useState(null);
   const textAreaRef = useRef();
-  const canvasRef = useRef(null);
 
   useLayoutEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
+    const canvas = document.getElementById("canvas");
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -163,7 +176,6 @@ const DrawingBoard = () => {
       drawElement(roughCanvas, context, element);
     });
   }, [elements, action, selectedElement]);
-
 
   useEffect(() => {
     const undoRedoFunction = event => {
@@ -306,12 +318,9 @@ const DrawingBoard = () => {
 
     if (action === "writing") return;
 
-
-
     setAction("none");
     setSelectedElement(null);
   };
-
 
   const handleBlur = event => {
     const { id, x1, y1, type } = selectedElement;
@@ -320,17 +329,9 @@ const DrawingBoard = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
-  // function MyComponent() {
-  //   const [color, setColor] = useState('#000');
-
-  //   function handleColorChange(newColor) {
-  //     setColor(newColor.hex);
-  //   }
   return (
     <div>
       <div style={{ position: "fixed" }}>
-        {/* <canvas id="canvas" ref={canvasRef} width={500} height={500} /> */}
-        {/* <CirclePicker onChange={handleColorChange} color={color} /> */}
         <input
           type="radio"
           id="pencil"
@@ -377,4 +378,4 @@ const DrawingBoard = () => {
   );
 };
 
-export default DrawingBoard;
+export default App;
