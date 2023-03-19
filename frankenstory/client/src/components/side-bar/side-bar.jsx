@@ -9,7 +9,7 @@ import CompletionCircle_6 from '../side-bar/side-bar assets/CompletionCircle_6.s
 import CompletionCircle_7 from '../side-bar/side-bar assets/CompletionCircle_7.svg'
 import CloseSidebarImg from '../side-bar/side-bar assets/CloseSidebarImg.svg'
 import FrankAddNew from '../side-bar/side-bar assets/FrankAddNew2.svg'
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
 
 
 function Sidebar() {
@@ -34,7 +34,7 @@ function Sidebar() {
       <button onClick={toggleSidebar}>Open Sidebar</button>
     <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
         <ul>
-        <li><img src={FrankAddNew} className="addNew" alt="Create New"/> </li>
+        <li><img src={FrankAddNew} className="addNew" alt="Create New"/>Create New FrankenStory! </li>
 
           <li><img src={CompletionCircle_1} className="completionCircle"/></li>
           <li><img src={CompletionCircle_2} className="completionCircle"/></li>
