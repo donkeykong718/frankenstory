@@ -1,4 +1,4 @@
-import * as backendFunctions from '../services/stories';
+import * as backendFunctions from '../../services/stories';
 
 export default function Stories({ story }) {
 
