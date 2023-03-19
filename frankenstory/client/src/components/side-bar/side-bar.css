@@ -1,12 +1,18 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+
+
 .sidebar {
   position: fixed;
   top: 0;
   left: -200px;
   width: 200px;
-  height: 100%;
+  height: 100vh;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
 }
 
 .sidebar.open {
@@ -27,9 +33,47 @@
 
 .sidebar li {
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  font-family: 'Schoolbell', cursive;
+  text-align: center;
+
+  /* border-bottom: 1px solid #ccc; */
 }
 
 .sidebar li:last-child {
   border-bottom: none;
+}
+
+.completionCircle {
+  width: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.closeSidebarImg {
+  width: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.addNew {
+  width: 100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  font-family: 'Schoolbell', cursive;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: red;
+}
+.addNew:hover .overlay {
+  opacity: 1;
 }
