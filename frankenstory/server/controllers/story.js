@@ -11,7 +11,7 @@ export const GetStories = async (req, res) => {
 
 export const GetStoryById = async (req, res) => {
   const id = req.params.id;
-  const story = await Story.findById(id).populate("user");
+  const story = await Story.findById(id);
   return res.json(story);
 }
 

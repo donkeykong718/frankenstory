@@ -1,0 +1,32 @@
+.test-container {
+  display: grid;
+  grid-template-columns: 28% 72%;
+  grid-template-rows: 18% 90%;
+}
+
+.user-input {
+  border: solid 1px black;
+  height: 100px;
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.story-select {
+  border: solid 1px black;
+  height: 100vh;
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  overflow-y: scroll;
+  grid-column: 1;
+  grid-row: 1 / 2;
+}
+
+.workspace {
+  border: 1px black solid;
+  grid-column: 2;
+  grid-row: 2;
+}
