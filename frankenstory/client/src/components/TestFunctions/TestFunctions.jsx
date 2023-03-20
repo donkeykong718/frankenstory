@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
 import * as backendFunctions from '../../services/stories';
-import prompts from "../../prompts.json"
-import Stories from "./Stories.jsx"
+// import prompts from "../../prompts.json"
+// import Stories from "../side-bar/ListStories.jsx"
 import './testfunctions.css'
+import Gallery from "./Gallery.jsx"
+import Frame from './Frame'
 
-export default function TestFunctions() {
+export default function TestFunctions({ current, featured }) {
 
+  const [selection, setSelection] = useState(false)
 
-  const randomIndex = Math.floor(Math.random() * prompts.length);
+  useEffect(() => { setSelection(true) }, [featured])
 
   const [user, setUser] = useState("guest");
-  const [data, setData] = useState({
-    prompt: prompts[randomIndex],
-    turn: 1,
-    text: ""
-  });
-
-  // const storyArray = Array.from(stories);
-  // console.log(storyArray);
-
   const [stories, setStories] = useState([]);
 
-  const [story, setStory] = useState({});
+  const [story, setStory] = useState(current);
   const [display, setDisplay] = useState();
   const [count, setCount] = useState(0);
 
@@ -35,21 +29,144 @@ export default function TestFunctions() {
     console.log(user);
   }
 
-  const handleTextChange = async (e) => {
+  const handleTextChange = (e) => {
     setCount(e.target.value.length)
-    const textInput = e.target.value;
-    let newData = Object.assign(data, textInput);
-    setData(newData);
-    console.log(newData);
+    const { value } = e.target;
+
+    let updatedStory = current;
+    let currentFrame;
+    let currentField;
+
+    console.log(`The current turn is: ${current.turn}`)
+    console.log(`The updatedStory turn is: ${updatedStory.turn}`)
+
+    switch (updatedStory.turn) {
+      case 1:
+        currentFrame = 'frame1';
+        currentField = 'img';
+        break;
+      case 2:
+        currentFrame = 'frame1';
+        currentField = 'text';
+        break;
+      case 3:
+        currentFrame = 'frame2';
+        currentField = 'img';
+        break;
+      case 4:
+        currentFrame = 'frame2';
+        currentField = 'text';
+        break
+      case 5:
+        currentFrame = 'frame3';
+        currentField = 'img';
+        break;
+      case 6:
+        currentFrame = 'frame3';
+        currentField = 'text';
+        break;
+      case 7:
+        currentFrame = 'frame4';
+        currentField = 'img';
+        break;
+      case 8:
+        currentFrame = 'frame4';
+        currentField = 'text';
+        break;
+      default:
+    }
+
+    console.log(`The current frame is: ${currentFrame} `)
+    console.log(updatedStory[currentFrame]);
+
+    if (currentField === 'text') {
+
+      const { img } = updatedStory[currentFrame];
+
+      updatedStory[currentFrame] = {
+        'text': value,
+        'user': user,
+        'img': img
+      }
+    }
+
+    else if (currentField === 'img') {
+
+      updatedStory[currentFrame] = {
+        'user': user,
+        'img': value
+      }
+    }
+
+    console.log('The updatedStory variable is')
+    console.log(updatedStory);
+
+    // updatedStory.frame[0][name] = value;
+
+    setStory(updatedStory)
+    // let newData = Object.assign(data, textInput);
+    // setData(newData);
+    // console.log(newData);
+    console.log(story);
   }
 
 
   const handleTextSubmit = async (e) => {
     e.preventDefault();
-    // const textInput = e.target.value;
-    // setData;
-    // console.log(textInput);
+    let updateStory = story;
+    updateStory['turn'] = updateStory.turn + 1;
+    // updateStory['frame1'] = {
+    //  'text': e.target.value,
+    // 'img': e.target.value,
+    // 'user': user
+    //   }
+
+    // updateStory.frame1[user] = user;
+    // updateStory.turn = updateStory.turn + 1;
+    setStory(updateStory);
+    console.log(story._id, story);
+    const newStory = await backendFunctions.updateStory(story._id, story);
+    console.log(newStory);
+    // console.log('Now the story is:')
+    // console.log(story);
+    // console.log(story._id);
+
   }
+
+  useEffect(() => {
+    console.log("The current story is:")
+    console.log(current)
+    const { prompt, turn } = current;
+    console.log(prompt, turn)
+
+    switch (turn) {
+      case 1:
+        setDisplay(prompt);
+        break;
+      case 2:
+        setDisplay(current.frame1.img);
+        break;
+      case 3:
+        setDisplay(current.frame1.text);
+        break;
+      case 4:
+        setDisplay(current.frame2.img);
+        break;
+      case 5:
+        setDisplay(current.frame2.text);
+        break;
+      case 6:
+        setDisplay(current.frame3.img);
+        break;
+      case 7:
+        setDisplay(current.frame3.text);
+        break;
+      case 8:
+        setDisplay(current.frame4.img);
+        break;
+      default:
+    }
+  }, [current])
 
 
   useEffect(() => {
@@ -61,44 +178,89 @@ export default function TestFunctions() {
     handleGetStories();
   }, [])
 
-  useEffect(() => {
-    const { prompt, turn } = story;
-    console.log(prompt, turn)
-
-    switch (turn) {
-      case 1:
-        setDisplay(prompt);
-        break;
-      case 2:
-        setDisplay(story.frame1.img);
-        break;
-      case 3:
-        setDisplay(story.frame1.text);
-        break;
-      case 4:
-        setDisplay(story.frame2.img);
-        break;
-      case 5:
-        setDisplay(story.frame2.text);
-        break;
-      case 6:
-        setDisplay(story.frame3.img);
-        break;
-      case 7:
-        setDisplay(story.frame3.text);
-        break;
-      case 8:
-        setDisplay(story.frame4.img);
-        break;
-      default:
-      // code block
+  const setWorkspace = (current) => {
+    const { turn } = current;
+    console.log(`Turn remainder is ${turn % 2}`);
+    if (turn === 1) {
+      return (
+        <div>
+          <form onSubmit={handleTextSubmit}>
+            <textarea maxLength={400} className='text-display' placeholder="Draw a picture based on the above prompt." name="img" onChange={handleTextChange} />
+            <button>Submit</button>
+          </form>
+        </div>
+      )
     }
+    else if (turn % 2 === 0) {
+      return (
+        <div>
+          <p>{400 - count}/400 characters remaining</p>
+          <form onSubmit={handleTextSubmit}>
+            <textarea maxLength={400} className='text-display' placeholder="Write the next part of a story based on the above picture."
+              onChange={handleTextChange} name="text" />
+            <button>Submit</button>
+          </form>
+        </div>
+      )
+    }
+    else if (turn % 2 === 1) {
+      return (
+        <div>
+          <p>Draw a picture based on the above prompt</p>
+          <form onSubmit={handleTextSubmit}>
+            <textarea maxLength={400} className='text-display' placeholder="Illustrate the next part of the story."
+              onChange={handleTextChange} name="img" />
+            <button>Submit</button>
+          </form>
+        </div>
+      )
+    }
+    else {
 
-  }, [story])
+      return <p>Some kind of error, I guess</p>
+    }
+  }
 
+
+  //FRAMES
+  const pictureBook = (displayStory) => {
+    const { prompt, frame1, frame2, frame3, frame4 } = displayStory;
+    const frames = [frame1, frame2, frame3, frame4];
+
+    const storyList = document.querySelector('.story-list');
+    storyList.classList.toggle = 'hidden';
+
+    return (
+      <div className="picture-book">
+        <h2>{prompt}</h2>
+        <div>
+          {frames.map((frame, index) => (<Frame frame={frame} key={index}
+          />))}
+        </div>
+      </div>
+    )
+  }
+
+  const displayGallery = async () => {
+
+    const allStories = await backendFunctions.getStories();
+    const finishedStories = allStories.filter(story => story.completed === true);
+    console.log(finishedStories);
+
+    const workspace = document.querySelector(".workspace");
+    const gallery = document.querySelector(".gallery");
+    workspace.classList.toggle('hidden');
+    gallery.classList.toggle('hidden');
+
+    setStories(finishedStories);
+    // console.log(finishedStories);
+
+  }
 
   return (
     <div className='test-container'>
+
+      <button onClick={displayGallery}>View Gallery</button>
       {/*SET USER / LOG-IN ETC*/}
       <div className="user-input">
         <form onSubmit={handleUserSubmit}>
@@ -111,28 +273,35 @@ export default function TestFunctions() {
       <br></br>
 
       {/*SIDE-BAR / SELECT STORY*/}
-      <div className="story-select">
+      {/* <div className="story-select">
         <button onClick={async () => {
           const currentStory = await backendFunctions.createStory(data)
           console.log(currentStory);
           setStory(currentStory);
         }} >Create New Story</button>
         {/* <button onClick={handleGetStories}>Add to Active Story</button> */}
-        <div className="story-list">
+      {/* <div className="story-list">
           {stories.map((story, index) => (<Stories story={story} key={index} />))}
         </div>
+      </div> */}
+
+      <div className='gallery hidden'>
+        <h1>Gallery</h1>
+        <ul className="story-list">
+          {stories.map((story, index) => (<Gallery story={story} key={index}
+          />))}
+        </ul>
+        {selection &&
+          <div>{pictureBook(featured)}</div>}
       </div>
+
 
       <div className='workspace'>
-        <p>{400 - count}/400 characters remaining</p>
-        <form onSubmit={handleTextSubmit}>
-          <textarea maxLength={400} className='text-display' placeholder="Write the beginning of a story here."
-            onChange={handleTextChange} />
-          <div className='image-display'></div>
-          <button>Submit</button>
-        </form>
+        <p>The current story is: {current._id}</p>
+        <p>{display}</p>
+        <p>It is turn number {current.turn}</p>
+        <div>{setWorkspace(current)}</div>
       </div>
-
     </div >
   )
 }

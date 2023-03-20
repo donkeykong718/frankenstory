@@ -29,7 +29,7 @@ export const createStory = async (startData) => {
 
 export const updateStory = async (id, StoryData) => {
   try {
-    const response = await api.put(`/Stories/${id}`, StoryData);
+    const response = await api.put(`/${id}`, StoryData);
     return response.data;
   } catch (error) {
     throw error;

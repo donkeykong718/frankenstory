@@ -5,7 +5,7 @@ import Story from "../models/Story.js";
 // const TOKEN_KEY = process.env.TOKEN_KEY;
 
 export const GetStories = async (req, res) => {
-  const activeStories = await Story.find({ completed: false });
+  const activeStories = await Story.find();
   return res.json(activeStories);
 }
 
