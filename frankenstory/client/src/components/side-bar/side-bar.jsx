@@ -1,9 +1,37 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './side-bar.css'
+import React, { useState, useEffect, useRef, useContext } from 'react';
+
+//DK added 3.19
+import * as backendFunctions from '../../services/stories'
+import ListStories from './ListStories'
+import prompts from "../../prompts.json"
+import { StoryContext } from '../../App';
+
+import './side-bar.css';
+
+import CloseSidebarImg from '../side-bar/side-bar assets/CloseSidebarImg.svg'
+import FrankAddNew from '../side-bar/side-bar assets/FrankAddNew2.svg'
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+
 
 function Sidebar() {
+
+  const { current, setCurrent } = useContext(StoryContext);
+
+  const randomIndex = Math.floor(Math.random() * prompts.length);
+
+  const [data, setData] = useState({
+    prompt: prompts[randomIndex],
+    turn: 1,
+    text: ""
+  });
+
+
+  //DK added 3.19
+  const [stories, setStories] = useState([]);
+
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
+
 
   useEffect(() => {
     document.addEventListener("mousedown", (event) => {
@@ -14,21 +42,50 @@ function Sidebar() {
 
   }, [isOpen])
 
+  //adding a GET ALL stories to display in SideBar
+
+  useEffect(() => {
+    const handleGetStories = async () => {
+      const allStories = await backendFunctions.getStories();
+      const activeStories = allStories.filter(story => story.completed === false);
+
+      activeStories.sort((a, b) => b.turn - a.turn)
+
+      setStories(activeStories);
+    }
+    handleGetStories();
+  }, [])
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  const createStory = async () => {
+    const currentStory = await backendFunctions.createStory(data)
+    console.log("The current story is:")
+    console.log(currentStory);
+    setCurrent(currentStory);
+  }
+
   return (
     <>
       <button onClick={toggleSidebar}>Open Sidebar</button>
-    <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
-      <ul>
-        <li>Link 1</li>
-        <li>Link 2</li>
-          <li>Link 3</li>
-          <li>      <button onClick={toggleSidebar}>Close Sidebar</button></li>
-      </ul>
-    </div>
+      <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
+        <ul>
+          <li><img src={FrankAddNew} className="addNew" alt="Create New" />Create New FrankenStory! </li>
+          <button onClick={createStory}>Create</button>
+
+          <ul className="story-list">
+            {stories.map((story, index) => (<ListStories story={story} key={index}
+            />))}
+          </ul>
+
+          {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
+          {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
+
+          <img src={CloseSidebarImg} className="closeSidebarImg" onClick={toggleSidebar} alt="Close Sidebar" />
+        </ul>
+      </div>
     </>
   );
 }
