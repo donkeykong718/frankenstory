@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 
 
@@ -49,12 +48,14 @@
   display: flex;
   align-items: center;
 }
+
 .closeSidebarImg {
   width: 70px;
   margin: 0 auto;
   display: flex;
   align-items: center;
 }
+
 .addNew {
   width: 100px;
   margin: 0 auto;
@@ -62,6 +63,7 @@
   align-items: center;
   font-family: 'Schoolbell', cursive;
 }
+
 .overlay {
   position: absolute;
   top: 0;
@@ -74,6 +76,7 @@
   transition: .3s ease;
   background-color: red;
 }
+
 .addNew:hover .overlay {
   opacity: 1;
 }
