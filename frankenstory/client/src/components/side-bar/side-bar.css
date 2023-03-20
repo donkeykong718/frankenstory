@@ -12,6 +12,7 @@
   transition: left 0.3s ease-in-out;
   max-height: calc(100vh - 9rem);
   overflow-y: auto;
+  
 }
 
 .sidebar.open {
@@ -19,7 +20,7 @@
 }
 
 .sidebar button {
-  display: block;
+  display: flex;
   margin: 20px;
   padding: 10px;
 }
@@ -50,10 +51,20 @@
 }
 
 .closeSidebarImg {
-  width: 70px;
+  width: 50px;
   margin: 0 auto;
   display: flex;
   align-items: center;
+}
+.create-new-box {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Creepster', cursive;
+  font-size: 23px;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-weight: lighter;
+  cursor: pointer;
 }
 
 .addNew {
@@ -64,19 +75,47 @@
   font-family: 'Schoolbell', cursive;
 }
 
-.overlay {
+.close-sidebar {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Creepster', cursive;
+  font-size: 23px;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+.create-new-box:hover .overlay {
+  opacity: 1;
+}
+.text {
+  color: #963484;
+  font-size: 20px;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.overlay {
+
+  position: relative;
+  z-index: 1000;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100%;
-  width: 100%;
+  height: 50%;
+  width: 50%;
   opacity: 0;
   transition: .3s ease;
   background-color: red;
 }
 
-.addNew:hover .overlay {
+/* .addNew:hover .overlay {
   opacity: 1;
-}
+} */

@@ -1,16 +1,15 @@
 import React from "react";
 // import "./nav-barApp";
 import "./Header.css";
-
-// import LogoImg from "../nav-bar assets/Frank_logo.svg";
-
-
+import LogoImg from "./Header assets/Frank_logo.svg";
 
 function Header() {
   return (
-    <div className="nav-bar">
+    <div className="header">
+        <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div>
       <ul className="header-list">
-        <li>Name & Logo</li>
+        <li>
+        </li>
         <li>Gallery</li>
         <li>SignIn</li>
         <li>Log Out</li>
