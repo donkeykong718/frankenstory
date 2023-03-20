@@ -7,7 +7,7 @@ GET {{url}}/story
 ###
 # @name CreateStory
 
-POST {{url}}
+POST {{url}}/story
 Content-Type: application/json
 
 {
@@ -19,6 +19,11 @@ Content-Type: application/json
 
 ###
 
+# @name GetStoriesById
+
+GET {{url}}/story/6418a754e96d093760bfa77
+
+###
 # @name Sign Up
 
 POST {{url}}/user/sign-up
@@ -26,7 +31,8 @@ Content-Type: application/json
 
 {
 	"name": "John Doe",
-	"username": "iforgot93",
+	"email": "johndoe12@gmail.com",
+	"username": "testingdata12",
 	"password": "password123"
 }
 
@@ -38,7 +44,7 @@ POST {{url}}/user/sign-in
 Content-Type: application/json
 
 {
-	"username": "dontmakememad93",
+	"username": "testingdata12",
 	"password": "password123"
 }
 
