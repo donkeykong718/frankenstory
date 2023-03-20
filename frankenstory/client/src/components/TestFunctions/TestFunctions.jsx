@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as backendFunctions from '../../services/stories';
 // import prompts from "../../prompts.json"
 // import Stories from "../side-bar/ListStories.jsx"
 import './testfunctions.css'
-import Gallery from "./Gallery.jsx"
-import Frame from './Frame'
+// import Gallery from "./Gallery.jsx"
+// import Frame from './Frame'
+import { StoryContext } from '../../App';
 
-export default function TestFunctions({ current, featured }) {
 
-  const [selection, setSelection] = useState(false)
+export default function TestFunctions({ current }) {
 
-  useEffect(() => { setSelection(true) }, [featured])
+  const { setCurrent } = useContext(StoryContext);
+
+  // const [selection, setSelection] = useState(false)
+
+  // useEffect(() => { setSelection(true) }, [featured])
 
   const [user, setUser] = useState("guest");
   const [stories, setStories] = useState([]);
@@ -42,58 +46,58 @@ export default function TestFunctions({ current, featured }) {
 
     switch (updatedStory.turn) {
       case 1:
-        currentFrame = 'frame1';
+        currentFrame = 0;
         currentField = 'img';
         break;
       case 2:
-        currentFrame = 'frame1';
+        currentFrame = 0;
         currentField = 'text';
         break;
       case 3:
-        currentFrame = 'frame2';
+        currentFrame = 1;
         currentField = 'img';
         break;
       case 4:
-        currentFrame = 'frame2';
+        currentFrame = 1;
         currentField = 'text';
         break
       case 5:
-        currentFrame = 'frame3';
+        currentFrame = 2;
         currentField = 'img';
         break;
       case 6:
-        currentFrame = 'frame3';
+        currentFrame = 2;
         currentField = 'text';
         break;
       case 7:
-        currentFrame = 'frame4';
+        currentFrame = 3;
         currentField = 'img';
         break;
       case 8:
-        currentFrame = 'frame4';
+        currentFrame = 3;
         currentField = 'text';
         break;
       default:
     }
 
-    console.log(`The current frame is: ${currentFrame} `)
-    console.log(updatedStory[currentFrame]);
+    console.log(`The current frame is: ${currentFrame + 1} `)
+    console.log(updatedStory.frames[currentFrame]);
 
     if (currentField === 'text') {
 
-      const { img } = updatedStory[currentFrame];
+      const { img } = updatedStory.frames[currentFrame];
 
-      updatedStory[currentFrame] = {
+      updatedStory.frames[currentFrame] = {
         'text': value,
-        'user': user,
+        // 'user': user,
         'img': img
       }
     }
 
     else if (currentField === 'img') {
 
-      updatedStory[currentFrame] = {
-        'user': user,
+      updatedStory.frames[currentFrame] = {
+        // 'user': user,
         'img': value
       }
     }
@@ -104,6 +108,7 @@ export default function TestFunctions({ current, featured }) {
     // updatedStory.frame[0][name] = value;
 
     setStory(updatedStory)
+    setCurrent(updatedStory)
     // let newData = Object.assign(data, textInput);
     // setData(newData);
     // console.log(newData);
@@ -139,30 +144,32 @@ export default function TestFunctions({ current, featured }) {
     const { prompt, turn } = current;
     console.log(prompt, turn)
 
+
+
     switch (turn) {
       case 1:
         setDisplay(prompt);
         break;
       case 2:
-        setDisplay(current.frame1.img);
+        setDisplay(current.frames[0].img);
         break;
       case 3:
-        setDisplay(current.frame1.text);
+        setDisplay(current.frames[0].text);
         break;
       case 4:
-        setDisplay(current.frame2.img);
+        setDisplay(current.frames[1].img);
         break;
       case 5:
-        setDisplay(current.frame2.text);
+        setDisplay(current.frames[1].text);
         break;
       case 6:
-        setDisplay(current.frame3.img);
+        setDisplay(current.frames[2].img);
         break;
       case 7:
-        setDisplay(current.frame3.text);
+        setDisplay(current.frames[2].text);
         break;
       case 8:
-        setDisplay(current.frame4.img);
+        setDisplay(current.frames[3].img);
         break;
       default:
     }
@@ -217,50 +224,50 @@ export default function TestFunctions({ current, featured }) {
     }
     else {
 
-      return <p>Some kind of error, I guess</p>
+      return <p>Select a project from the sidebar</p>
     }
   }
 
 
   //FRAMES
-  const pictureBook = (displayStory) => {
-    const { prompt, frame1, frame2, frame3, frame4 } = displayStory;
-    const frames = [frame1, frame2, frame3, frame4];
+  // const pictureBook = (displayStory) => {
+  //   const { prompt, frame1, frame2, frame3, frame4 } = displayStory;
+  //   const frames = [frame1, frame2, frame3, frame4];
 
-    const storyList = document.querySelector('.story-list');
-    storyList.classList.toggle = 'hidden';
+  //   const storyList = document.querySelector('.story-list');
+  //   storyList.classList.toggle = 'hidden';
 
-    return (
-      <div className="picture-book">
-        <h2>{prompt}</h2>
-        <div>
-          {frames.map((frame, index) => (<Frame frame={frame} key={index}
-          />))}
-        </div>
-      </div>
-    )
-  }
+  //   return (
+  //     <div className="picture-book">
+  //       <h2>{prompt}</h2>
+  //       <div>
+  //         {frames.map((frame, index) => (<Frame frame={frame} key={index}
+  //         />))}
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
-  const displayGallery = async () => {
+  // const displayGallery = async () => {
 
-    const allStories = await backendFunctions.getStories();
-    const finishedStories = allStories.filter(story => story.completed === true);
-    console.log(finishedStories);
+  //   const allStories = await backendFunctions.getStories();
+  //   const finishedStories = allStories.filter(story => story.completed === true);
+  //   console.log(finishedStories);
 
-    const workspace = document.querySelector(".workspace");
-    const gallery = document.querySelector(".gallery");
-    workspace.classList.toggle('hidden');
-    gallery.classList.toggle('hidden');
+  //   const workspace = document.querySelector(".workspace");
+  //   const gallery = document.querySelector(".gallery");
+  //   workspace.classList.toggle('hidden');
+  //   gallery.classList.toggle('hidden');
 
-    setStories(finishedStories);
-    // console.log(finishedStories);
+  //   setStories(finishedStories);
+  //   // console.log(finishedStories);
 
-  }
+  // }
 
   return (
     <div className='test-container'>
 
-      <button onClick={displayGallery}>View Gallery</button>
+      {/* <button onClick={displayGallery}>View Gallery</button> */}
       {/*SET USER / LOG-IN ETC*/}
       <div className="user-input">
         <form onSubmit={handleUserSubmit}>
@@ -285,7 +292,7 @@ export default function TestFunctions({ current, featured }) {
         </div>
       </div> */}
 
-      <div className='gallery hidden'>
+      {/* <div className='gallery hidden'>
         <h1>Gallery</h1>
         <ul className="story-list">
           {stories.map((story, index) => (<Gallery story={story} key={index}
@@ -293,13 +300,12 @@ export default function TestFunctions({ current, featured }) {
         </ul>
         {selection &&
           <div>{pictureBook(featured)}</div>}
-      </div>
+      </div> */}
 
-
+      <p>The current story is: {current._id}</p>
+      <p>It is turn number {current.turn}</p>
       <div className='workspace'>
-        <p>The current story is: {current._id}</p>
         <p>{display}</p>
-        <p>It is turn number {current.turn}</p>
         <div>{setWorkspace(current)}</div>
       </div>
     </div >
