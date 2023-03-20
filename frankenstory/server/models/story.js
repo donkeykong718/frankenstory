@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 const frameSchema = new mongoose.Schema({
   text: { type: String },
   img: { type: String },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  user: { type: String },
   inProgress: { type: Boolean, default: true },
 });
 
@@ -17,7 +17,7 @@ const storySchema = new mongoose.Schema({
   completed: { type: Boolean, default: false },
   turn: { type: Number, min: 0, max: 8 },
   // There is not a turn when it's completed have it zero or 9
-  frames: [frameSchema, frameSchema, frameSchema, frameSchema],
+  frames: [String]
 });
 
 // Try to implement turn logic on frontend if possible
