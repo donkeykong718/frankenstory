@@ -18,6 +18,7 @@ async function seed() {
     username: "dumbass",
     hash: "asdf",
     email: "boomers123@gmail.com",
+    password: "idontknow123",
     isVerified: true,
     drawings: [],
   });
