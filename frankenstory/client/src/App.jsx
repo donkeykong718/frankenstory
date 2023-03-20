@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './components/side-bar/side-bar';
+import Header from './components/Header/Header';
+
 import Gallery from './components/TestFunctions/Gallery';
 import TestFunctions from './components/TestFunctions/TestFunctions';
 // import * as backendFunctions from './services/stories';
@@ -28,7 +30,9 @@ function App() {
 
   return (
     <>
+
       <StoryContext.Provider value={{ current, setCurrent }}>
+        <Header />
         <Sidebar />
         <GalleryContext.Provider value={{ featured, setFeatured }}>
           <TestFunctions current={current} featured={featured} />
