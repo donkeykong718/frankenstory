@@ -1,0 +1,34 @@
+.test-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-input {
+  border: solid 1px black;
+  height: 100px;
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.story-select {
+  border: solid 1px black;
+  height: 100vh;
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  overflow-y: scroll;
+}
+
+.workspace {
+  border: 1px black solid;
+  height: 400px;
+  width: 250px;
+}
+
+.hidden {
+  display: none;
+}
