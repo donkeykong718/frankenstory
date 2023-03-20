@@ -4,6 +4,7 @@ const userSchema = new mongoose.Schema({
   username: String,
   hash: String,
   email: String,
+  isVerified: { type: Boolean, default: false },
   drawings: [
     {
       type: mongoose.Schema.Types.ObjectId,

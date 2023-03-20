@@ -1,25 +1,65 @@
-@url = http://localhost:3000
+@url = http://localhost:3000/api
 
 # @name GetStories
 
-GET {{url}}/
+GET {{url}}/story
 
 ###
-
 # @name CreateStory
 
-POST {{url}}/
+POST {{url}}
 Content-Type: application/json
 
 {
-  "prompt": "Anything",
-  "completed": false,
-  "turn": 1,
-  "frame1": {
-        "text": "",
-        "img": "",
-        "user": "dummyuser"
-     }
+	"prompt": "Anything",
+	"completed": false,
+	"turn": 1,
+	"frames": []
+}
+
+###
+
+# @name Sign Up
+
+POST {{url}}/user/sign-up
+Content-Type: application/json
+
+{
+	"name": "John Doe",
+	"username": "dontmakememad93",
+	"password": "password123"
+}
+
+###
+
+# @name Sign In
+
+POST {{url}}/user/sign-in
+Content-Type: application/json
+
+{
+	"email": "johndoe@example.com",
+	"password": "password123"
+}
+
+###
+
+# @name Verify
+
+GET {{url}}/user/verify
+Authorization: Bearer <access_token>
+
+###
+
+# @name Change Password
+
+POST {{url}}/user/change-password
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+	"oldPassword": "password123",
+	"newPassword": "newpassword123"
 }
 
 ###
