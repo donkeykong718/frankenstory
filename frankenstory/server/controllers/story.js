@@ -23,7 +23,7 @@ export const CreateStory = async (req, res) => {
 
 export const UpdateStory = async (req, res) => {
   const id = req.params.id;
-  const story = Story.findByIdAndUpdate(id, req.body);
+  const story = await Story.findByIdAndUpdate(id, req.body);
   res.status(201).json(story);
 };
 

@@ -1,102 +1,125 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // In controllers/users.js
-const TOKEN_KEY = process.env.TOKEN_KEY;
+let SALT_ROUNDS = 11;
+let TOKEN_KEY = process.env.TOKEN_KEY;
+
+function getExpiration() {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() + 30);
+  return d.getTime();
+}
+
 // function for sign-up route
 export const signUp = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, username, password } = req.body;
 
-  if (!username || !password) {
-    return res
-      .status(400)
-      .json({ message: "Please provide a username and password" });
-  }
+  // if (!email || !username || !password) {
+  //   return res
+  //     .status(400)
+  //     .json({ message: "Please provide a username and password" });
+  // }
 
-  try {
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already registered" });
-    }
+  // await User.findOne({ username });
+  // if (existingUser) {
+  //   return res.status(400).json({ message: "Username already registered" });
+  // }
 
-    const hash = await bcrypt.hash(password, 10);
-    const user = await User.create({
-      username,
-      hash,
-      handle: username,
-    });
+  const hash = await bcrypt.hash(password, SALT_ROUNDS);
+  const user = await User.create({
+    username,
+    email,
+    hash,
+  });
 
-    const data = {
-      id: user._id,
-      handle: user.handle,
-      exp: getExpiration(),
-    };
+  const data = {
+    id: user._id,
+    username: user.username,
+    email: user.email,
+    exp: getExpiration(),
+  };
 
-    const token = jwt.sign(data, TOKEN_KEY);
-    return res.json(token);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
+  const token = jwt.sign(data, TOKEN_KEY);
+  return res.json(token);
+
+  // try {
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ message: "Server error" });
+  // }
 };
 
 // function for sign-in routeexport const signIn = async (req, res) => {
 export const signIn = async (req, res) => {
-  const { handle, password } = req.body;
-  try {
-    const user = await User.findOne({ handle });
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-    const isMatch = await bcrypt.compare(password, user.hash);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-    if (!user.isVerified) {
-      return res.status(401).json({ message: "Email not verified" });
-    }
+  const { username, password } = req.body;
+
+  // try {
+  const user = await User.findOne({ username });
+
+  // if (!user) {
+  //   return res.status(400).json({ message: "User not found" });
+  // }
+
+  const isMatch = await bcrypt.compare(password, user.hash);
+
+  if (isMatch) {
     const payload = {
       userId: user._id,
-      handle: user.handle,
+      username: user.username,
+      email: user.email,
+      exp: getExpiration(),
     };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(payload, TOKEN_KEY);
     res.status(200).json({ token });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
   }
+
+  // if (!isMatch) {
+  //   return res.status(401).json({ message: "Invalid credentials" });
+  // }
+  // if (!user.isVerified) {
+  //   return res.status(401).json({ message: "User not verified" });
+  // }
+
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ message: "Server error" });
+  // }
 };
 
 // function for verify route
 export const verify = async (req, res) => {
   // Your code to handle email verification logic
   // For example, update the user's email verification status in your database
-  const { token } = req.body;
+  const token = req.headers.authorization.split(" ")[1];
 
-  if (!token) {
-    return res.status(400).json({ message: "Token not provided" });
+  // if (!token) {
+  //   return res.status(400).json({ message: "Token not provided" });
+  // }
+
+  // try {
+  const decodedToken = jwt.verify(token, TOKEN_KEY);
+  // const user = await User.findById(decodedToken.id);
+  if (decodedToken) {
+    res.json(decodedToken);
   }
 
-  try {
-    const decodedToken = jwt.verify(token, TOKEN_KEY);
-    const user = await User.findById(decodedToken.id);
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
+  // if (!user) {
+  //   return res.status(400).json({ message: "User not found" });
+  // }
 
-    if (user.isVerified) {
-      return res.status(400).json({ message: "User already verified" });
-    }
+  // if (user.isVerified) {
+  //   return res.status(400).json({ message: "User already verified" });
+  // }
 
-    user.isVerified(true);
-    await user.save();
-    res.status(200).json({ message: "User verified" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
-  }
+  // user.isVerified(true);
+  // await user.save();
+  // res.status(200).json({ message: "User verified" });
+  // } catch (error) {
+  //   console.error(error);
+  //   res.status(500).json({ message: "Server error" });
+  // }
 };
 
 // function for change-password route
