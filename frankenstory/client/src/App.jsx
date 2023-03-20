@@ -6,6 +6,7 @@ import Gallery from './components/TestFunctions/Gallery';
 import TestFunctions from './components/TestFunctions/TestFunctions';
 // import * as backendFunctions from './services/stories';
 // import '.side-bar'
+import DrawingBoard from './components/canvas-component/drawingBoard';
 // import Parent from './components/TestFunctions/Parent'
 
 export const StoryContext = React.createContext();
@@ -22,20 +23,18 @@ function App() {
   //   // const storyArray = Array.from(activeStories);
   //   return activeStories;
   // }
-
   // const activeStories = getActiveStories();
-
   // console.log(storyArray);
   // console.log(typeof storyArray);
 
   return (
     <>
-
       <StoryContext.Provider value={{ current, setCurrent }}>
         <Header />
         <Sidebar />
         <GalleryContext.Provider value={{ featured, setFeatured }}>
           <TestFunctions current={current} featured={featured} />
+                <DrawingBoard />
         </GalleryContext.Provider>
       </StoryContext.Provider>
     </>
