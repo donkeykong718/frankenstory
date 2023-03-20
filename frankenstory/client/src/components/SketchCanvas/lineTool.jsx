@@ -165,7 +165,7 @@
 //       textArea.focus();
 //       textArea.value = selectedElement.text;
 //     }
-//   }, [action, selectedElement]);
+//   }, [action, selectedElem;sent]);
 
 //   const updateElement = (id, x1, y1, x2, y2, type, options) => {
 //     const elementsCopy = [...elements];

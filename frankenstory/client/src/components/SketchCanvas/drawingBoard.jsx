@@ -118,10 +118,11 @@ const useHistory = initialState => {
     }
   };
 
+  const clear = () => index > 0 && setIndex(prevstate => prevstate = 0);
   const undo = () => index > 0 && setIndex(prevState => prevState - 1);
   const redo = () => index < history.length - 1 && setIndex(prevState => prevState + 1);
 
-  return [history[index], setState, undo, redo];
+  return [history[index], setState, undo, redo, clear];
 };
 
 const getSvgPathFromStroke = stroke => {
@@ -162,7 +163,7 @@ const adjustmentRequired = type => ["line", "rectangle"].includes(type);
 const DrawingBoard = () => {
   const canvasRef = useRef(null);
   const [color, setColor] = useState('#FF0000');
-  const [elements, setElements, undo, redo] = useHistory([]);
+  const [elements, setElements, undo, redo, clear] = useHistory([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("text");
   const [selectedElement, setSelectedElement] = useState(null);
@@ -172,7 +173,7 @@ const DrawingBoard = () => {
     const canvas = document.getElementById("canvas");
     if (canvas) {
       const context = canvas.getContext("2d");
-      context.strokeStyle = "blue";
+      context.strokeColor = "blue";
       context.clearRect(0, 0, canvas.width, canvas.height);
 
       const roughCanvas = rough.canvas(canvas);
@@ -199,7 +200,7 @@ const DrawingBoard = () => {
     return () => {
       document.removeEventListener("keydown", undoRedoFunction);
     };
-  }, [undo, redo]);
+  }, [undo, redo, clear]);
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -332,6 +333,9 @@ const DrawingBoard = () => {
     setSelectedElement(null);
   };
 
+  // const Color = ({ color }: { color: string }) => {
+  //   const snap = useSnapshot(state);
+
   const handleBlur = event => {
     const { id, x1, y1, type } = selectedElement;
     setAction("none");
@@ -349,6 +353,7 @@ const DrawingBoard = () => {
   return (
     <div>
       <div style={{ position: "fixed" }}>
+
         <CirclePicker onChange={handleColorChange} color={color} />
         <input
           type="radio"
@@ -361,6 +366,7 @@ const DrawingBoard = () => {
       <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
+        <button onClick={clear}>Clear</button>
       </div>
       {action === "writing" ? (
         <textarea
