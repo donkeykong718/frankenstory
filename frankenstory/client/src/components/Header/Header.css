@@ -1,26 +1,32 @@
   @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    transition: all ease-out 300ms;
+    /* font-family: 'Schoolbell', cursive; */
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  transition: all ease-out 300ms;
-font-family: 'Schoolbell', cursive;}
-
-.header-list {
-  display: flex;
-  list-style: none;
-  gap: 30px;
 }
+  .header-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    color:#D2BF55;
+    font-family: 'Creepster', cursive;
 
-.nav-bar {
+  }
+
+.header {
   background-color: #333;
-  height: 50px;
+  height: 90px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0;
 }
 .navbar {
   display: flex;
@@ -46,17 +52,33 @@ font-family: 'Schoolbell', cursive;}
   margin-right: 1rem;
 }
 
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: bold;
+.nav-bar {
+  background-color: #333;
+  height: 90px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 76px;
 }
 
 .nav-link:hover {
   text-decoration: underline;
 }
-
+img{
+  width: 80px;
+  height: 80px;
+}
+.logo-box {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Creepster', cursive;
+  font-size: 36px;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-weight: lighter;
+  color: #D2BF55;
+}
 /* Add a black background color to the top navigation */
 /* .topnav {
   background-color: #333;
