@@ -15,7 +15,7 @@ const frameSchema = new mongoose.Schema({
 const storySchema = new mongoose.Schema({
   prompt: String,
   completed: { type: Boolean, default: false },
-  turn: { type: Number, min: 1, max: 8 },
+  turn: { type: Number, min: 0, max: 8 },
   // There is not a turn when it's completed have it zero or 9
   frames: [frameSchema, frameSchema, frameSchema, frameSchema],
 });
