@@ -8,24 +8,11 @@ import Frame from './Frame'
 
 export default function TestFunctions({ current, featured }) {
 
-  // const randomIndex = Math.floor(Math.random() * prompts.length);
-  // console.log("Current story is:")
-  // console.log(current);
   const [selection, setSelection] = useState(false)
-
 
   useEffect(() => { setSelection(true) }, [featured])
 
   const [user, setUser] = useState("guest");
-  // const [data, setData] = useState({
-  //   prompt: prompts[randomIndex],
-  //   turn: 1,
-  //   text: ""
-  // });
-
-  // const storyArray = Array.from(stories);
-  // console.log(storyArray);
-
   const [stories, setStories] = useState([]);
 
   const [story, setStory] = useState(current);
@@ -47,9 +34,68 @@ export default function TestFunctions({ current, featured }) {
     const { value } = e.target;
 
     let updatedStory = current;
-    updatedStory['frame1'] = {
-      'text': value,
-      'user': user
+    let currentFrame;
+    let currentField;
+
+    console.log(`The current turn is: ${current.turn}`)
+    console.log(`The updatedStory turn is: ${updatedStory.turn}`)
+
+    switch (updatedStory.turn) {
+      case 1:
+        currentFrame = 'frame1';
+        currentField = 'img';
+        break;
+      case 2:
+        currentFrame = 'frame1';
+        currentField = 'text';
+        break;
+      case 3:
+        currentFrame = 'frame2';
+        currentField = 'img';
+        break;
+      case 4:
+        currentFrame = 'frame2';
+        currentField = 'text';
+        break
+      case 5:
+        currentFrame = 'frame3';
+        currentField = 'img';
+        break;
+      case 6:
+        currentFrame = 'frame3';
+        currentField = 'text';
+        break;
+      case 7:
+        currentFrame = 'frame4';
+        currentField = 'img';
+        break;
+      case 8:
+        currentFrame = 'frame4';
+        currentField = 'text';
+        break;
+      default:
+    }
+
+    console.log(`The current frame is: ${currentFrame} `)
+    console.log(updatedStory[currentFrame]);
+
+    if (currentField === 'text') {
+
+      const { img } = updatedStory[currentFrame];
+
+      updatedStory[currentFrame] = {
+        'text': value,
+        'user': user,
+        'img': img
+      }
+    }
+
+    else if (currentField === 'img') {
+
+      updatedStory[currentFrame] = {
+        'user': user,
+        'img': value
+      }
     }
 
     console.log('The updatedStory variable is')
@@ -78,9 +124,13 @@ export default function TestFunctions({ current, featured }) {
     // updateStory.frame1[user] = user;
     // updateStory.turn = updateStory.turn + 1;
     setStory(updateStory);
-    // await backendFunctions.updateStory(story._id, story);
-    console.log('Now the story is:')
-    console.log(story);
+    console.log(story._id, story);
+    const newStory = await backendFunctions.updateStory(story._id, story);
+    console.log(newStory);
+    // console.log('Now the story is:')
+    // console.log(story);
+    // console.log(story._id);
+
   }
 
   useEffect(() => {
@@ -172,7 +222,6 @@ export default function TestFunctions({ current, featured }) {
   }
 
 
-
   //FRAMES
   const pictureBook = (displayStory) => {
     const { prompt, frame1, frame2, frame3, frame4 } = displayStory;
@@ -207,90 +256,6 @@ export default function TestFunctions({ current, featured }) {
     // console.log(finishedStories);
 
   }
-
-  // const displayPrompt = async (current) => {
-  //   const { prompt, turn } = current;
-  //   console.log(prompt, turn)
-
-  //   switch (turn) {
-  //     case 1:
-  //       setDisplay(prompt);
-  //       break;
-  //     case 2:
-  //       setDisplay(current.frame1.img);
-  //       break;
-  //     case 3:
-  //       setDisplay(current.frame1.text);
-  //       break;
-  //     case 4:
-  //       setDisplay(current.frame2.img);
-  //       break;
-  //     case 5:
-  //       setDisplay(current.frame2.text);
-  //       break;
-  //     case 6:
-  //       setDisplay(current.frame3.img);
-  //       break;
-  //     case 7:
-  //       setDisplay(current.frame3.text);
-  //       break;
-  //     case 8:
-  //       setDisplay(current.frame4.img);
-  //       break;
-  //     default:
-  //   }
-
-  // return (
-  //   <div>{display}</div>
-  // )
-
-  // <div>{display}</div>
-  //       {current.turn % 2 === 0 ? <span> {current.prompt} </span> : <div className='text-input'>
-  //         <p>{400 - count}/400 characters remaining</p>
-  //         <form onSubmit={handleTextSubmit}>
-  //           <textarea maxLength={400} className='text-display' placeholder="Write the beginning of a story here."
-  //             onChange={handleTextChange} />
-  //           <div className='image-display'></div>
-  //           <button>Submit</button>
-  //         </form>
-  //       </div>} }
-  // }
-
-
-  // useEffect(() => {
-  //   const { prompt, turn } = story;
-  //   console.log(prompt, turn)
-
-  //   switch (turn) {
-  //     case 1:
-  //       setDisplay(prompt);
-  //       break;
-  //     case 2:
-  //       setDisplay(story.frame1.img);
-  //       break;
-  //     case 3:
-  //       setDisplay(story.frame1.text);
-  //       break;
-  //     case 4:
-  //       setDisplay(story.frame2.img);
-  //       break;
-  //     case 5:
-  //       setDisplay(story.frame2.text);
-  //       break;
-  //     case 6:
-  //       setDisplay(story.frame3.img);
-  //       break;
-  //     case 7:
-  //       setDisplay(story.frame3.text);
-  //       break;
-  //     case 8:
-  //       setDisplay(story.frame4.img);
-  //       break;
-  //     default:
-  //     // code block
-  //   }
-
-  // }, [story])
 
   return (
     <div className='test-container'>
@@ -336,15 +301,6 @@ export default function TestFunctions({ current, featured }) {
         <p>{display}</p>
         <p>It is turn number {current.turn}</p>
         <div>{setWorkspace(current)}</div>
-        {/* {story.turn % 2 === 0 ? <span> even </span> : <span> Odd </span>} */}
-        {/* {storyt.prompt} </span> : <div className='text-input'>
-          <p>{400 - count}/400 characters remaining</p>
-          <form onSubmit={handleTextSubmit}>
-            <textarea maxLength={400} className='text-display' placeholder="Write the beginning of a story here."
-              onChange={handleTextChange} />
-            <div className='image-display'></div>
-            <button>Submit</button>
-          </form> */}
       </div>
     </div >
   )
