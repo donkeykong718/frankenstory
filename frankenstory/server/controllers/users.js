@@ -14,7 +14,7 @@ function getExpiration() {
 
 export const getUser = async (req, res) => {
   const username = req.params.username;
-  const user = await User.findOne({ 'username': username });
+  const user = await User.findOne({ username: username });
   return res.json(user);
 };
 
@@ -22,16 +22,17 @@ export const getUser = async (req, res) => {
 export const signUp = async (req, res) => {
   const { email, username, password } = req.body;
 
-  // if (!email || !username || !password) {
-  //   return res
-  //     .status(400)
-  //     .json({ message: "Please provide a username and password" });
-  // }
+  if (!username || !password) {
+    console.log("no username or emaip");
+    return res
+      .status(400)
+      .json({ message: "Please provide a username and password" });
+  }
 
-  // await User.findOne({ username });
-  // if (existingUser) {
-  //   return res.status(400).json({ message: "Username already registered" });
-  // }
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.json({ message: "Username already registered" });
+  }
 
   const hash = await bcrypt.hash(password, SALT_ROUNDS);
   const user = await User.create({
@@ -82,7 +83,7 @@ export const signIn = async (req, res) => {
 
   const token = jwt.sign(payload, TOKEN_KEY);
   res.status(200).json({ token });
-}
+};
 
 // }
 // if (!user.isVerified) {
@@ -93,7 +94,6 @@ export const signIn = async (req, res) => {
 //   console.error(error);
 //   res.status(500).json({ message: "Server error" });
 // }
-
 
 // function for verify route
 export const verify = async (req, res) => {
