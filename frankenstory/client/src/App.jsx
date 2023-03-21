@@ -1,6 +1,3 @@
-
-import Screenshot from './components/SketchCanvas/Screenshot';
-import React, { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 
@@ -41,23 +38,12 @@ function App() {
 
   return (
     <>
-      <StoryContext.Provider value={{ current, setCurrent }}>
-        <Header />
-        <Sidebar />
-        <GalleryContext.Provider value={{ featured, setFeatured }}>
-          <TestFunctions current={current} featured={featured} />
-          <Screenshot />
-          <DrawingBoard />
-        </GalleryContext.Provider>
-      </StoryContext.Provider>
-
-
       <Routes>
         <Route path="/" element={
           <StoryContext.Provider value={{ current, setCurrent }}>
-            <UserContext.Provider value={{user, setUser}}>
+            <UserContext.Provider value={{ user, setUser }}>
               <Header />
-              </UserContext.Provider>
+            </UserContext.Provider>
             <Sidebar />
             {Object.keys(current).length === 0 ? <div>Select a new project</div> : <Workspace />}
           </StoryContext.Provider>

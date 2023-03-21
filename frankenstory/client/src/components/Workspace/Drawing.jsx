@@ -72,7 +72,7 @@ export default function Drawing({ story }) {
     canvas.toBlob(function (blob) {
       input = canvas.toDataURL();
       console.log(canvas.toDataURL())
-      saveAs(blob, "image.png");
+      // saveAs(blob, "image.png");
     });
     console.log('The handle drawing ran.')
 
