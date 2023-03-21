@@ -4,13 +4,13 @@ import { signup } from '../services/users';
 
 export default function SignUp() {
   const [username, setUser] = useState('')
-  const [email, setEmail] = useState('')
+  // const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault()
-    console.log(username, email, password)
-    const response = await signup(username, email, password)
+    console.log(username, password)
+    const response = await signup(username, password)
     console.log(response);
   }
 
@@ -24,12 +24,12 @@ export default function SignUp() {
           value={username}
           onChange={e => setUser(e.target.value)}
         />
-        <label>E-mail:</label>
+        {/* <label>E-mail:</label>
         <input
           type="text"
           value={email}
           onChange={e => setEmail(e.target.value)}
-        />
+        /> */}
         <label>Password:</label>
         <input
           type="password"
