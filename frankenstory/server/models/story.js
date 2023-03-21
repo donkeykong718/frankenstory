@@ -13,34 +13,19 @@ const frameSchema = new mongoose.Schema({
 });
 
 const storySchema = new mongoose.Schema({
-  prompt: String,
+  title: String,
   completed: { type: Boolean, default: false },
   turn: { type: Number, min: 0, max: 8 },
   // There is not a turn when it's completed have it zero or 9
-  frames: [String]
+  frames: [{
+    text: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    }
+  }]
 });
 
 // Try to implement turn logic on frontend if possible
 
 export default mongoose.model("Story", storySchema);
-
-// frames: {
-//   text: String,
-//   img: String,
-//   user: String
-// },
-// frame2: {
-//   text: String,
-//   img: String,
-//   user: String
-// },
-// frame3: {
-//   text: String,
-//   img: String,
-//   user: String
-// },
-// frame4: {
-//   text: String,
-//   img: String,
-//   user: String
-// }

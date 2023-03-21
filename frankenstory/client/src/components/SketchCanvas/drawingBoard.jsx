@@ -160,7 +160,7 @@ const drawElement = (roughCanvas, context, element) => {
 
 const adjustmentRequired = type => ["line", "rectangle"].includes(type);
 
-const DrawingBoard = () => {
+const DrawingCanvas = () => {
   const canvasRef = useRef(null);
   const [color, setColor] = useState('#FF0000');
   const [elements, setElements, undo, redo, clear] = useHistory([]);
@@ -404,4 +404,4 @@ const DrawingBoard = () => {
 };
 
 
-export default DrawingBoard;
+export default DrawingCanvas;
