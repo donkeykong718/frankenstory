@@ -359,6 +359,24 @@ const DrawingCanvas = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
+  const saveImageToLocal = async (event) => {
+    const link = event.currentTarget;
+    link.setAttribute('download', 'canvas.png');
+    const image = canvasRef.current.toDataURL('image/png');
+    console.log(image);
+
+    try {
+      const handle = await window.showSaveFilePicker();
+      const file = await handle.getFile();
+      const writeable = await file.createWritable();
+      await writeable.write(image);
+      await writeable.close();
+      link.setAttribute('href', handle.nativeURL);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [selectedColor, setSelectedColor] = useState("#000000");
 
   function handleColorChange(newColor) {
@@ -405,7 +423,7 @@ const DrawingCanvas = () => {
             font: "24px sans-serif",
             margin: 0,
             padding: 0,
-            border: 5,
+            border: 0,
             outline: 0,
             resize: "auto",
             overflow: "hidden",
@@ -414,17 +432,19 @@ const DrawingCanvas = () => {
           }}
         />
       ) : null}
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        width={window.innerWidth}
-        height={window.innerHeight}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        Canvas
-      </canvas>
+      <div>
+        <canvas className="canvas-container"
+          ref={canvasRef}
+          id="canvas"
+          width={window.innerWidth}
+          height={window.innerHeight}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        >
+        </canvas>
+        <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a>
+      </div>
     </div>
   );
 };
