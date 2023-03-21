@@ -9,7 +9,6 @@ import SignUp from './pages/SignUp'
 import { getUser } from './services/users'
 import { get } from 'mongoose';
 
-
 export const StoryContext = React.createContext();
 export const UserContext = React.createContext();
 
