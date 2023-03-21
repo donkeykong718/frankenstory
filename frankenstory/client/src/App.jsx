@@ -1,3 +1,4 @@
+import Screenshot from './components/SketchCanvas/Screenshot';
 import React, { useState } from 'react';
 import Sidebar from './components/side-bar/side-bar';
 import Header from './components/Header/Header';
@@ -6,6 +7,7 @@ import TestFunctions from './components/TestFunctions/TestFunctions';
 import DrawingBoard from './components/SketchCanvas/drawingBoard';
 export const StoryContext = React.createContext();
 export const GalleryContext = React.createContext();
+
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
         <Sidebar />
         <GalleryContext.Provider value={{ featured, setFeatured }}>
           <TestFunctions current={current} featured={featured} />
+          <Screenshot />
           <DrawingBoard />
         </GalleryContext.Provider>
       </StoryContext.Provider>
