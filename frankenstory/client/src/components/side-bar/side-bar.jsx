@@ -18,6 +18,12 @@ import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 function Sidebar() {
   const { current, setCurrent } = useContext(StoryContext);
 
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+  if (!currentUser) { currentUser = { _id: '0', username: 'guest' } }
+  // console.log('The curent user in the SideBar is:')
+  // console.log(currentUser._id);
+
+
   const randomIndex = Math.floor(Math.random() * prompts.length);
 
   const [data, setData] = useState({
@@ -51,6 +57,18 @@ function Sidebar() {
         (story) => story.completed === false
       );
 
+      // if (currentUser.username !== 'guest') {
+
+      //   activeStories.filter((story) => {
+      //     let res = story.frames.map(x => x.user)
+      //     console.log(res);
+      //     if (res.includes(currentUser._id) === false) {
+      //       return story
+      //     };
+      //   }
+      //   )
+      // }
+      // console.log(activeStories);
       activeStories.sort((a, b) => b.turn - a.turn);
 
       setStories(activeStories);
@@ -64,8 +82,8 @@ function Sidebar() {
 
   const createStory = async () => {
     const currentStory = await backendFunctions.createStory(data);
-    console.log("The current story is:");
-    console.log(currentStory);
+    // console.log("The current story is:");
+    // console.log(currentStory);
     setCurrent(currentStory);
   };
 
@@ -99,6 +117,7 @@ function Sidebar() {
               <ListStories story={story} key={index} />
             ))}
           </ul>
+
 
           {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
           {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}

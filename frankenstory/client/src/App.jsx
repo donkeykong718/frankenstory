@@ -42,9 +42,9 @@ function App() {
       <Routes>
         <Route path="/" element={
           <StoryContext.Provider value={{ current, setCurrent }}>
-            <UserContext.Provider value={{ user, setUser }}>
+            <UserContext.Provider value={{user, setUser}}>
               <Header />
-            </UserContext.Provider>
+              </UserContext.Provider>
             <Sidebar />
             {Object.keys(current).length === 0 ? <div>Select a new project</div> : <Workspace />}
           </StoryContext.Provider>

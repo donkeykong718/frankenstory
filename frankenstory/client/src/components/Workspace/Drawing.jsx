@@ -10,12 +10,13 @@ import { getUser } from '../../services/users'
 
 export default function Drawing({ story }) {
 
-  let username = localStorage.getItem('currentUser');
-  console.log(`In Drawing, the username is ${username}`);
-
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+  if (!currentUser) { currentUser = { _id: 0, username: 'guest' } }
   const { current, setCurrent } = useContext(StoryContext);
   // const { user, setUser } = useContext(UserContext);
 
+  console.log(`In Drawing, the user is`)
+  console.log(currentUser);
 
   const [temp, setTemp] = useState(story);
   const [input, setInput] = useState();
@@ -27,21 +28,9 @@ export default function Drawing({ story }) {
 
   let display;
 
-  switch (turn) {
-    case 1:
-      display = title;
-      break;
-    case 3:
-      display = frames[1].text;
-      break;
-    case 5:
-      display = frames[3].text;
-      break;
-    case 7:
-      display = frames[5].text;
-      break;
-    default:
-  }
+  if (turn === 1) { display = title }
+  else if (framesArray[framesArray.length - 1].text !== null) { display = framesArray[framesArray.length - 1].text; }
+  else { display = 'ERROR' }
 
   const handleTextChange = (e) => {
     const { value } = e.target;
@@ -57,17 +46,25 @@ export default function Drawing({ story }) {
 
     let storyUpdate = story;
     storyUpdate['turn'] = storyUpdate.turn + 1;
+    if (storyUpdate.turn > 8) {
+      storyUpdate['completed'] = true;
+    }
     // frames = storyUpdate;
     console.log(`Input is ${input}`);
 
-    const newItem = { text: input };
+    let newItem;
+    if (currentUser._id !== 0) { newItem = { text: input, user: currentUser._id } }
+    else newItem = { text: input, user: null };
     framesArray.push(newItem);
     console.log(`Frames array is ${framesArray}`);
     storyUpdate['frames'] = framesArray;
     console.log(storyUpdate);
     // setTemp(storyUpdate);
     await backendFunctions.updateStory(current._id, storyUpdate);
+    setCurrent({});
+    window.location.reload(false);
   }
+
 
   return (
     <div className='workspace'>

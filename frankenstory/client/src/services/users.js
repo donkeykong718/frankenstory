@@ -2,9 +2,9 @@ import api from "./apiConfig.js";
 
 const LOCALSTORAGE_KEY = 'token'
 
-export const getUser = async (username) => {
+export const getUser = async (search) => {
   try {
-    const response = await api.get(`/api/user/${username}`);
+    const response = await api.get(`/api/user/${search}`);
     return response.data;
   } catch (error) {
     throw error;
