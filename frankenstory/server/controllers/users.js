@@ -3,14 +3,20 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 // In controllers/users.js
-let SALT_ROUNDS = 11;
-let TOKEN_KEY = process.env.TOKEN_KEY;
+const SALT_ROUNDS = 11;
+const TOKEN_KEY = process.env.TOKEN_KEY;
 
 function getExpiration() {
   const d = new Date();
   d.setMinutes(d.getMinutes() + 30);
   return d.getTime();
 }
+
+export const getUser = async (req, res) => {
+  const username = req.params.username;
+  const user = await User.findOne({ 'username': username });
+  return res.json(user);
+};
 
 // function for sign-up route
 export const signUp = async (req, res) => {
@@ -56,37 +62,38 @@ export const signIn = async (req, res) => {
   const { username, password } = req.body;
 
   // try {
-  const user = await User.findOne({ username });
-
-  // if (!user) {
-  //   return res.status(400).json({ message: "User not found" });
-  // }
+  const user = await User.findOne({ username: username });
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
 
   const isMatch = await bcrypt.compare(password, user.hash);
 
-  if (isMatch) {
-    const payload = {
-      userId: user._id,
-      username: user.username,
-      email: user.email,
-      exp: getExpiration(),
-    };
-    const token = jwt.sign(payload, TOKEN_KEY);
-    res.status(200).json({ token });
+  if (!isMatch) {
+    return res.status(401).json({ message: "Invalid credentials" });
   }
 
-  // if (!isMatch) {
-  //   return res.status(401).json({ message: "Invalid credentials" });
-  // }
-  // if (!user.isVerified) {
-  //   return res.status(401).json({ message: "User not verified" });
-  // }
+  const payload = {
+    userId: user._id,
+    username: user.username,
+    email: user.email,
+    exp: getExpiration(),
+  };
 
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ message: "Server error" });
-  // }
-};
+  const token = jwt.sign(payload, TOKEN_KEY);
+  res.status(200).json({ token });
+}
+
+// }
+// if (!user.isVerified) {
+//   return res.status(401).json({ message: "User not verified" });
+// }
+
+// } catch (error) {
+//   console.error(error);
+//   res.status(500).json({ message: "Server error" });
+// }
+
 
 // function for verify route
 export const verify = async (req, res) => {

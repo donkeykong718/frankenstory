@@ -50,6 +50,12 @@ Content-Type: application/json
 
 ###
 
+
+
+GET {{url}}/user/testingdata12
+
+###
+
 # @name Verify
 
 GET {{url}}/user/verify
