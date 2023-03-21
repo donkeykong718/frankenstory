@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { isValidObjectId } from "mongoose";
 
 // In controllers/users.js
 const SALT_ROUNDS = 11;
@@ -13,9 +14,17 @@ function getExpiration() {
 }
 
 export const getUser = async (req, res) => {
-  const username = req.params.username;
-  const user = await User.findOne({ username: username });
-  return res.json(user);
+
+  const search = req.params.search;
+  if (isValidObjectId(search) === true) {
+    const user = await User.findById({ '_id': search })
+    return res.json(user);
+  }
+  else {
+    const user = await User.findOne({ 'username': search });
+    return res.json(user);
+  }
+  
 };
 
 // function for sign-up route

@@ -1,4 +1,5 @@
 import * as backendFunctions from '../../services/stories';
+// import { getUser } from '../../services/users'
 import { useEffect, useState, useContext } from 'react'
 import { StoryContext } from '../../App';
 
@@ -12,11 +13,29 @@ import CompletionCircle_7 from './side-bar assets/CompletionCircle_7.svg'
 
 function ListStories({ story }) {
 
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+  if (!currentUser) { currentUser = { _id: 0, username: 'guest' } }
+
   const { current, setCurrent } = useContext(StoryContext);
 
   const [circle, setCircle] = useState();
+  const [valid, setValid] = useState(true);
 
-  const { _id, turn } = story;
+  const { _id, turn, frames } = story;
+
+  useEffect(() => {
+    if (currentUser.username !== 'guest') {
+      console.log(frames);
+      let res = frames.map(x => x.user)
+      console.log('Checking validity:')
+      console.log(res);
+      // console.log(currentUser._id)
+      if (res.includes(currentUser._id)) {
+        setValid(false);
+      }
+    }
+    else setValid(true);
+  }, []);
 
   const handleGetStory = async () => {
     const currentStory = await backendFunctions.getStory(_id)
@@ -25,6 +44,20 @@ function ListStories({ story }) {
     console.log(current);
     // onSelection(currentStory);
   }
+
+  // useEffect(() => {
+  //   async function getLastUser() {
+  //     const lastUser = frames[frames.length - 1];
+  //     console.log('The last user was:')
+  //     const lastUserName = await getUser(lastUser.user)
+  //     return lastUserName;
+  //   }
+  //   let lastUserName = getLastUser();
+  //   console.log('The last username was:')
+  //   console.log(lastUserName);
+  // }, [story])
+
+
 
   useEffect(() => {
     const { turn } = story;
@@ -59,17 +92,19 @@ function ListStories({ story }) {
     }
   }, [story])
 
-
   return (
     <div className="story-list">
+      <p>Story ID: {_id}</p>
       <li className="current-turn"><img src={circle} className="completionCircle" alt="" />
       </li>
-      <p>Next up:
-        {turn % 2 === 0 ? <span> drawing </span> : <span> writing </span>}
-        <span>frame </span>
-        {Math.floor(turn / 2)}
-      </p>
-      <button onClick={handleGetStory}>Select story</button>
+      {valid ?
+        <p>Next up:
+          {turn % 2 === 0 ? <span> writing </span> : <span> drawing </span>}
+          {/* <span>frame </span>
+        {Math.floor(turn / 2)} */}
+        </p> : <p>Not Available. You already contributed.</p>}
+      {/* <p>Most recent contribution by: {lastUser}</p> */}
+      {valid ? <button onClick={handleGetStory}>Select story</button> : <button type="button" disabled>Select story</button>}
     </div>
   )
 }

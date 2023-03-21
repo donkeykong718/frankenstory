@@ -47,11 +47,11 @@ export default function Workspace() {
 
 
   return (
-    <>
+    <div className='test-container'>
       <h2>This is the workspace</h2>
       <h3>The current story is: {current._id}</h3>
       {current.turn % 2 === 0 ? <Writing story={current} /> : <Drawing story={current} />}
-    </>
+    </div>
   )
 
 }
