@@ -9,7 +9,7 @@ export default function Writing({ story }) {
   const [temp, setTemp] = useState(story);
   const [input, setInput] = useState();
 
-  const { turn, prompt, frames } = story;
+  const { turn, title, frames } = story;
   let framesArray = [];
 
   if (frames !== undefined) { framesArray = Array.from(frames); }
@@ -18,16 +18,16 @@ export default function Writing({ story }) {
 
   switch (turn) {
     case 2:
-      display = frames[0];
+      display = frames[0].text;
       break;
     case 4:
-      display = frames[2];
+      display = frames[2].text;
       break;
     case 6:
-      display = frames[4];
+      display = frames[4].text;
       break;
     case 8:
-      display = frames[6];
+      display = frames[6].text;
       break;
     default:
   }
@@ -84,26 +84,21 @@ export default function Writing({ story }) {
     storyUpdate['turn'] = storyUpdate.turn + 1;
     // frames = storyUpdate;
     console.log(`Input is ${input}`);
-    framesArray.push(input);
+    const newItem = { text: input };
+    framesArray.push(newItem);
     console.log(`Frames array is ${framesArray}`);
     storyUpdate['frames'] = framesArray;
     console.log(storyUpdate);
 
-
-    setTemp(storyUpdate);
-    const newStory = await backendFunctions.updateStory(current._id, temp);
-    setCurrent(newStory);
+    // newStory = await backendFunctions.updateStory(current._id, storyUpdate);
   }
 
+  // let newStory;
+
   // useEffect(() => {
-  //   async function updateStory() {
-  //     const newStory = await backendFunctions.updateStory(temp._id, temp);
-  //     console.log('The new story is now:')
-  //     console.log(newStory)
-  //     setCurrent(newStory)
-  //   }
-  //   updateStory();
-  // }, [temp])
+  //   setCurrent(newStory);
+  //   console.log(`Use effect has been called.`)
+  // }, [newStory])
 
   return (
     <div className='workspace'>

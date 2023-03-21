@@ -72,7 +72,6 @@ function ListStories({ story }) {
       <button onClick={handleGetStory}>Select story</button>
     </div>
   )
-
 }
 
 export default ListStories;

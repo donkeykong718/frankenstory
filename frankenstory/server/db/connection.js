@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 import chalk from "chalk";
 
-mongoose.set("returnOriginal", false);
+const DATABASE_URL = process.env.DATABASE_URL
+
+mongoose.set("strictQuery", false);
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/frankenstory")
+  .connect(DATABASE_URL)
   .catch((err) => {
     console.log(`Error connection go MongoDB: ${err.message}`);
   });
