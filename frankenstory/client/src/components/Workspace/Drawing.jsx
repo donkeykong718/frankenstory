@@ -3,7 +3,7 @@ import { StoryContext, UserContext } from '../../App';
 import * as backendFunctions from '../../services/stories'
 import { getUser } from '../../services/users'
 
-import DrawingBoard from "../SketchCanvas/drawingBoard"
+// import DrawingBoard from "../SketchCanvas/drawingBoard"
 
 
 
@@ -78,7 +78,7 @@ export default function Drawing({ story }) {
           onChange={handleTextChange} name="img" />
         <button>Submit</button>
       </form>
-      <DrawingBoard />
+      {/* <DrawingBoard /> */}
     </div>
   )
 }

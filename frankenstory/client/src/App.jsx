@@ -12,6 +12,7 @@ import { get } from 'mongoose';
 export const StoryContext = React.createContext();
 export const UserContext = React.createContext();
 
+
 // async function getCurrentUser() {
 //   let currentUsername = localStorage.getItem('currentUser');
 //   console.log(`Current username is ${currentUsername}`);
@@ -24,8 +25,12 @@ export const UserContext = React.createContext();
 
 function App() {
 
+  const defaultUser = {
+    username: 'Guest'
+  }
+
   const [current, setCurrent] = useState({});
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(defaultUser);
   // const [featured, setFeatured] = useState({});
 
   // const [state, setState] = useState('draw');
@@ -37,9 +42,11 @@ function App() {
       <Routes>
         <Route path="/" element={
           <StoryContext.Provider value={{ current, setCurrent }}>
-            <Header />
+            <UserContext.Provider value={{ user, setUser }}>
+              <Header />
+            </UserContext.Provider>
             <Sidebar />
-            <Workspace />
+            {Object.keys(current).length === 0 ? <div>Select a new project</div> : <Workspace />}
           </StoryContext.Provider>
         } />
         <Route path="/user/sign-up" element={<SignUp />} />
