@@ -21,9 +21,8 @@ function Sidebar() {
   const randomIndex = Math.floor(Math.random() * prompts.length);
 
   const [data, setData] = useState({
-    prompt: prompts[randomIndex],
+    title: prompts[randomIndex],
     turn: 1,
-    text: "",
   });
 
   //DK added 3.19
@@ -74,7 +73,7 @@ function Sidebar() {
     <>
       <button onClick={toggleSidebar}>Open Sidebar</button>
       <div className={`sidebar ${isOpen ? "open" : ""}`} ref={sidebarRef}>
-        <div className="create-new-box">
+        {/* <div className="create-new-box">
           <img
             src={FrankAddNew}
             onClick={createStory}
@@ -89,11 +88,11 @@ function Sidebar() {
 
         <></>
 
-        <div></div>
+        <div></div> */}
 
         <ul>
-          {/* <li><img src={FrankAddNew}onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li> */}
-          {/* <button onClick={createStory}>Create</button> */}
+          <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li>
+          <button onClick={createStory}>Create</button>
 
           <ul className="story-list">
             {stories.map((story, index) => (
@@ -105,18 +104,18 @@ function Sidebar() {
           {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
 
           <li>
-          <div className="close-sidebar">
+            <div className="close-sidebar">
 
-            <img
-              src={CloseSidebarImg}
-              className="closeSidebarImg"
-              onClick={toggleSidebar}
-              alt="Close Sidebar"
-            />
-            <div class="overlay">
-              <div class="text">Close Sidebar</div>
+              <img
+                src={CloseSidebarImg}
+                className="closeSidebarImg"
+                onClick={toggleSidebar}
+                alt="Close Sidebar"
+              />
+              <div class="overlay">
+                <div class="text">Close Sidebar</div>
               </div>
-              </div>
+            </div>
           </li>
         </ul>
       </div>

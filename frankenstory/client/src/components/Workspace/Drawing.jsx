@@ -1,17 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { StoryContext } from '../../App';
+import { StoryContext, UserContext } from '../../App';
 import * as backendFunctions from '../../services/stories'
-import DrawingBoard from "../canvas-component/drawingBoard"
+import { getUser } from '../../services/users'
+
+// import DrawingBoard from "../canvas-component/drawingBoard"
+
+
 
 
 export default function Drawing({ story }) {
 
+  let username = localStorage.getItem('currentUser');
+  console.log(`In Drawing, the username is ${username}`);
+
   const { current, setCurrent } = useContext(StoryContext);
+  // const { user, setUser } = useContext(UserContext);
+
 
   const [temp, setTemp] = useState(story);
   const [input, setInput] = useState();
 
-  const { turn, prompt, frames } = story;
+  const { turn, title, frames } = story;
   let framesArray = [];
 
   if (frames !== undefined) { framesArray = Array.from(frames); }
@@ -20,16 +29,16 @@ export default function Drawing({ story }) {
 
   switch (turn) {
     case 1:
-      display = prompt;
+      display = title;
       break;
     case 3:
-      display = frames[1];
+      display = frames[1].text;
       break;
     case 5:
-      display = frames[3];
+      display = frames[3].text;
       break;
     case 7:
-      display = frames[5];
+      display = frames[5].text;
       break;
     default:
   }
@@ -50,7 +59,9 @@ export default function Drawing({ story }) {
     storyUpdate['turn'] = storyUpdate.turn + 1;
     // frames = storyUpdate;
     console.log(`Input is ${input}`);
-    framesArray.push(input);
+
+    const newItem = { text: input };
+    framesArray.push(newItem);
     console.log(`Frames array is ${framesArray}`);
     storyUpdate['frames'] = framesArray;
     console.log(storyUpdate);
@@ -68,7 +79,7 @@ export default function Drawing({ story }) {
           onChange={handleTextChange} name="img" />
         <button>Submit</button>
       </form>
-      <DrawingBoard />
+      {/* <DrawingBoard /> */}
     </div>
   )
 }
