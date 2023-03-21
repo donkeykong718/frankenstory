@@ -71,24 +71,9 @@ function Sidebar() {
 
   return (
     <>
+      {/* //MOVE TO HEADER// */}
       <button onClick={toggleSidebar}>Open Sidebar</button>
       <div className={`sidebar ${isOpen ? "open" : ""}`} ref={sidebarRef}>
-        {/* <div className="create-new-box">
-          <img
-            src={FrankAddNew}
-            onClick={createStory}
-            className="addNew"
-            alt="Create New Frankenstory!"
-          />
-
-          <div class="overlay">
-            <div class="text">Create New!</div>
-          </div>
-        </div>
-
-        <></>
-
-        <div></div> */}
 
         <ul>
           <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li>
@@ -99,10 +84,6 @@ function Sidebar() {
               <ListStories story={story} key={index} />
             ))}
           </ul>
-
-          {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
-          {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
-
           <li>
             <div className="close-sidebar">
 
