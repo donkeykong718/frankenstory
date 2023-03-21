@@ -170,11 +170,11 @@
 //   const updateElement = (id, x1, y1, x2, y2, type, options) => {
 //     const elementsCopy = [...elements];
 
-//     switch (type) {
-//       case "line":
-//       case "rectangle":
-//         elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
-//         break;
+    // switch (type) {
+    //   case "line":
+    //   case "rectangle":
+    //     elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+    //     break;
 //       default:
 //         throw new Error(`Type not recognised: ${type}`);
 //     }

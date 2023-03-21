@@ -3,8 +3,17 @@ import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { CirclePicker } from 'react-color';
 
+const generator = rough.generator();
+
 const createElement = (id, x1, y1, x2, y2, type) => {
   switch (type) {
+    case "line":
+    case "rectangle":
+      const roughElement =
+        type === "line"
+          ? generator.line(x1, y1, x2, y2)
+          : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+      return { id, x1, y1, x2, y2, type, roughElement };
     case "pencil":
       return { id, type, points: [{ x: x1, y: y1 }] };
     case "text":
@@ -143,6 +152,10 @@ const getSvgPathFromStroke = stroke => {
 
 const drawElement = (roughCanvas, context, element) => {
   switch (element.type) {
+    case "line":
+    case "rectangle":
+      roughCanvas.draw(element.roughElement);
+      break;
     case "pencil":
       const stroke = getSvgPathFromStroke(getStroke(element.points));
       context.fillstyle = "blue";
@@ -214,6 +227,10 @@ const DrawingCanvas = () => {
     const elementsCopy = [...elements];
 
     switch (type) {
+      case "line":
+      case "rectangle":
+        elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
+        break;
       case "pencil":
         elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
         break;
@@ -272,7 +289,6 @@ const DrawingCanvas = () => {
 
   const handleMouseMove = event => {
     const { clientX, clientY } = event;
-
     if (action === "drawing") {
       if (!canvasRef.current) return
       const context = canvasRef.current.getContext("2d");
@@ -343,6 +359,24 @@ const DrawingCanvas = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
+  const saveImageToLocal = async (event) => {
+    const link = event.currentTarget;
+    link.setAttribute('download', 'canvas.png');
+    const image = canvasRef.current.toDataURL('image/png');
+    console.log(image);
+
+    try {
+      const handle = await window.showSaveFilePicker();
+      const file = await handle.getFile();
+      const writeable = await file.createWritable();
+      await writeable.write(image);
+      await writeable.close();
+      link.setAttribute('href', handle.nativeURL);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const [selectedColor, setSelectedColor] = useState("#000000");
 
   function handleColorChange(newColor) {
@@ -353,8 +387,9 @@ const DrawingCanvas = () => {
   return (
     <div>
       <div style={{ position: "fixed" }}>
+        {/* 
+        <CirclePicker onChange={handleColorChange} color={color} /> */}
 
-        <CirclePicker onChange={handleColorChange} color={color} />
         <input
           type="radio"
           id="pencil"
@@ -362,6 +397,15 @@ const DrawingCanvas = () => {
           onChange={() => setTool("pencil")}
         />
         <label htmlFor="pencil">Pencil</label>
+        <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
+        <label htmlFor="line">Line</label>
+        <input
+          type="radio"
+          id="rectangle"
+          checked={tool === "rectangle"}
+          onChange={() => setTool("rectangle")}
+        />
+        <label htmlFor="rectangle">Rectangle</label>
       </div>
       <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
@@ -388,17 +432,19 @@ const DrawingCanvas = () => {
           }}
         />
       ) : null}
-      <canvas
-        ref={canvasRef}
-        id="canvas"
-        width={window.innerWidth}
-        height={window.innerHeight}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        Canvas
-      </canvas>
+      <div>
+        <canvas className="canvas-container"
+          ref={canvasRef}
+          id="canvas"
+          width={window.innerWidth}
+          height={window.innerHeight}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        >
+        </canvas>
+        <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a>
+      </div>
     </div>
   );
 };

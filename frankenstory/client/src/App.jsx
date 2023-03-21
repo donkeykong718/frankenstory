@@ -1,3 +1,6 @@
+
+import Screenshot from './components/SketchCanvas/Screenshot';
+import React, { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 
@@ -23,6 +26,7 @@ export const UserContext = React.createContext();
 
 // export const GalleryContext = React.createContext();
 
+
 function App() {
 
   const defaultUser = {
@@ -37,6 +41,15 @@ function App() {
 
   return (
     <>
+      <StoryContext.Provider value={{ current, setCurrent }}>
+        <Header />
+        <Sidebar />
+        <GalleryContext.Provider value={{ featured, setFeatured }}>
+          <TestFunctions current={current} featured={featured} />
+          <Screenshot />
+          <DrawingBoard />
+        </GalleryContext.Provider>
+      </StoryContext.Provider>
 
 
       <Routes>
