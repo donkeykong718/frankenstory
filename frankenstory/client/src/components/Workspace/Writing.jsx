@@ -1,37 +1,34 @@
 import React, { useState, useContext, useEffect } from 'react';
 import * as backendFunctions from '../../services/stories'
 import { StoryContext } from '../../App';
+import { ObjectId } from 'mongoose';
 
 export default function Writing({ story }) {
 
   const { current, setCurrent } = useContext(StoryContext);
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+  if (!currentUser) { currentUser = { _id: 0, username: "guest" } }
+  // console.log(`In Writing, the user is`)
+  // console.log(currentUser);
+
+
 
   const [temp, setTemp] = useState(story);
   const [input, setInput] = useState();
 
-  const { turn, title, frames } = story;
+  const { turn, frames } = story;
   let framesArray = [];
 
   if (frames !== undefined) { framesArray = Array.from(frames); }
 
-  let display;
+  // console.log(framesArray);
 
-  switch (turn) {
-    case 2:
-      display = frames[0].text;
-      break;
-    case 4:
-      display = frames[2].text;
-      break;
-    case 6:
-      display = frames[4].text;
-      break;
-    case 8:
-      display = frames[6].text;
-      break;
-    default:
-  }
+  // let display;
 
+  let imgSrc = framesArray[framesArray.length - 1].text
+
+  // if (framesArray[framesArray.length - 1].text !== null) { display = framesArray[framesArray.length - 1].text; }
+  // else { display = 'ERROR' }
 
   const handleTextChange = (e) => {
     const { value } = e.target;
@@ -83,14 +80,25 @@ export default function Writing({ story }) {
     let storyUpdate = story;
     storyUpdate['turn'] = storyUpdate.turn + 1;
     // frames = storyUpdate;
-    console.log(`Input is ${input}`);
-    const newItem = { text: input };
-    framesArray.push(newItem);
-    console.log(`Frames array is ${framesArray}`);
-    storyUpdate['frames'] = framesArray;
-    console.log(storyUpdate);
 
-    // newStory = await backendFunctions.updateStory(current._id, storyUpdate);
+    if (storyUpdate.turn > 8) {
+      storyUpdate['completed'] = true;
+    }
+
+    console.log(`Input is ${input}`);
+    let newItem;
+    console.log(currentUser._id);
+    if (currentUser._id !== 0) { newItem = { text: input, user: currentUser._id } }
+    else newItem = { text: input, user: null };
+
+    framesArray.push(newItem);
+    // console.log(`Frames array is ${framesArray}`);
+    storyUpdate['frames'] = framesArray;
+    // console.log(storyUpdate);
+
+    await backendFunctions.updateStory(current._id, storyUpdate);
+    setCurrent({});
+    if (storyUpdate.turn <= 8) { window.location.reload(false); }
   }
 
   // let newStory;
@@ -103,7 +111,7 @@ export default function Writing({ story }) {
   return (
     <div className='workspace'>
       <p>Turn # {turn}</p>
-      <p>{display}</p>
+      <img src={imgSrc} alt="" />
       <form onSubmit={handleTextSubmit}>
         <textarea maxLength={400} className='text-display' placeholder="Write a story based on the above image."
           onChange={handleTextChange} name="text" />

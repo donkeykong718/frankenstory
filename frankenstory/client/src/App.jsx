@@ -1,3 +1,6 @@
+
+import Screenshot from './components/SketchCanvas/Screenshot';
+import React, { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom'
 
@@ -12,6 +15,7 @@ import { get } from 'mongoose';
 export const StoryContext = React.createContext();
 export const UserContext = React.createContext();
 
+
 // async function getCurrentUser() {
 //   let currentUsername = localStorage.getItem('currentUser');
 //   console.log(`Current username is ${currentUsername}`);
@@ -22,24 +26,40 @@ export const UserContext = React.createContext();
 
 // export const GalleryContext = React.createContext();
 
+
 function App() {
 
+  const defaultUser = {
+    username: 'Guest'
+  }
+
   const [current, setCurrent] = useState({});
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(defaultUser);
   // const [featured, setFeatured] = useState({});
 
   // const [state, setState] = useState('draw');
 
   return (
     <>
+      <StoryContext.Provider value={{ current, setCurrent }}>
+        <Header />
+        <Sidebar />
+        <GalleryContext.Provider value={{ featured, setFeatured }}>
+          <TestFunctions current={current} featured={featured} />
+          <Screenshot />
+          <DrawingBoard />
+        </GalleryContext.Provider>
+      </StoryContext.Provider>
 
 
       <Routes>
         <Route path="/" element={
           <StoryContext.Provider value={{ current, setCurrent }}>
-            <Header />
+            <UserContext.Provider value={{user, setUser}}>
+              <Header />
+              </UserContext.Provider>
             <Sidebar />
-            <Workspace />
+            {Object.keys(current).length === 0 ? <div>Select a new project</div> : <Workspace />}
           </StoryContext.Provider>
         } />
         <Route path="/user/sign-up" element={<SignUp />} />

@@ -9,19 +9,26 @@ export default function Signin() {
 
   const [text, setText] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false);
   let currentUser = user;
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const response = await signin(text, password)
+    setLoading(true);
+    const response = await signin(text, password);
     console.log(response);
-    currentUser = await getUser(text);
-    setUser(currentUser)
-    console.log(user)
+    setLoading(false);
   }
 
-  useEffect(() => { setUser(currentUser); console.log(user) });
-
+  useEffect(() => {
+    const workAround = async () => {
+      const currentUser = await getUser(text)
+      setUser(currentUser);
+      console.log(user);
+      localStorage.setItem('user', JSON.stringify(user))
+    };
+    workAround();
+  }, [loading])
 
   return (
     <div>
