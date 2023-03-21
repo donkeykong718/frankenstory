@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StoryContext } from '../../App';
 import * as backendFunctions from '../../services/stories'
+import { saveAs } from 'file-saver';
 
 // import DrawingBoard from '../canvas-component/drawingBoard';
 import Writing from './Writing'
@@ -17,7 +18,7 @@ export default function Workspace() {
 
   // const { title, frames } = story;
 
-  console.log(current);
+  // console.log(current);
 
   // useEffect(() => {
   //   setStory(current);

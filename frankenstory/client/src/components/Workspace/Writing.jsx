@@ -23,10 +23,12 @@ export default function Writing({ story }) {
 
   // console.log(framesArray);
 
-  let display;
+  // let display;
 
-  if (framesArray[framesArray.length - 1].text !== null) { display = framesArray[framesArray.length - 1].text; }
-  else { display = 'ERROR' }
+  let imgSrc = framesArray[framesArray.length - 1].text
+
+  // if (framesArray[framesArray.length - 1].text !== null) { display = framesArray[framesArray.length - 1].text; }
+  // else { display = 'ERROR' }
 
   const handleTextChange = (e) => {
     const { value } = e.target;
@@ -109,7 +111,7 @@ export default function Writing({ story }) {
   return (
     <div className='workspace'>
       <p>Turn # {turn}</p>
-      <p>{display}</p>
+      <img src={imgSrc} alt="" />
       <form onSubmit={handleTextSubmit}>
         <textarea maxLength={400} className='text-display' placeholder="Write a story based on the above image."
           onChange={handleTextChange} name="text" />
