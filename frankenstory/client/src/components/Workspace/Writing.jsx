@@ -90,21 +90,15 @@ export default function Writing({ story }) {
     storyUpdate['frames'] = framesArray;
     console.log(storyUpdate);
 
-
-    setTemp(storyUpdate);
-    const newStory = await backendFunctions.updateStory(current._id, temp);
-    setCurrent(newStory);
+    // newStory = await backendFunctions.updateStory(current._id, storyUpdate);
   }
 
+  // let newStory;
+
   // useEffect(() => {
-  //   async function updateStory() {
-  //     const newStory = await backendFunctions.updateStory(temp._id, temp);
-  //     console.log('The new story is now:')
-  //     console.log(newStory)
-  //     setCurrent(newStory)
-  //   }
-  //   updateStory();
-  // }, [temp])
+  //   setCurrent(newStory);
+  //   console.log(`Use effect has been called.`)
+  // }, [newStory])
 
   return (
     <div className='workspace'>

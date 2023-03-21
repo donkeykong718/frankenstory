@@ -3,7 +3,7 @@ import { StoryContext, UserContext } from '../../App';
 import * as backendFunctions from '../../services/stories'
 import { getUser } from '../../services/users'
 
-// import DrawingBoard from "../canvas-component/drawingBoard"
+import DrawingBoard from "../SketchCanvas/drawingBoard"
 
 
 
@@ -65,9 +65,8 @@ export default function Drawing({ story }) {
     console.log(`Frames array is ${framesArray}`);
     storyUpdate['frames'] = framesArray;
     console.log(storyUpdate);
-    setTemp(storyUpdate);
-    const newStory = await backendFunctions.updateStory(current._id, temp);
-    setCurrent(newStory);
+    // setTemp(storyUpdate);
+    await backendFunctions.updateStory(current._id, storyUpdate);
   }
 
   return (
@@ -79,7 +78,7 @@ export default function Drawing({ story }) {
           onChange={handleTextChange} name="img" />
         <button>Submit</button>
       </form>
-      {/* <DrawingBoard /> */}
+      <DrawingBoard />
     </div>
   )
 }
