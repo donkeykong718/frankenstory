@@ -18,12 +18,17 @@ import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 function Sidebar() {
   const { current, setCurrent } = useContext(StoryContext);
 
+  let currentUser = JSON.parse(localStorage.getItem('user'));
+  if (!currentUser) { currentUser = { _id: '0', username: 'guest' } }
+  // console.log('The curent user in the SideBar is:')
+  // console.log(currentUser._id);
+
+
   const randomIndex = Math.floor(Math.random() * prompts.length);
 
   const [data, setData] = useState({
-    prompt: prompts[randomIndex],
+    title: prompts[randomIndex],
     turn: 1,
-    text: "",
   });
 
   //DK added 3.19
@@ -52,6 +57,18 @@ function Sidebar() {
         (story) => story.completed === false
       );
 
+      // if (currentUser.username !== 'guest') {
+
+      //   activeStories.filter((story) => {
+      //     let res = story.frames.map(x => x.user)
+      //     console.log(res);
+      //     if (res.includes(currentUser._id) === false) {
+      //       return story
+      //     };
+      //   }
+      //   )
+      // }
+      // console.log(activeStories);
       activeStories.sort((a, b) => b.turn - a.turn);
 
       setStories(activeStories);
@@ -65,8 +82,8 @@ function Sidebar() {
 
   const createStory = async () => {
     const currentStory = await backendFunctions.createStory(data);
-    console.log("The current story is:");
-    console.log(currentStory);
+    // console.log("The current story is:");
+    // console.log(currentStory);
     setCurrent(currentStory);
   };
 
@@ -74,7 +91,7 @@ function Sidebar() {
     <>
       <button onClick={toggleSidebar}>Open Sidebar</button>
       <div className={`sidebar ${isOpen ? "open" : ""}`} ref={sidebarRef}>
-        <div className="create-new-box">
+        {/* <div className="create-new-box">
           <img
             src={FrankAddNew}
             onClick={createStory}
@@ -89,11 +106,11 @@ function Sidebar() {
 
         <></>
 
-        <div></div>
+        <div></div> */}
 
         <ul>
-          {/* <li><img src={FrankAddNew}onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li> */}
-          {/* <button onClick={createStory}>Create</button> */}
+          <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li>
+          <button onClick={createStory}>Create</button>
 
           <ul className="story-list">
             {stories.map((story, index) => (
@@ -101,22 +118,23 @@ function Sidebar() {
             ))}
           </ul>
 
+
           {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
           {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
 
           <li>
-          <div className="close-sidebar">
+            <div className="close-sidebar">
 
-            <img
-              src={CloseSidebarImg}
-              className="closeSidebarImg"
-              onClick={toggleSidebar}
-              alt="Close Sidebar"
-            />
-            <div class="overlay">
-              <div class="text">Close Sidebar</div>
+              <img
+                src={CloseSidebarImg}
+                className="closeSidebarImg"
+                onClick={toggleSidebar}
+                alt="Close Sidebar"
+              />
+              <div class="overlay">
+                <div class="text">Close Sidebar</div>
               </div>
-              </div>
+            </div>
           </li>
         </ul>
       </div>

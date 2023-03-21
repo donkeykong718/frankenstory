@@ -29,13 +29,20 @@ GET {{url}}/story/6418a754e96d093760bfa77
 POST {{url}}/user/sign-up
 Content-Type: application/json
 
-{
-	"name": "John Doe",
-	"email": "johndoe12@gmail.com",
-	"username": "testingdata12",
-	"password": "password123"
-}
+# {
+# 	"name": "Richard",
+# 	"email": "johndoe12@gmail.com",
+# 	"username": "testingdata12",
+# 	"password": "password123"
+# }
 
+{
+    "name": "Richard",
+    "email": "email@gmail.com",
+    "username": "Richard",
+    "password": "password"
+
+}
 ###
 
 # @name Sign In
@@ -44,9 +51,15 @@ POST {{url}}/user/sign-in
 Content-Type: application/json
 
 {
-	"username": "testingdata12",
-	"password": "password123"
+	"username": "Richard",
+	"password": "password"
 }
+
+###
+
+
+
+GET {{url}}/user/6419b66144d7660a60d3afe7
 
 ###
 

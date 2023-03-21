@@ -6,16 +6,16 @@ import * as backendFunctions from '../../services/stories'
 import Writing from './Writing'
 import Drawing from './Drawing'
 
-// import '../TestFunctions/testfunctions.css'
+import '../TestFunctions/testfunctions.css'
 
 export default function Workspace() {
 
   const { current, setCurrent } = useContext(StoryContext);
 
-  const [story, setStory] = useState(current);
-  const [turn, setTurn] = useState(story.turn);
+  // const [story, setStory] = useState(current);
+  // const [turn, setTurn] = useState(story.turn);
 
-  // const { prompt, frames } = story;
+  // const { title, frames } = story;
 
   console.log(current);
 
@@ -47,11 +47,11 @@ export default function Workspace() {
 
 
   return (
-    <>
+    <div className='test-container'>
       <h2>This is the workspace</h2>
       <h3>The current story is: {current._id}</h3>
       {current.turn % 2 === 0 ? <Writing story={current} /> : <Drawing story={current} />}
-    </>
+    </div>
   )
 
 }

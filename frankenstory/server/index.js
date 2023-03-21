@@ -1,5 +1,5 @@
 import "dotenv/config";
-// import "../db/connection.js";
+import "./db/connection.js";
 import express from "express";
 import mongoose from 'mongoose'
 import logger from "morgan";
@@ -9,16 +9,14 @@ import userRouter from "./routes/users.js";
 // import authRouter from "./routes/auth.js";
 // import router from "./routes/router.js"
 
-const app = express();
-app.use(express.json());
-
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.DATABASE_URL);
 const PORT = process.env.PORT || 3000;
 
+const app = express();
+
+app.use(express.json());
 app.use(cors());
-// app.use(express.json());
-app.use(logger("dev"));
+app.use(express.json());
+app.use(logger('dev'));
 
 app.use("/api/story", storyRouter);
 app.use("/api/user", userRouter);
