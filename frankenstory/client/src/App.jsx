@@ -8,7 +8,7 @@ import DrawingBoard from './components/SketchCanvas/drawingBoard';
 // import TestFunctions from './components/TestFunctions/TestFunctions';
 // import * as backendFunctions from './services/stories';
 // import '.side-bar'
-import DrawingBoard from './components/canvas-component/drawingBoard';
+import drawingBoard from './components/canvas-component/drawingBoard';
 import Workspace from './components/Workspace/Workspace';
 // import Parent from './components/TestFunctions/Parent'
 

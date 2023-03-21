@@ -103,10 +103,10 @@ function Sidebar() {
 
           {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
           {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
-
           <li>
+          </li>
+        </ul>
           <div className="close-sidebar">
-
             <img
               src={CloseSidebarImg}
               className="closeSidebarImg"
@@ -117,8 +117,6 @@ function Sidebar() {
               <div class="text">Close Sidebar</div>
               </div>
               </div>
-          </li>
-        </ul>
       </div>
     </>
   );
