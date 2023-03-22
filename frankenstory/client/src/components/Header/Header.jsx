@@ -6,7 +6,7 @@ import LogoImg from "./Header assets/Frank_logo.svg";
 import { getUser } from "../../services/users";
 import SignInForm from "../LoginForms/SignIn/SignInForm";
 import { UserContext } from "../../App";
-
+import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 function Header({ handleLoginClick }) {
   const [modal, setModal] = useState(false);
 
@@ -63,22 +63,28 @@ function Header({ handleLoginClick }) {
         </div>
 
         <div className="navbar">
-                <span onClick={handleClick} className="loginicon">
+                <div onClick={handleClick} className="loginicon">
                   Sign In
-                </span>
-              <div onClick={handleClick} className="loginicon">
+          </div>
+
+              <div onClick="" className="loginicon">
                 Gallery
               </div>
+          
               <div onClick={handleLogOut} className="loginicon">
                 Log Out
               </div>
-        </div>
         
       </div>
 
+  </div>
       <div className="navbar2">
-        <div className="username-welcome">Logged in as: {username}</div>
-      </div>
+        
+        <div className="username-welcome">Welcome,  {   username }</div>
+        </div>
+    <div>
+      
+  </div>
     </>
   );
 }

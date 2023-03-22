@@ -3,6 +3,7 @@ import "./SignInForm.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signin } from "../../../services/users";
+import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 
 const SignInForm = ({ isShowLogin }) => {
   const [text, setText] = useState("");
@@ -20,7 +21,9 @@ const SignInForm = ({ isShowLogin }) => {
       <div className="login-form">
         {!stage ? 
         <form onSubmit={handleSubmit}>
-          <div></div>
+            <div></div>
+            <div><img src={FrankAddNew} onClick="" className="addNew" alt="Create New" /></div>
+
           <h1 className="login-text">Sign In</h1>
 
           <label>Username</label>

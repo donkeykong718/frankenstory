@@ -6,23 +6,24 @@
 
 .loginicon {
   position: flex;
-  width: 80px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bolder;
-  color: #963484;
+  color: #dbfcff;
   height: 40px;
   left: 85%;
   top: 10px;
-  background:#A6CFD5;
-  border-radius: 24px;
   cursor: pointer;
+  font-family: 'Creepster', display;
+  font-size: xxx-large;
+  text-shadow: 2px 2px #963484;
   }
 
 .loginicon:hover{
-  color: #ffff;
+  color: #963484;
+  text-shadow:#ffff;
 }
 
 .highlight {

@@ -77,12 +77,13 @@
 .close-sidebar {
   display: flex;
   flex-direction: column;
-  font-family: 'Creepster', cursive;
   font-size: 23px;
   flex-wrap: nowrap;
   align-items: center;
   font-weight: lighter;
   cursor: pointer;
+      font-family: 'Schoolbell', cursive;
+
 }
 
 .create-new-box:hover .overlay {
@@ -109,12 +110,62 @@
   left: 0;
   right: 0;
   height: 50%;
-  width: 50%;
   opacity: 0;
   transition: .3s ease;
   background-color: red;
 }
 
-/* .addNew:hover .overlay {
+.addNew:hover .overlay {
   opacity: 1;
-} */
+}
+button{
+    background-color: #A6CFD5;
+    border: solid #D2BF55;
+    box-sizing: border-box;
+    color: #963484;
+    display: flex;
+    font-family: 'Schoolbell', cursive;
+    font-size: 1.5rem;
+    font-weight: 700;
+    justify-content: center;
+    line-height: 1.75rem;
+    padding: .75rem 1.65rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none #000000 solid;
+    text-decoration-thickness: auto;
+    width: 80%;
+    max-width: 460px;
+    position: relative;
+    cursor: pointer;
+    transform: rotate(-2deg);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+  
+  .button:focus {
+    outline: 0;
+  }
+  
+  .button:after {
+    content: '';
+    position: absolute;
+    border: 1px solid #000000;
+    bottom: 4px;
+    left: 4px;
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+  }
+  
+  .button:hover:after {
+    bottom: 2px;
+    left: 2px;
+  }
+  
+  @media (min-width: 768px) {
+    .button {
+      padding: .75rem 3rem;
+      font-size: 1.25rem;
+    }
+  }
