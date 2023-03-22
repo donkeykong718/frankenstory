@@ -1,5 +1,11 @@
 .canvas-container {
-  height: 3000px;
-  width: 3000px;
+  height: flex;
+  width: flex;
   border: 2px solid #000;
+  background-color: rgb(190, 190, 190);
+} 
+
+canvas {
+  height: flex;
+  width: flex;
 }

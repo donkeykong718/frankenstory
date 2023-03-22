@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
+import './drawingBoard.css'
 import getStroke from "perfect-freehand";
 import { CirclePicker } from 'react-color';
 
@@ -386,10 +387,9 @@ const DrawingCanvas = () => {
 
   return (
     <div>
-      <div style={{ position: "fixed" }}>
+      <div style={{ position: "static" }}>
         {/* 
         <CirclePicker onChange={handleColorChange} color={color} /> */}
-
         <input
           type="radio"
           id="pencil"
@@ -406,44 +406,24 @@ const DrawingCanvas = () => {
           onChange={() => setTool("rectangle")}
         />
         <label htmlFor="rectangle">Rectangle</label>
+        <div>
+          <canvas className="canvas-container"
+            ref={canvasRef}
+            id="canvas"
+            width={window.innerWidth}
+            height={window.innerHeight}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
+          </canvas>
+          {/* <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a> */}
+        </div>
       </div>
-      <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
+      <div style={{ position: "static", bottom: 0, padding: 10 }}>
         <button onClick={undo}>Undo</button>
         <button onClick={redo}>Redo</button>
         <button onClick={clear}>Clear</button>
-      </div>
-      {action === "writing" ? (
-        <textarea
-          ref={textAreaRef}
-          onBlur={handleBlur}
-          style={{
-            position: "fixed",
-            top: selectedElement.y1 - 2,
-            left: selectedElement.x1,
-            font: "24px sans-serif",
-            margin: 0,
-            padding: 0,
-            border: 0,
-            outline: 0,
-            resize: "auto",
-            overflow: "hidden",
-            whiteSpace: "pre",
-            background: "transparent",
-          }}
-        />
-      ) : null}
-      <div>
-        <canvas className="canvas-container"
-          ref={canvasRef}
-          id="canvas"
-          width={window.innerWidth}
-          height={window.innerHeight}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
-        </canvas>
-        <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a>
       </div>
     </div>
   );

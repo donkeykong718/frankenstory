@@ -101,7 +101,8 @@ export default function Drawing({ story }) {
           onChange={handleTextChange} name="img" />
         <button>Submit</button>
       </form>
-      <button onClick={handleDrawing}>Submit DRAWING</button>
+      <button onClick={handleDrawing}
+      >Submit DRAWING</button>
       <DrawingBoard />
     </div>
   )
