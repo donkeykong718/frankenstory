@@ -86,7 +86,6 @@ setUser({ _id: 0, username: 'guest' });
         </ul>
       </div>
 
-  </div>
       <div className="navbar2">
         
         <div className="username-welcome">Welcome,  {   username }</div>
