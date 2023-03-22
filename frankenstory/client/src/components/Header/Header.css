@@ -10,7 +10,7 @@
     /* font-family: 'Schoolbell', cursive; */
 
 }
-  .header-list {
+.header-list {
     display: flex;
     list-style: none;
     gap: 30px;
@@ -27,15 +27,24 @@
   color: white;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 0;
   overflow: hidden;
+  justify-content: space-between;
 }
-
 
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 0rem;
+  margin: 0px;
+  column-gap: 30px;
+}
+.navbar2 {
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   background-color: #333;
   color: #fff;
@@ -71,18 +80,26 @@
   text-decoration: underline;
 }
 img{
-  width: 80px;
-  height: 80px;
+  width: 150px;
+  height: 150px;
 }
 .logo-box {
   display: flex;
   flex-direction: column;
-  font-family: 'Creepster', cursive;
   font-size: 36px;
   flex-wrap: nowrap;
   align-items: center;
   font-weight: lighter;
   color: #D2BF55;
+  font-weight: 600;
+  font-size: 58px;
+  font-family: 'Creepster', display;
+  text-shadow: #963484 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;
+  padding: 10px;
+}
+
+.username-welcome{
+
 }
 /* Add a black background color to the top navigation */
 /* .topnav {

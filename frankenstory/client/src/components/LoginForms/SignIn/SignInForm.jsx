@@ -3,7 +3,6 @@ import "./SignInForm.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signin } from "../../../services/users";
-// import { LogoImg } from "frankenstory/client/src/components/Header/Header assets/Frank_logo.svg";
 
 const SignInForm = ({ isShowLogin }) => {
   const [text, setText] = useState("");
@@ -21,7 +20,6 @@ const SignInForm = ({ isShowLogin }) => {
       <div className="login-form">
         {!stage ? 
         <form onSubmit={handleSubmit}>
-          {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
           <div></div>
           <h1 className="login-text">Sign In</h1>
 

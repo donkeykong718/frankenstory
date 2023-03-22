@@ -97,6 +97,8 @@ function Sidebar() {
           <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li>
           <button onClick={createStory}>Create</button>
 
+
+
           <ul className="story-list">
             {stories.map((story, index) => (
               <ListStories story={story} key={index} />

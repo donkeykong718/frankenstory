@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 import LogoImg from "./Header assets/Frank_logo.svg";
 import { getUser } from "../../services/users";
 import SignInForm from "../LoginForms/SignIn/SignInForm";
-// import { Link } from 'react-router-dom'
-import LogoImg from "./Header assets/Frank_logo.svg";
-// import { getUser } from '../../services/users'
 import { UserContext } from "../../App";
-
 
 function Header({ handleLoginClick }) {
   const [modal, setModal] = useState(false);
@@ -17,7 +13,9 @@ function Header({ handleLoginClick }) {
   const modalRef = useRef(null);
 
   const handleClick = () => {
-    { <a href="/user/sign-in">SignIn</a>; }
+    {
+      <a href="/user/sign-in">SignIn</a>;
+    }
 
     console.log("hello");
     setModal(!modal);
@@ -38,16 +36,18 @@ function Header({ handleLoginClick }) {
 
   let username = localStorage.getItem("currentUser");
   const { user, setUser } = useContext(UserContext);
-  let userDetails = JSON.parse(localStorage.getItem('user'));
-  console.log('The user in Header is:')
+  let userDetails = JSON.parse(localStorage.getItem("user"));
+  console.log("The user in Header is:");
   console.log(userDetails);
 
-  if (!userDetails) { userDetails = user }
+  if (!userDetails) {
+    userDetails = user;
+  }
 
   const handleLogOut = () => {
     localStorage.clear();
-    setUser({ username: 'guest' });
-  }
+    setUser({ username: "guest" });
+  };
 
   return (
     <>
@@ -62,36 +62,24 @@ function Header({ handleLoginClick }) {
           <img src={LogoImg} alt="" /> FrankenStory
         </div>
 
-        <ul className="header-list">
-          <li>Logged in as: {username}</li>
+        <div className="navbar">
+                <span onClick={handleClick} className="loginicon">
+                  Sign In
+                </span>
+              <div onClick={handleClick} className="loginicon">
+                Gallery
+              </div>
+              <div onClick={handleLogOut} className="loginicon">
+                Log Out
+              </div>
+        </div>
+        
+      </div>
 
-
-          <li>Gallery</li>
-
-          <div className="navbar">
-            <div>
-              <span onClick={handleClick} className="loginicon">
-                Sign In
-              </span>
-            </div>
-          </div>
-          <li>Log Out</li>
-        </ul>
+      <div className="navbar2">
+        <div className="username-welcome">Logged in as: {username}</div>
       </div>
     </>
-    <div className="header">
-      <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div>
-      <ul className="header-list">
-        <li>
-          Logged in as: {userDetails.username}
-        </li>
-        <li>
-          Gallery
-        </li>
-        <a href="/user/sign-in">SignIn</a>
-        <button onClick={handleLogOut}>Log Out</button>
-      </ul>
-    </div>
   );
 }
 

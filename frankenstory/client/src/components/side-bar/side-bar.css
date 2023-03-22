@@ -2,7 +2,7 @@
 
 
 .sidebar {
-  position: fixed;
+  position:relative;
   top: 0;
   left: -200px;
   width: 200px;
@@ -10,7 +10,6 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out;
-  max-height: calc(100vh - 9rem);
   overflow-y: auto;
   
 }
