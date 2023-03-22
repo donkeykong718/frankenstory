@@ -2,7 +2,7 @@ import React from "react";
 import "./SignInForm.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signin } from "../../../services/users";
+import { signin, signup } from "../../../services/users";
 // import { LogoImg } from "frankenstory/client/src/components/Header/Header assets/Frank_logo.svg";
 
 const SignInForm = ({ isShowLogin }) => {
@@ -16,91 +16,98 @@ const SignInForm = ({ isShowLogin }) => {
     console.log(response);
   }
 
+  async function handleSignup(e) {
+    e.preventDefault();
+    const response = await signup(text, password);
+    console.log(response);
+  }
+
+
   return (
     <div className={`${isShowLogin ? "active" : ""} show`}>
       <div className="login-form">
-        {!stage ? 
-        <form onSubmit={handleSubmit}>
-          {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
-          <div></div>
-          <h1 className="login-text">Sign In</h1>
+        {!stage ?
+          <form onSubmit={handleSubmit}>
+            {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
+            <div></div>
+            <h1 className="login-text">Sign In</h1>
 
-          <label>Username</label>
+            <label>Username</label>
 
-          <br></br>
+            <br></br>
 
-          <input
-            type="text"
-            value={text}
-            name="username"
-            onChange={(e) => setText(e.target.value)}
-            className="login-box"
-          />
-          <br></br>
+            <input
+              type="text"
+              value={text}
+              name="username"
+              onChange={(e) => setText(e.target.value)}
+              className="login-box"
+            />
+            <br></br>
 
-          <label>Password</label>
-          <br></br>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            className="login-box"
-          />
-          <br></br>
+            <label>Password</label>
+            <br></br>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              className="login-box"
+            />
+            <br></br>
 
-          <input type="submit" value="LOGIN" className="login-btn" />
+            <input type="submit" value="LOGIN" className="login-btn" />
 
-          <div>
-            <label>
-              {"Need an account?"}
-              <br/>
+            <div>
+              <label>
+                {"Need an account?"}
+                <br />
                 <span className="highlight" onClick={() => setStage(true)}>Go to Signup</span>
-              {" instead."}
-            </label>
-          </div>
-        </form>
+                {" instead."}
+              </label>
+            </div>
+          </form>
           : <>
-                  <form onSubmit={handleSubmit}>
-          {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
-          <div></div>
-          <h1 className="login-text">Sign Up</h1>
+            <form onSubmit={handleSignup}>
+              {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
+              <div></div>
+              <h1 className="login-text">Sign Up</h1>
 
-          <label>Username</label>
+              <label>Username</label>
 
-          <br></br>
+              <br></br>
 
-          <input
-            type="text"
-            value={text}
-            name="username"
-            onChange={(e) => setText(e.target.value)}
-            className="login-box"
-          />
-          <br></br>
+              <input
+                type="text"
+                value={text}
+                name="username"
+                onChange={(e) => setText(e.target.value)}
+                className="login-box"
+              />
+              <br></br>
 
-          <label>Password</label>
-          <br></br>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            className="login-box"
-          />
-          <br></br>
+              <label>Password</label>
+              <br></br>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                className="login-box"
+              />
+              <br></br>
 
-          <input type="submit" value="LOGIN" className="login-btn" />
+              <input type="submit" value="LOGIN" className="login-btn" />
 
-          <div>
-            <label>
-              {"Need an account?"}
-              <br/>
-                <span className="highlight" onClick={() => setStage(false)}>Go to Signin</span>
-              {" instead."}
-            </label>
-          </div>
-        </form>
+              <div>
+                <label>
+                  {"Need an account?"}
+                  <br />
+                  <span className="highlight" onClick={() => setStage(false)}>Go to Signin</span>
+                  {" instead."}
+                </label>
+              </div>
+            </form>
           </>}
       </div>
     </div>

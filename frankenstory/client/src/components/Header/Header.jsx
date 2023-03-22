@@ -35,7 +35,7 @@ function Header({ handleLoginClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
 
-  // let username = localStorage.getItem("currentUser");
+  let username = localStorage.getItem("currentUser");
   const { user, setUser } = useContext(UserContext);
   let userDetails = JSON.parse(localStorage.getItem('user'));
   console.log('The user in Header is:')
@@ -62,7 +62,7 @@ function Header({ handleLoginClick }) {
         </div>
 
         <ul className="header-list">
-          <li>Logged in as: {userDetails.username}</li>
+          <li>Logged in as: {username}</li>
 
           <Link to="/story/gallery/">Gallery</Link>
           <div className="navbar">

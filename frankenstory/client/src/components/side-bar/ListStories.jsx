@@ -24,6 +24,9 @@ function ListStories({ story }) {
   const [valid, setValid] = useState(true);
 
   const { _id, turn, frames } = story;
+  console.log(_id)
+  console.log(turn)
+  console.log(frames)
 
   useEffect(() => {
     if (currentUser.username !== 'guest') {
@@ -96,7 +99,7 @@ function ListStories({ story }) {
 
   return (
     <div className="story-list">
-      <p>Story ID: {_id}</p>
+      {/* <p>Story ID: {_id}</p> */}
       <li className="current-turn"><img src={circle} className="completionCircle" alt="" />
       </li>
       {valid ?

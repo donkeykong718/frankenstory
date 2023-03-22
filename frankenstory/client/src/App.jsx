@@ -8,7 +8,6 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Gallery from './pages/Gallery';
 import { getUser } from './services/users'
-import { get } from 'mongoose';
 
 export const StoryContext = React.createContext();
 export const UserContext = React.createContext();
@@ -28,7 +27,7 @@ export const GalleryContext = React.createContext();
 function App() {
 
   const defaultUser = {
-    username: 'Guest'
+    _id: 0, username: 'guest'
   }
 
   const [current, setCurrent] = useState({});

@@ -5,13 +5,13 @@
   margin: 0 20px;
 }
 
-.story-list {
+.gallery-list {
   display: flex;
   position: relative;
   overflow-x: scroll;
 }
 
-.story-list::-webkit-scrollbar {
+.gallery-list::-webkit-scrollbar {
   display: none;
 }
 

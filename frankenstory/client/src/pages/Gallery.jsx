@@ -60,7 +60,7 @@ function Gallery() {
     <div>
       <div className='gallery hidden'>
         <h1>Gallery</h1>
-        <ul className="story-list">
+        <ul className="gallery-list">
           {finstories.map((story, index) => (<Thumbnail story={story} key={index}
           />))}
         </ul>
