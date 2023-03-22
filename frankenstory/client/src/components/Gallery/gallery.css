@@ -1,0 +1,115 @@
+.thumbnail {
+  min-height: 150px;
+  min-width: 200px;
+  border: 1px solid black;
+  margin: 0 20px;
+}
+
+.gallery-list {
+  display: flex;
+  position: relative;
+  overflow-x: scroll;
+}
+
+.gallery-list::-webkit-scrollbar {
+  display: none;
+}
+
+.storybook {
+  position: fixed;
+  display: flex;
+  background-color: white;
+  border: solid gold 2px;
+  margin: auto;
+  z-index: 1;
+  /* width: 40%;
+  text-align: center; */
+  top: 25%;
+  left: 50%;
+  padding: 20px;
+  transform: translate(-50%, 0);
+
+}
+
+.frame {
+  height: 100px;
+  width: 100px;
+  border: red solid 1px;
+}
+
+#curtain {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  border: 1px purple solid;
+  overflow: hidden;
+}
+
+.gallery-page {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+#curtain-L {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  background: white;
+}
+
+
+/* @keyframes slideleft {
+  to {
+    transform: translateX(-110%);
+  }
+} */
+
+#curtain-R {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 2;
+  background: white;
+}
+
+.slideleft {
+  transform: translateX(-110%);
+  transition: 3s;
+  /* animation-name: slideleft;
+  animation-duration: 3s; */
+}
+
+.sideright {
+  transform: translateX(110%);
+  transition: 3s;
+}
+
+/* #curtain-R:hover {
+  transform: translateX(100%);
+} */
+
+#splash-logo-L {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  border: 4px green solid;
+  margin: auto;
+  transform: translateX(62.5%)
+}
+
+#splash-logo-R {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  border: 4px green solid;
+  transform: translateX(-62.5%);
+  /* offset-position: 0 50%; */
+  margin: auto;
+}

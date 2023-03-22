@@ -72,6 +72,7 @@ function Sidebar() {
       activeStories.sort((a, b) => b.turn - a.turn);
 
       setStories(activeStories);
+      console.log(activeStories);
     };
     handleGetStories();
   }, []);

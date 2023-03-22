@@ -6,9 +6,6 @@ import { saveAs } from 'file-saver';
 
 import DrawingBoard from "../SketchCanvas/drawingBoard"
 
-
-
-
 export default function Drawing({ story }) {
 
   let currentUser = JSON.parse(localStorage.getItem('user'));
@@ -94,15 +91,16 @@ export default function Drawing({ story }) {
 
   return (
     <div className='workspace'>
-      <p>Turn # {turn}</p>
-      <p> {display}</p>
-      <form onSubmit={handleTextSubmit}>
-        <textarea maxLength={400} className='text-display' placeholder="Normally you would draw here."
-          onChange={handleTextChange} name="img" />
-        <button>Submit</button>
-      </form>
-      <button onClick={handleDrawing}>Submit DRAWING</button>
-      <DrawingBoard />
+      <div className='promptHeader'>
+        <p className='turnCounter'>Turn # {turn}</p>
+        <br></br>
+        <p className='drawPrompt'> {display}</p>
+      </div>
+      <p id='instructions' >Illustrate what you think should come next, then click submit. <button id='draw-submit' onClick={handleDrawing}>Submit DRAWING</button> </p>
+
+      <div id='drawing-container'>
+        <DrawingBoard />
+      </div>
     </div>
   )
 }

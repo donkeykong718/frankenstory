@@ -9,6 +9,16 @@ export const getStories = async () => {
   }
 };
 
+export const getFinishedStories = async () => {
+  try {
+    const response = await api.get("/api/story/gallery/");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 export const getStory = async (id) => {
   try {
     const response = await api.get(`/api/story/${id}`);

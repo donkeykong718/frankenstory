@@ -2,9 +2,9 @@ import React, { useContext, useState, useRef, useEffect } from "react";
 // import "./nav-barApp";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import LogoImg from "./Header assets/Frank_logo.svg";
 import { getUser } from "../../services/users";
 import SignInForm from "../LoginForms/SignIn/SignInForm";
+import LogoImg from "./Header assets/Frank_logo.svg";
 import { UserContext } from "../../App";
 import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 function Header({ handleLoginClick }) {
@@ -28,6 +28,7 @@ function Header({ handleLoginClick }) {
       }
     });
   }, []);
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -46,8 +47,16 @@ function Header({ handleLoginClick }) {
 
   const handleLogOut = () => {
     localStorage.clear();
-    setUser({ username: "guest" });
-  };
+
+setUser({ _id: 0, username: 'guest' });
+  }
+
+  const handleCurtain = () => {
+    const curtainL = document.getElementById('curtain-L');
+    const curtainR = document.getElementById('curtain-R');
+    curtainL.classList.add('slideleft');
+    curtainR.classList.add('sideright');
+  }
 
   return (
     <>
@@ -62,19 +71,19 @@ function Header({ handleLoginClick }) {
           <img src={LogoImg} alt="" /> FrankenStory
         </div>
 
-        <div className="navbar">
-                <div onClick={handleClick} className="loginicon">
-                  Sign In
-          </div>
+        <ul className="header-list">
+          <li>Logged in as: {username}</li>
 
-              <div onClick="" className="loginicon">
-                Gallery
-              </div>
-          
-              <div onClick={handleLogOut} className="loginicon">
-                Log Out
-              </div>
-        
+          <li onClick={handleCurtain}>Gallery</li>
+          <div className="navbar">
+            <div>
+              <span onClick={handleClick} className="loginicon">
+                Sign In
+              </span>
+            </div>
+          </div>
+          <span onClick={handleLogOut}>Log Out</span>
+        </ul>
       </div>
 
   </div>
