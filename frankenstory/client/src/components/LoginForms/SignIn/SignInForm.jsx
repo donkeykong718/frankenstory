@@ -2,8 +2,8 @@ import React from "react";
 import "./SignInForm.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signin } from "../../../services/users";
-// import { LogoImg } from "frankenstory/client/src/components/Header/Header assets/Frank_logo.svg";
+import { signin, signup } from "../../../services/users";
+// import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 
 const SignInForm = ({ isShowLogin }) => {
   const [text, setText] = useState("");
@@ -15,14 +15,27 @@ const SignInForm = ({ isShowLogin }) => {
     const response = await signin(text, password);
     console.log(response);
   }
-
+  async function handleSignup(e) {
+    e.preventDefault();
+    const response = await signup(text, password);
+    console.log(response);
+    
+  }
+  function closeForm() {
+    // get the parent element of the login form
+    const loginForm = document.querySelector('.login-form').parentElement;
+    // remove the "active" class from the parent element to hide the form
+    loginForm.classList.remove('active');
+  }
+  
   return (
     <div className={`${isShowLogin ? "active" : ""} show`}>
       <div className="login-form">
         {!stage ? 
         <form onSubmit={handleSubmit}>
-          {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
-          <div></div>
+            <div></div>
+            {/* <div><img src={FrankAddNew} onClick="" className="addNew" alt="Create New" /></div> */}
+
           <h1 className="login-text">Sign In</h1>
 
           <label>Username</label>
@@ -61,7 +74,7 @@ const SignInForm = ({ isShowLogin }) => {
           </div>
         </form>
           : <>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSignup}>
           {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
           <div></div>
           <h1 className="login-text">Sign Up</h1>
@@ -90,7 +103,9 @@ const SignInForm = ({ isShowLogin }) => {
           />
           <br></br>
 
-          <input type="submit" value="LOGIN" className="login-btn" />
+              <input type="submit" value="LOGIN" className="login-btn" />
+              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+
 
           <div>
             <label>
