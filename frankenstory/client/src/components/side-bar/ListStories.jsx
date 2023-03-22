@@ -13,6 +13,8 @@ import CompletionCircle_7 from './side-bar assets/CompletionCircle_7.svg'
 
 function ListStories({ story }) {
 
+  console.log(story);
+
   let currentUser = JSON.parse(localStorage.getItem('user'));
   if (!currentUser) { currentUser = { _id: 0, username: 'guest' } }
 
@@ -25,10 +27,10 @@ function ListStories({ story }) {
 
   useEffect(() => {
     if (currentUser.username !== 'guest') {
-      console.log(frames);
+      // console.log(frames);
       let res = frames.map(x => x.user)
-      console.log('Checking validity:')
-      console.log(res);
+      // console.log('Checking validity:')
+      // console.log(res);
       // console.log(currentUser._id)
       if (res.includes(currentUser._id)) {
         setValid(false);

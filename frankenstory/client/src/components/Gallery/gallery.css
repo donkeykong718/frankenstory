@@ -1,0 +1,38 @@
+.thumbnail {
+  min-height: 150px;
+  min-width: 200px;
+  border: 1px solid black;
+  margin: 0 20px;
+}
+
+.story-list {
+  display: flex;
+  position: relative;
+  overflow-x: scroll;
+}
+
+.story-list::-webkit-scrollbar {
+  display: none;
+}
+
+.storybook {
+  position: fixed;
+  display: flex;
+  background-color: white;
+  border: solid gold 2px;
+  margin: auto;
+  z-index: 1;
+  /* width: 40%;
+  text-align: center; */
+  top: 25%;
+  left: 50%;
+  padding: 20px;
+  transform: translate(-50%, 0);
+
+}
+
+.frame {
+  height: 100px;
+  width: 100px;
+  border: red solid 1px;
+}

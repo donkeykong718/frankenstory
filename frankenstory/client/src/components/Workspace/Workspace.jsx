@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StoryContext } from '../../App';
 import * as backendFunctions from '../../services/stories'
-import { saveAs } from 'file-saver';
 
 // import DrawingBoard from '../canvas-component/drawingBoard';
 import Writing from './Writing'
 import Drawing from './Drawing'
 
-import '../TestFunctions/testfunctions.css'
+import './workspace.css'
 
 export default function Workspace() {
 
@@ -48,9 +47,9 @@ export default function Workspace() {
 
 
   return (
-    <div className='test-container'>
-      <h2>This is the workspace</h2>
-      <h3>The current story is: {current._id}</h3>
+    <div id='desktop-container'>
+      {/* <h2>This is the workspace</h2>
+      <h3>The current story is: {current._id}</h3> */}
       {current.turn % 2 === 0 ? <Writing story={current} /> : <Drawing story={current} />}
     </div>
   )

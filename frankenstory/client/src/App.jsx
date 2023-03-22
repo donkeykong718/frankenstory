@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import Workspace from './components/Workspace/Workspace';
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
+import Gallery from './pages/Gallery';
 import { getUser } from './services/users'
 import { get } from 'mongoose';
 
@@ -21,7 +22,7 @@ export const UserContext = React.createContext();
 //   return currentUser;
 // }
 
-// export const GalleryContext = React.createContext();
+export const GalleryContext = React.createContext();
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
         <Route path="/user/sign-in" element={<UserContext.Provider value={{ user, setUser }}>
           <SignIn />
         </UserContext.Provider>} />
+        <Route path="/story/gallery/" element={<Gallery />} />
 
       </Routes>
     </>

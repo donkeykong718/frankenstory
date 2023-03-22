@@ -10,9 +10,9 @@
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out;
-  max-height: calc(100vh - 9rem);
+  /* max-height: calc(100vh - 9rem); */
   overflow-y: auto;
-  
+
 }
 
 .sidebar.open {
@@ -56,6 +56,7 @@
   display: flex;
   align-items: center;
 }
+
 .create-new-box {
   display: flex;
   flex-direction: column;
@@ -89,6 +90,7 @@
 .create-new-box:hover .overlay {
   opacity: 1;
 }
+
 .text {
   color: #963484;
   font-size: 20px;

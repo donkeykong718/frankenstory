@@ -15,6 +15,8 @@ export default function Writing({ story }) {
 
   const [temp, setTemp] = useState(story);
   const [input, setInput] = useState();
+  const [count, setCount] = useState(0);
+
 
   const { turn, frames } = story;
   let framesArray = [];
@@ -32,6 +34,7 @@ export default function Writing({ story }) {
 
   const handleTextChange = (e) => {
     const { value } = e.target;
+    setCount(value.length)
     setInput(value)
   }
 
@@ -110,12 +113,16 @@ export default function Writing({ story }) {
 
   return (
     <div className='workspace'>
-      <p>Turn # {turn}</p>
-      <img src={imgSrc} alt="" />
+      <div className='promptHeader'>
+        <p className='turnCounter'>Turn # {turn}</p>
+        <img id='writePrompt' src={imgSrc} alt="a terrible drawing" />
+      </div>
+      <p className='instructions' >Write what you think might follow this image, then click submit. </p>
+      <p>{400 - count}/400 characters remaining</p>
       <form onSubmit={handleTextSubmit}>
         <textarea maxLength={400} className='text-display' placeholder="Write a story based on the above image."
           onChange={handleTextChange} name="text" />
-        <button>Submit</button>
+        <button className='submit-button'>Submit</button>
       </form>
     </div>
   )
