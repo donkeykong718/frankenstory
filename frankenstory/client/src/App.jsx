@@ -4,8 +4,9 @@ import { Routes, Route } from 'react-router-dom'
 import Sidebar from './components/side-bar/side-bar';
 import Header from './components/Header/Header';
 import Workspace from './components/Workspace/Workspace';
-import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
+import Landing from './pages/Landing';
+// import SignIn from './pages/SignIn'
+// import SignUp from './pages/SignUp'
 import Gallery from './pages/Gallery';
 import { getUser } from './services/users'
 
@@ -45,13 +46,13 @@ function App() {
               <Header />
             </UserContext.Provider>
             <Sidebar />
-            {Object.keys(current).length === 0 ? <div>Select a new project</div> : <Workspace />}
+            {Object.keys(current).length === 0 ? <Landing /> : <Workspace />}
           </StoryContext.Provider>
         } />
-        <Route path="/user/sign-up" element={<SignUp />} />
+        {/* <Route path="/user/sign-up" element={<SignUp />} />
         <Route path="/user/sign-in" element={<UserContext.Provider value={{ user, setUser }}>
           <SignIn />
-        </UserContext.Provider>} />
+        </UserContext.Provider>} /> */}
         <Route path="/story/gallery/" element={<Gallery />} />
 
       </Routes>

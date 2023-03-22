@@ -48,6 +48,13 @@ function Header({ handleLoginClick }) {
     setUser({ _id: 0, username: 'guest' });
   }
 
+  const handleCurtain = () => {
+    const curtainL = document.getElementById('curtain-L');
+    const curtainR = document.getElementById('curtain-R');
+    curtainL.classList.add('slideleft');
+    curtainR.classList.add('sideright');
+  }
+
   return (
     <>
       {modal && (
@@ -64,7 +71,7 @@ function Header({ handleLoginClick }) {
         <ul className="header-list">
           <li>Logged in as: {username}</li>
 
-          <Link to="/story/gallery/">Gallery</Link>
+          <li onClick={handleCurtain}>Gallery</li>
           <div className="navbar">
             <div>
               <span onClick={handleClick} className="loginicon">

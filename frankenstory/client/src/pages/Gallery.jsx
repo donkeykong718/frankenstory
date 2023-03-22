@@ -58,7 +58,7 @@ function Gallery() {
 
   return (
     <div>
-      <div className='gallery hidden'>
+      <div className='gallery-page'>
         <h1>Gallery</h1>
         <ul className="gallery-list">
           {finstories.map((story, index) => (<Thumbnail story={story} key={index}

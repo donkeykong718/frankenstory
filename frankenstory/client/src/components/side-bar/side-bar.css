@@ -12,7 +12,7 @@
   transition: left 0.3s ease-in-out;
   /* max-height: calc(100vh - 9rem); */
   overflow-y: auto;
-
+  z-index: 3;
 }
 
 .sidebar.open {
