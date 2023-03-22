@@ -134,14 +134,13 @@ button{
     text-align: center;
     text-decoration: none #000000 solid;
     text-decoration-thickness: auto;
-    width: 80%;
     max-width: 460px;
     position: relative;
     cursor: pointer;
-    transform: rotate(-2deg);
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    margin: 10px;
 }
   
   .button:focus {

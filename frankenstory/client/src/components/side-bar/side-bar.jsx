@@ -7,9 +7,10 @@ import prompts from "../../prompts.json";
 import { StoryContext } from "../../App";
 
 import "./side-bar.css";
-
 import CloseSidebarImg from "../side-bar/side-bar assets/CloseSidebarImg.svg";
 import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
+
+
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
