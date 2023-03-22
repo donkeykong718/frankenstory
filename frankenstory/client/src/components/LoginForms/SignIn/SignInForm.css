@@ -5,24 +5,25 @@
 
 
 .loginicon {
-  position: absolute;
-  width: 80px;
+  position: flex;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bolder;
-  color: #963484;
+  color: #dbfcff;
   height: 40px;
   left: 85%;
   top: 10px;
-  background:#A6CFD5;
-  border-radius: 24px;
   cursor: pointer;
-}
+  font-family: 'Creepster', display;
+  font-size: xxx-large;
+  text-shadow: 2px 2px #963484;
+  }
 
 .loginicon:hover{
-  color: #ffff;
+  color: #d2bf55;
+  text-shadow:#ffff;
 }
 
 .highlight {
@@ -43,6 +44,8 @@
   /* background: content-box radial-gradient(#963484, #A6CFD5);} */
   background-color: #FFF;
   pointer-events: auto;
+  border: solid; 
+  border: 1px solid #963484; box-shadow: #1E90FF;
 }
 
 .form-box{
@@ -57,19 +60,26 @@
 }
 
 .login-text {
-  font-family: 'Creepster', cursive;
   width: 100%;
-  color: black;
   border-bottom: 2px solid white;
   line-height: 30px;
   width: 100%;
-  font-weight: bolder;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 5vh;
   padding-bottom: 3vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-weight: lighter;
+  color: #D2BF55;
+  font-weight: 600;
+  font-size: 32px !important;
+  font-family: 'Creepster', display;
+  text-shadow: #963484 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;
 }
 
 label {
@@ -80,7 +90,7 @@ label {
 }
 
 .login-box{
-  border: 1px solid lightgrey;
+  border: 1px solid #963484;
   display: flex;
   justify-content: center;
   align-items: center;

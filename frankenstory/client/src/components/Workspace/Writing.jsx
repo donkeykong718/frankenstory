@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import * as backendFunctions from '../../services/stories'
 import { StoryContext } from '../../App';
-import { ObjectId } from 'mongoose';
 
 export default function Writing({ story }) {
 

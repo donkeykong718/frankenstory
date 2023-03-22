@@ -7,9 +7,9 @@ import prompts from "../../prompts.json";
 import { StoryContext } from "../../App";
 
 import "./side-bar.css";
-
 import CloseSidebarImg from "../side-bar/side-bar assets/CloseSidebarImg.svg";
 import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
+
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -90,13 +90,14 @@ function Sidebar() {
 
   return (
     <>
-      {/* //MOVE TO HEADER// */}
-      <button onClick={toggleSidebar}>Open Sidebar</button>
+      <button  onClick={toggleSidebar}>Open Sidebar</button>
       <div className={`sidebar ${isOpen ? "open" : ""}`} ref={sidebarRef}>
 
         <ul>
-          <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li>
-          <button onClick={createStory}>Create</button>
+          <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" /></li>
+          <button onClick={createStory}>Create New</button>
+
+
 
           <ul className="story-list">
             {stories.map((story, index) => (
@@ -105,8 +106,6 @@ function Sidebar() {
           </ul>
 
 
-          {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
-          {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
 
           <li>
             <div className="close-sidebar">
@@ -116,7 +115,7 @@ function Sidebar() {
                 className="closeSidebarImg"
                 onClick={toggleSidebar}
                 alt="Close Sidebar"
-              />
+              />Close Sidebar
               <div class="overlay">
                 <div class="text">Close Sidebar</div>
               </div>
