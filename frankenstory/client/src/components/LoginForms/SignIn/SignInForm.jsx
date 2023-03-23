@@ -1,8 +1,6 @@
 import React from "react";
 import "./SignInForm.css";
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signin, signup } from "../../../services/users";
 import Frank from "../SignIn/FRANK.png";
 import { useEffect, useState, useContext } from "react";
 import { signin, signup, getUser } from "../../../services/users";
@@ -31,9 +29,8 @@ const SignInForm = ({ isShowLogin }) => {
     const response = await signup(text, password);
     console.log(response);
     setLoading(false);
-
   }
-  
+
   // function closeForm() {
   //   // get the parent element of the login form
   //   const loginForm = document.querySelector('.login-form').parentElement;
@@ -43,93 +40,30 @@ const SignInForm = ({ isShowLogin }) => {
 
   useEffect(() => {
     const workAround = async () => {
-      const currentUser = await getUser(text)
+      const currentUser = await getUser(text);
       setUser(currentUser);
       console.log(user);
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem("user", JSON.stringify(user));
     };
     workAround();
-  }, [loading])
+  }, [loading]);
 
   return (
     <div className={`${isShowLogin ? "active" : ""} show`}>
       <div className="login-form">
-        {!stage ?
-          <form onSubmit={handleSubmit}>
-            <div></div>
-            <div><img src={Frank} onClick="" className="addNew" alt="Create New" /></div>
+        <div>
+          {!stage ? (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <img
+                  src={Frank}
+                  onClick=""
+                  className="addNew"
+                  alt="Create New"
+                />
+              </div>
 
-            <h1 className="login-text">Sign In</h1>
-
-            <label>Username</label>
-
-            <br></br>
-
-            <input
-              type="text"
-              value={text}
-              name="username"
-              onChange={(e) => setText(e.target.value)}
-              className="login-box"
-            />
-            <br></br>
-
-            <label>Password</label>
-            <br></br>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              name="password"
-              className="login-box"
-            />
-            <br></br>
-
-            <input type="submit" value="LOGIN" className="login-btn" />
-
-            <div>
-              <label>
-                {"Need an account?"}
-                <br />
-                <span className="highlight" onClick={() => setStage(true)}>Go to Signup</span>
-                {" instead."}
-              </label>
-            </div>
-          </form>
-          : <>
-                  <form onSubmit={handleSignup}>
-                  <div><img src={Frank} onClick="" className="addNew" alt="Create New" /></div>
-
-          <div></div>
-          <h1 className="login-text">Sign Up</h1>
-
-          <label>Username</label>
-
-          <br></br>
-
-          <input
-            type="text"
-            value={text}
-            name="username"
-            onChange={(e) => setText(e.target.value)}
-            className="login-box"
-          />
-          <br></br>
-
-          <label>Password</label>
-          <br></br>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            className="login-box"
-          />
-          <br></br>
-            <form onSubmit={handleSignup}>
-              {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
-              <div></div>
-              <h1 className="login-text">Sign Up</h1>
+              <h1 className="login-text">Sign In</h1>
 
               <label>Username</label>
 
@@ -157,17 +91,63 @@ const SignInForm = ({ isShowLogin }) => {
 
               <input type="submit" value="LOGIN" className="login-btn" />
 
-
               <div>
                 <label>
                   {"Need an account?"}
                   <br />
-                  <span className="highlight" onClick={() => setStage(false)}>Go to Signin</span>
+                  <span className="highlight" onClick={() => setStage(true)}>
+                    Go to Signup
+                  </span>
                   {" instead."}
                 </label>
               </div>
             </form>
-          </>}
+          ) : (
+            <>
+              <form onSubmit={handleSignup}>
+                {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
+                <h1 className="login-text">Sign Up</h1>
+
+                <label>Username</label>
+
+                <br></br>
+
+                <input
+                  type="text"
+                  value={text}
+                  name="username"
+                  onChange={(e) => setText(e.target.value)}
+                  className="login-box"
+                />
+                <br></br>
+
+                <label>Password</label>
+                <br></br>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  className="login-box"
+                />
+                <br></br>
+
+                <input type="submit" value="LOGIN" className="login-btn" />
+
+                <div>
+                  <label>
+                    {"Need an account?"}
+                    <br />
+                    <span className="highlight" onClick={() => setStage(false)}>
+                      Go to Signin
+                    </span>
+                    {" instead."}
+                  </label>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
