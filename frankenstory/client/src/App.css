@@ -5,6 +5,11 @@
   background-color: #DBFCFF;
 }
 
+#headerbox {
+  position: fixed;
+  z-index: 3;
+}
+
 .App {
   text-align: center;
 }
@@ -39,6 +44,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

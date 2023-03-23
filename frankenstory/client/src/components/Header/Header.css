@@ -1,10 +1,10 @@
   @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
- 
+
   @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
- 
+
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-  
+
   * {
     box-sizing: border-box;
     padding: 0;
@@ -12,111 +12,119 @@
     transition: all ease-out 300ms;
     /* font-family: 'Schoolbell', cursive; */
 
-}
-.header-list {
+  }
+
+  .header-list {
     display: flex;
     list-style: none;
     gap: 30px;
-    color:#D2BF55;
+    color: #D2BF55;
     font-family: 'Creepster', cursive;
     flex: content;
     justify-content: space-around;
     margin: 10px 20px;
   }
 
-.header {
-  background-color: #333;
-  width: 100;
-  color: white;
-  display: flex;
-  align-items: center;
-  margin: 0;
-  overflow: hidden;
-  justify-content: space-between;
-}
+  .header {
+    background-color: #333;
+    width: 100;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+    justify-content: space-between;
+    z-index: 3;
+  }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  padding: 0rem;
-  margin: 40px;
-  column-gap: 30px;
-}
-.navbar2 {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
-  padding: 1px;
-}
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 0rem;
+    margin: 40px;
+    column-gap: 30px;
+    width: 33%;
+  }
 
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-}
+  .navbar2 {
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1px;
+  }
 
-.navbar-nav {
-  display: flex;
-  list-style: none;
-}
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 
-.nav-item {
-  margin-right: 1rem;
-}
+  .navbar-nav {
+    display: flex;
+    list-style: none;
+  }
 
-.nav-bar {
-  background-color: #333;
-  height: 90px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 76px;
-}
+  .nav-item {
+    margin-right: 1rem;
+  }
 
-.nav-link:hover {
-  text-decoration: underline;
-}
-img{
-  width: 180px;
-}
-.logo-box {
-  display: flex;
-  flex-direction: column;
-  font-size: 36px;
-  flex-wrap: nowrap;
-  align-items: center;
-  font-weight: lighter;
-  color: #D2BF55;
-  font-weight: 600;
-  font-size: 58px;
-  font-family: 'Creepster', display;
-  
-  text-shadow: #963484 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;
-  padding: 10px;
-}
+  .nav-bar {
+    background-color: #333;
+    height: 90px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 76px;
+  }
 
-.username-welcome {
-  font-family: 'Schoolbell', cursive;
-  font-size: 36px;
-  letter-spacing: 2px;
-  color: #dbfcff;
-  text-shadow: #963484;
-  padding-right: 20px;
-}
-/* Add a black background color to the top navigation */
-/* .topnav {
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  img {
+    width: 180px;
+  }
+
+  .logo-box {
+    display: flex;
+    flex-direction: column;
+    font-size: 36px;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-weight: lighter;
+    color: #D2BF55;
+    font-weight: 600;
+    font-size: 58px;
+    font-family: 'Creepster', display;
+
+    text-shadow: #963484 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;
+    padding: 10px;
+  }
+
+  .username-welcome {
+    font-family: 'Schoolbell', cursive;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: #dbfcff;
+    text-shadow: #963484;
+    padding-right: 20px;
+  }
+
+  /* Add a black background color to the top navigation */
+  /* .topnav {
   background-color: #333;
   overflow: hidden;
 } */
 
-/* Style the links inside the navigation bar */
-/* .topnav a {
+  /* Style the links inside the navigation bar */
+  /* .topnav a {
   float: left;
   color: #f2f2f2;
   text-align: center;
@@ -125,14 +133,14 @@ img{
   font-size: 17px;
 } */
 
-/* Change the color of links on hover */
-/* .topnav a:hover {
+  /* Change the color of links on hover */
+  /* .topnav a:hover {
   background-color: #ddd;
   color: black;
 } */
 
-/* Add a color to the active/current link */
-/* .topnav a.active {
+  /* Add a color to the active/current link */
+  /* .topnav a.active {
   background-color: #04AA6D;
   color: white;
 } */

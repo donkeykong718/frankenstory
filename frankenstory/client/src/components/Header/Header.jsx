@@ -7,15 +7,17 @@ import SignInForm from "../LoginForms/SignIn/SignInForm";
 import LogoImg from "./Header assets/Frank_logo.svg";
 import { UserContext } from "../../App";
 import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
+
+
 function Header({ handleLoginClick }) {
   const [modal, setModal] = useState(false);
 
   const modalRef = useRef(null);
 
   const handleClick = () => {
-    {
-      <a href="/user/sign-in">SignIn</a>;
-    }
+    // {
+    //   <a href="/user/sign-in">SignIn</a>;
+    // }
 
     console.log("hello");
     setModal(!modal);
@@ -32,6 +34,7 @@ function Header({ handleLoginClick }) {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
 
@@ -48,7 +51,7 @@ function Header({ handleLoginClick }) {
   const handleLogOut = () => {
     localStorage.clear();
 
-setUser({ _id: 0, username: 'guest' });
+    setUser({ _id: 0, username: 'guest' });
   }
 
   const handleCurtain = () => {
@@ -71,28 +74,22 @@ setUser({ _id: 0, username: 'guest' });
           <img src={LogoImg} alt="" /> FrankenStory
         </div>
 
-        <ul className="header-list">
-          <li>Logged in as: {username}</li>
+        {/* <ul className="header-list">
+          <li>Logged in as: {username}</li> */}
 
-          <li onClick={handleCurtain}>Gallery</li>
-          <div className="navbar">
-            <div>
-              <span onClick={handleClick} className="loginicon">
-                Sign In
-              </span>
-            </div>
-          </div>
-          <span onClick={handleLogOut}>Log Out</span>
-        </ul>
-      </div>
 
-      <div className="navbar2">
-        
-        <div className="username-welcome">Welcome,  {   username }</div>
+        <div className="navbar">
+          {/* <div onClick={createStory}>
+        <img src={FrankAddNew}  className="addNew" alt="Create New" />Create New FrankenStory! </div> */}
+          <div onClick={handleCurtain} className="loginicon">Gallery</div>
+          <div onClick={handleClick} className="loginicon">Sign In</div>
+          <div onClick={handleLogOut} className='loginicon'>Log Out</div>
         </div>
-    <div>
-      
-  </div>
+
+        <div className="navbar2">
+          <div className="username-welcome">Welcome, {userDetails.username}</div>
+        </div>
+      </div>
     </>
   );
 }
