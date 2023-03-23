@@ -98,6 +98,7 @@ export default function Writing({ story }) {
     }
 
     console.log(`Input is ${input}`);
+    if (!input) { setInput('Whoops, you forgot to write something.') }
     let newItem;
     console.log(currentUser._id);
     if (currentUser._id !== 0) { newItem = { text: input, user: currentUser._id } }
