@@ -1,0 +1,84 @@
+@url = http://localhost:3000/api
+
+# @name GetStories
+
+GET {{url}}/story
+
+###
+# @name CreateStory
+
+POST {{url}}/story
+Content-Type: application/json
+
+{
+	"prompt": "Anything",
+	"completed": false,
+	"turn": 1,
+	"frames": []
+}
+
+###
+
+# @name GetStoriesById
+
+GET {{url}}/story/6418a754e96d093760bfa77
+
+###
+# @name Sign Up
+
+POST {{url}}/user/sign-up
+Content-Type: application/json
+
+# {
+# 	"name": "Richard",
+# 	"email": "johndoe12@gmail.com",
+# 	"username": "testingdata12",
+# 	"password": "password123"
+# }
+
+{
+    "name": "Richard",
+    "email": "email@gmail.com",
+    "username": "Richard",
+    "password": "password"
+
+}
+###
+
+# @name Sign In
+
+POST {{url}}/user/sign-in
+Content-Type: application/json
+
+{
+	"username": "Richard",
+	"password": "password"
+}
+
+###
+
+
+
+GET {{url}}/user/6419b66144d7660a60d3afe7
+
+###
+
+# @name Verify
+
+GET {{url}}/user/verify
+Authorization: Bearer <access_token>
+
+###
+
+# @name Change Password
+
+POST {{url}}/user/change-password
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+	"oldPassword": "password123",
+	"newPassword": "newpassword123"
+}
+
+###
