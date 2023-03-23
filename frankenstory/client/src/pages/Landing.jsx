@@ -20,7 +20,7 @@ export default function Landing() {
   return (
     <div id="main-container">
       {!playing ?
-        <div id='welcome-box'>Welcome to Frankenstory, a collaborative storytelling game.
+        <div id='welcome-box'><span className='welcome-box-title'>Welcome to Frankenstory, a collaborative storytelling game.</span>
           <ol>
             <li>1.  Create a new story or select an in-progress one from the sidebar.</li>
             <li>2.  You'll be shown the latest illustration or text segment in an ongoing story (or given a random prompt to draw from if you start a new one.) </li>

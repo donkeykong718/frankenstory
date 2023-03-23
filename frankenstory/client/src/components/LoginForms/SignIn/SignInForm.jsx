@@ -56,23 +56,64 @@ const SignInForm = ({ isShowLogin, modal, setModal }) => {
   }, [loading]);
 
   return (
-    <div>
-      <div className={`${isShowLogin ? "active" : ""} show`}>
-        <div className="login-form">
-          <div>
-            {!stage ? (
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <img
-                    src={Frank}
-                    onClick=""
-                    className="addNew"
-                    alt="Create New"
-                  />
-                </div>
+    <div className={`${isShowLogin ? "active" : ""} show`}>
+      <div className="login-form">
+        <div>
+          {!stage ? (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <img
+                  src={Frank}
+                  className="addNew"
+                  alt="Create New"
+                />
+              </div>
 
-                <h1 className="login-text">Sign In</h1>
+              <h1 className="login-text">Sign In</h1>
 
+              <label>Username</label>
+
+              <br></br>
+
+              <input
+                type="text"
+                value={text}
+                name="username"
+                onChange={(e) => setText(e.target.value)}
+                className="login-box"
+              />
+              <br></br>
+
+              <label>Password</label>
+              <br></br>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                className="login-box"
+              />
+              <br></br>
+
+              <input type="submit" value="LOGIN" className="login-btn" />
+
+              <div>
+                <label>
+                  {"Need an account?"}
+                  <br />
+                  <span className="highlight" onClick={() => setStage(true)}>
+                    Go to Signup
+                  </span>
+                  {" instead."}
+                </label>
+              </div>
+            </form>
+          ) : (
+            <>
+              <form onSubmit={handleSignup}>
+                {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
+                <h1 className="login-text">Sign Up</h1>
+                
                 <label>Username</label>
 
                 <br></br>
