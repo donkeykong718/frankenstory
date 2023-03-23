@@ -20,7 +20,7 @@ export default function Landing() {
       <div id='welcome-box'>Welcome to Frankenstory, a collaborative storytelling game.
         <ol>
           <li>1.  Create a new story or select an in-progress one from the sidebar.</li>
-          <li>2.  You'll be shown the last illustration or text segment in an ongoing story (or given a random prompt to draw from if you start a new one.) </li>
+          <li>2.  You'll be shown the latest illustration or text segment in an ongoing story (or given a random prompt to draw from if you start a new one.) </li>
           <li>3.  Draw or write whatever you think  comes next, there are no rules!</li>
           <li>4.  Actually, there is one rule. You can only contribute to each story once, so after you submit, select a new story or check out the gallery to see completed ones.</li>
           <li>5.  If you have an account, you will be notified when any story to which you contribute is finished.</li>

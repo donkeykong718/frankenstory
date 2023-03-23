@@ -1,0 +1,12 @@
+{
+  "projectId": "prj_lYHICiPPnSmsDBHOBF1MFSbF5vWj",
+  "orgId": "Mam3UzPx1MpNrNeYi1tecJvl",
+  "rest-client.environmentVariables": {
+    "local": {
+      "host": "http://localhost:3000"
+    },
+    "vercel": {
+      "host": "https://frankenstory.vercel.app"
+    }
+  }
+}
