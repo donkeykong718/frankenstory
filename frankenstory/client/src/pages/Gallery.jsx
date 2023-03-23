@@ -1,7 +1,7 @@
 import * as backendFunctions from '../services/stories'
 // import Frame from './Frame'
 // import { GalleryContext } from '../App';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Thumbnail from '../components/Gallery/Thumbnail'
 // import Header from '../components/Header/Header'
 // import Sidebar from '../components/side-bar/side-bar'
@@ -25,6 +25,7 @@ import LabBackdrop from './laboratory1920a.jpg'
 
 
 function Gallery() {
+
 
   const [finstories, setFinStories] = useState([]);
 
@@ -59,6 +60,7 @@ function Gallery() {
   // }
 
   return (
+
     <div style={{ backgroundImage: `url(${LabBackdrop})` }} className='gallery-page'>
       <h1
         style={{

@@ -169,6 +169,10 @@ button {
   left: 2px;
 }
 
+.button:disabled {
+  color: gray;
+}
+
 @media (min-width: 768px) {
   .button {
     padding: .75rem 3rem;

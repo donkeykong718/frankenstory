@@ -24,12 +24,13 @@ body {
 .gallery-list {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 50px;
-  grid-auto-rows: minmax(250px, auto);
+  gap: 20px;
+  /* grid-template-rows: auto(1 fr); */
   /* flex-wrap: wrap; */
   position: relative;
   justify-content: center;
   align-content: center;
+  height: 50%;
 }
 
 .storybook {
@@ -50,11 +51,16 @@ body {
 }
 
 .frame {
+  display: flex;
   height: 750px;
   width: 750px;
   margin-right: 50px;
-  background: #8C8;
-  border: 2px solid red;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-family: 'Schoolbell', sans-serif;
+  /* background: #8C8;
+  border: 2px solid red; */
 }
 
 .flickity-prev-next-button {
@@ -139,7 +145,7 @@ li {
   z-index: 1;
   width: 100vw;
   height: 100vh;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

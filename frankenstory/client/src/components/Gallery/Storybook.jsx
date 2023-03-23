@@ -23,7 +23,7 @@ export default function Storybook({ story }) {
       reloadOnUpdate // default false
       static // default false
     >
-      <div className='frame'>Initial Prompt: {title}</div>
+      <div className='frame'>{title}</div>
       {frames.map((frame, index) => (<Frame frame={frame} key={index}
       />))}
     </Flickity>

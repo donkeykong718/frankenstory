@@ -5,17 +5,20 @@
 * {
   margin: 0;
   padding: 0;
-    /* font-family: 'Schoolbell', cursive; */
-  }
+  /* font-family: 'Schoolbell', cursive; */
+}
 
 #desktop-container {
+  position: absolute;
   display: flex;
   justify-content: center;
-  /* height: 100vh;
-  width: 100vw; */
-  max-height: 100vh;
-  max-width: 100vw;
-  border: 1px black solid;
+  height: 100vh;
+  width: 100vw;
+  /* border: 1px black solid; */
+  z-index: 2;
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
 #drawing-container {
@@ -25,19 +28,21 @@
 }
 
 .workspace {
+  margin: 40px;
   padding: 20px;
+  background: #EEE;
 }
 
 .promptHeader {
   font-family: 'Schoolbell', cursive;
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   font-size: x-large;
 }
 
 .drawPrompt {
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   border: 1px solid black;
   width: 70vw;
   height: fit-content;
@@ -76,23 +81,28 @@ textarea {
   font-family: 'Schoolbell', sans-serif;
   font-size: xx-large;
 }
-.canvas-buttons{
-display: flex;
-justify-content: flex-end;
+
+.canvas-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
-#download_image_link{
+
+#download_image_link {
   align-content: flex-end;
   font-size: xx-large;
   color: #d2bf55
 }
+
 .story-button {
   color: #d2bf55;
-    font-family: 'Schoolbell', cursive;
-    --glow-color: rgb(217, 176, 255);
+  font-family: 'Schoolbell', cursive;
+  --glow-color: rgb(217, 176, 255);
   --glow-spread-color: rgba(191, 123, 255, 0.781);
   --enhanced-glow-color: rgb(231, 206, 255);
   --btn-color: rgb(100, 61, 136);
-  border: #A6CFD5 /*.25em solid var(--glow-color)*/;
+  border: #A6CFD5
+    /*.25em solid var(--glow-color)*/
+  ;
   padding: 1em 3em;
   color: var(--glow-color);
   font-size: 15px;
@@ -101,14 +111,14 @@ justify-content: flex-end;
   border-radius: 1em;
   outline: none;
   box-shadow: 0 0 1em .25em var(--glow-color),
-         0 0 4em 1em var(--glow-spread-color),
-         inset 0 0 .75em .25em var(--glow-color);
+    0 0 4em 1em var(--glow-spread-color),
+    inset 0 0 .75em .25em var(--glow-color);
   text-shadow: 0 0 .5em var(--glow-color);
   position: relative;
   transition: all 0.3s;
- }
- 
- .story-button::after {
+}
+
+.story-button::after {
   pointer-events: none;
   content: "";
   position: absolute;
@@ -120,27 +130,28 @@ justify-content: flex-end;
   filter: blur(2em);
   opacity: .7;
   transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
- }
- 
- .story-button:hover {
+}
+
+.story-button:hover {
   color: #963484;
   background-color: var(--glow-color);
   box-shadow: 0 0 1em .25em var(--glow-color),
-         0 0 4em 2em var(--glow-spread-color),
-         inset 0 0 .75em .25em var(--glow-color);
- }
- 
- .story-button:active {
+    0 0 4em 2em var(--glow-spread-color),
+    inset 0 0 .75em .25em var(--glow-color);
+}
+
+.story-button:active {
   box-shadow: 0 0 0.6em .25em var(--glow-color),
-         0 0 2.5em 2em var(--glow-spread-color),
-         inset 0 0 .5em .25em var(--glow-color);         
- }
- .palette-tools{
-display: flex;
-flex-direction: row-reverse;  
-justify-content:last baseline;
-font-size: xx-large;
-word-spacing: 20px;
-align-content: space-between;
-color:#963484
- }
+    0 0 2.5em 2em var(--glow-spread-color),
+    inset 0 0 .5em .25em var(--glow-color);
+}
+
+.palette-tools {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: last baseline;
+  font-size: xx-large;
+  word-spacing: 20px;
+  align-content: space-between;
+  color: #963484
+}

@@ -386,12 +386,11 @@ const DrawingCanvas = () => {
   }
 
   return (
-    <div className="palette-tools">
-      <div>
+    <div style={{ width: '100%' }}>
 
-      <div>
-        
-        {/* <CirclePicker onChange={handleColorChange} color={color} />  */}
+      <div style={{ fontSize: '2em' }}>
+        {/* 
+        <CirclePicker onChange={handleColorChange} color={color} /> */}
 
         <input
           type="radio"
@@ -400,15 +399,15 @@ const DrawingCanvas = () => {
           onChange={() => setTool("pencil")}
         />
         <label htmlFor="pencil">Pencil</label>
-        </div>
-        <div></div>
-        <div>
+      </div>
+      <div></div>
+      <div>
 
         <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-          <label htmlFor="line">Line</label>
-          </div>
-        <div></div>
-        <div>
+        <label htmlFor="line">Line</label>
+      </div>
+      <div></div>
+      <div>
 
         <input
           type="radio"
@@ -418,8 +417,14 @@ const DrawingCanvas = () => {
         />
 
         <label htmlFor="rectangle">Rectangle</label>
-        </div>
-        </div>
+      </div>
+
+      <div style={{ display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 50, padding: 10, width: '100%' }}>
+        <button onClick={undo}>Undo</button>
+        <button onClick={redo}>Redo</button>
+        <button onClick={clear}>Clear</button>
+      </div>
+
       {action === "writing" ? (
         <textarea
           ref={textAreaRef}
@@ -444,22 +449,15 @@ const DrawingCanvas = () => {
         <canvas className="canvas-container"
           ref={canvasRef}
           id="canvas"
-          width={window.innerWidth}
-          height={window.innerHeight}
+          // width={window.innerWidth}
+          // height={window.innerHeight}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
         >
         </canvas>
-        <div className="canvas-buttons">
-          
-        <button onClick={undo}>Undo</button>
-        <button onClick={redo}>Redo</button>
-        <button onClick={clear}>Clear</button>
-        <buttonclass className="story-button"><a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a></buttonclass>
-        </div>
-        </div>
-
+        {/* <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a> */}
+      </div>
     </div>
   );
 };

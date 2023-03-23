@@ -5,6 +5,7 @@ import Sidebar from './components/side-bar/side-bar';
 import Header from './components/Header/Header';
 import Workspace from './components/Workspace/Workspace';
 import Landing from './pages/Landing';
+import Footer from './components/footer/footer'
 // import SignIn from './pages/SignIn'
 // import SignUp from './pages/SignUp'
 import Gallery from './pages/Gallery';
@@ -22,7 +23,7 @@ export const UserContext = React.createContext();
 //   return currentUser;
 // }
 
-export const GalleryContext = React.createContext();
+export const GameContext = React.createContext();
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
   const [current, setCurrent] = useState({});
   const [user, setUser] = useState(defaultUser);
+  const [playing, setPlaying] = useState(false);
   // const [featured, setFeatured] = useState({});
 
   // const [state, setState] = useState('draw');
@@ -41,22 +43,29 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={
-          <StoryContext.Provider value={{ current, setCurrent }}>
-            <UserContext.Provider value={{ user, setUser }}>
-              <div id='headerbox'>
-                <Header />
-              </div>
-            </UserContext.Provider>
-            <Sidebar />
-            {Object.keys(current).length === 0 ? <Landing /> : <Workspace />}
-          </StoryContext.Provider>
+          <GameContext.Provider value={{ playing, setPlaying }}>
+            <StoryContext.Provider value={{ current, setCurrent }}>
+              <UserContext.Provider value={{ user, setUser }}>
+                <div id='headerbox'>
+                  <Header />
+                </div>
+                <Sidebar />
+                {/* {Object.keys(current).length === 0 ? */}
+                <Landing />
+                <div id='footer'>
+                  <Footer />
+                </div>
+                {/* : <Workspace />} */}
+              </UserContext.Provider>
+            </StoryContext.Provider>
+          </GameContext.Provider>
+
         } />
         {/* <Route path="/user/sign-up" element={<SignUp />} />
         <Route path="/user/sign-in" element={<UserContext.Provider value={{ user, setUser }}>
           <SignIn />
         </UserContext.Provider>} /> */}
         {/* <Route path="/story/gallery/" element={<Gallery />} /> */}
-
       </Routes>
     </>
   );

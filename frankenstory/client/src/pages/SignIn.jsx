@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { signin } from '../services/users'
+import { signin, getUser } from '../services/users'
 import { UserContext } from "../App";
-import { getUser } from "../services/users";
 
 export default function Signin() {
   const { user, setUser } = useContext(UserContext);

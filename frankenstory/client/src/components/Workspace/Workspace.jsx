@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { StoryContext } from '../../App';
 import * as backendFunctions from '../../services/stories'
+import LabBackdrop from '../../pages/laboratory1920a.jpg'
 
 // import DrawingBoard from '../canvas-component/drawingBoard';
 import Writing from './Writing'
@@ -47,7 +48,7 @@ export default function Workspace() {
 
 
   return (
-    <div id='desktop-container'>
+    <div style={{ backgroundImage: `url(${LabBackdrop})` }} id='desktop-container'>
       {/* <h2>This is the workspace</h2>
       <h3>The current story is: {current._id}</h3> */}
       {current.turn % 2 === 0 ? <Writing story={current} /> : <Drawing story={current} />}

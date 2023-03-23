@@ -1,5 +1,5 @@
 import './gallery.css'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Storybook from './Storybook'
 
 export default function Thumbnail({ story, index }) {
@@ -9,6 +9,19 @@ export default function Thumbnail({ story, index }) {
   const handleSelection = () => {
     setSelect(story);
   }
+
+  const storybookRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", (event) => {
+      if (
+        !storybookRef.current?.contains(event.target) &&
+        !storybookRef.current?.contains(event.target)
+      ) {
+        setSelect({});
+      }
+    });
+  }, [select]);
 
   const row = Math.floor(index / 5) + 1;
   let column = index % 5;

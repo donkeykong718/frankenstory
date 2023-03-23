@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
-//DK added 3.19
 import * as backendFunctions from "../../services/stories";
 import ListStories from "./ListStories";
 import prompts from "../../prompts.json";
-import { StoryContext } from "../../App";
+import { StoryContext, UserContext } from "../../App";
 
 import "./side-bar.css";
+
 import CloseSidebarImg from "../side-bar/side-bar assets/CloseSidebarImg.svg";
 import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
-
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -17,6 +16,7 @@ import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 
 function Sidebar() {
   const { current, setCurrent } = useContext(StoryContext);
+  const { user, setUser } = useContext(UserContext);
 
   let currentUser = JSON.parse(localStorage.getItem('user'));
   if (!currentUser) { currentUser = { _id: '0', username: 'guest' } }
@@ -31,7 +31,6 @@ function Sidebar() {
     turn: 1,
   });
 
-  //DK added 3.19
   const [stories, setStories] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +74,7 @@ function Sidebar() {
       console.log(activeStories);
     };
     handleGetStories();
-  }, []);
+  }, [current]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -90,14 +89,13 @@ function Sidebar() {
 
   return (
     <>
-      <button  onClick={toggleSidebar}>Open Sidebar</button>
+      {/* //MOVE TO HEADER// */}
+      <button style={{ position: 'absolute', zIndex: 10 }} onClick={toggleSidebar}>Open Sidebar</button>
       <div className={`sidebar ${isOpen ? "open" : ""}`} ref={sidebarRef}>
 
         <ul>
-          <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" /></li>
-          <button onClick={createStory}>Create New</button>
-
-
+          <li><img src={FrankAddNew} onClick={createStory} className="addNew" alt="Create New" />Create New FrankenStory! </li>
+          <button onClick={createStory}>Create</button>
 
           <ul className="story-list">
             {stories.map((story, index) => (
@@ -106,6 +104,8 @@ function Sidebar() {
           </ul>
 
 
+          {/* <li><button onClick={toggleSidebar}>Close Sidebar</button></li> */}
+          {/* <li><onClick={toggleSidebar}><img src={CloseSidebarImg} className="completionCircle"></li> */}
 
           <li>
             <div className="close-sidebar">
@@ -115,7 +115,7 @@ function Sidebar() {
                 className="closeSidebarImg"
                 onClick={toggleSidebar}
                 alt="Close Sidebar"
-              />Close Sidebar
+              />
               <div class="overlay">
                 <div class="text">Close Sidebar</div>
               </div>
