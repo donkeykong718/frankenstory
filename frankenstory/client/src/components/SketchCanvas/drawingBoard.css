@@ -1,5 +1,6 @@
 .canvas-container {
-  height: 3000px;
-  width: 3000px;
+  height: 70vh;
+  width: 70vw;
   border: 2px solid #000;
+  margin: 0;
 }

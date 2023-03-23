@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { CirclePicker } from 'react-color';
+import './drawingBoard.css'
 
 const generator = rough.generator();
 
@@ -436,8 +437,8 @@ const DrawingCanvas = () => {
         <canvas className="canvas-container"
           ref={canvasRef}
           id="canvas"
-          width={window.innerWidth}
-          height={window.innerHeight}
+          // width={window.innerWidth}
+          // height={window.innerHeight}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
