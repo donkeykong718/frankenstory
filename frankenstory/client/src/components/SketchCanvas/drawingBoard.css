@@ -1,6 +1,18 @@
+@import url(https://fonts.googleapis.com/css?family=Patrick+Hand+SC);
+
 .canvas-container {
-  height: 70vh;
-  width: 70vw;
+  height: 66vh;
+  width: 60vw;
   border: 2px solid #000;
   margin: 0;
+  box-shadow: 20px 38px 34px -26px hsla(0,0%,0%,.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  background:transparent;
+
+}
+.canvas-container:hover{
+  box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+} 
+.canvas-container:lined.thick{
+  border:solid 9px #41403E;
 }

@@ -386,10 +386,12 @@ const DrawingCanvas = () => {
   }
 
   return (
-    <div>
-      <div style={{ position: "fixed" }}>
-        {/* 
-        <CirclePicker onChange={handleColorChange} color={color} /> */}
+    <div className="palette-tools">
+      <div>
+
+      <div>
+        
+        {/* <CirclePicker onChange={handleColorChange} color={color} />  */}
 
         <input
           type="radio"
@@ -398,21 +400,26 @@ const DrawingCanvas = () => {
           onChange={() => setTool("pencil")}
         />
         <label htmlFor="pencil">Pencil</label>
+        </div>
+        <div></div>
+        <div>
+
         <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-        <label htmlFor="line">Line</label>
+          <label htmlFor="line">Line</label>
+          </div>
+        <div></div>
+        <div>
+
         <input
           type="radio"
           id="rectangle"
           checked={tool === "rectangle"}
           onChange={() => setTool("rectangle")}
         />
+
         <label htmlFor="rectangle">Rectangle</label>
-      </div>
-      <div style={{ position: "fixed", bottom: 0, padding: 10 }}>
-        <button onClick={undo}>Undo</button>
-        <button onClick={redo}>Redo</button>
-        <button onClick={clear}>Clear</button>
-      </div>
+        </div>
+        </div>
       {action === "writing" ? (
         <textarea
           ref={textAreaRef}
@@ -437,15 +444,22 @@ const DrawingCanvas = () => {
         <canvas className="canvas-container"
           ref={canvasRef}
           id="canvas"
-          // width={window.innerWidth}
-          // height={window.innerHeight}
+          width={window.innerWidth}
+          height={window.innerHeight}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
         >
         </canvas>
-        <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a>
-      </div>
+        <div className="canvas-buttons">
+          
+        <button onClick={undo}>Undo</button>
+        <button onClick={redo}>Redo</button>
+        <button onClick={clear}>Clear</button>
+        <buttonclass className="story-button"><a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a></buttonclass>
+        </div>
+        </div>
+
     </div>
   );
 };
