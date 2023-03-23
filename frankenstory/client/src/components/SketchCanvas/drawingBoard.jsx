@@ -1,8 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
-import { CirclePicker } from 'react-color';
-import './drawingBoard.css'
+import { CirclePicker } from "react-color";
+import "./drawingBoard.css";
 
 const generator = rough.generator();
 
@@ -43,7 +43,9 @@ const positionWithinElement = (x, y, element) => {
       const betweenAnyPoint = element.points.some((point, index) => {
         const nextPoint = element.points[index + 1];
         if (!nextPoint) return false;
-        return onLine(point.x, point.y, nextPoint.x, nextPoint.y, x, y, 5) != null;
+        return (
+          onLine(point.x, point.y, nextPoint.x, nextPoint.y, x, y, 5) != null
+        );
       });
       return betweenAnyPoint ? "inside" : null;
     case "text":
@@ -53,15 +55,19 @@ const positionWithinElement = (x, y, element) => {
   }
 };
 
-const distance = (a, b) => Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+const distance = (a, b) =>
+  Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 
 const getElementAtPosition = (x, y, elements) => {
   return elements
-    .map(element => ({ ...element, position: positionWithinElement(x, y, element) }))
-    .find(element => element.position !== null);
+    .map((element) => ({
+      ...element,
+      position: positionWithinElement(x, y, element),
+    }))
+    .find((element) => element.position !== null);
 };
 
-const adjustElementCoordinates = element => {
+const adjustElementCoordinates = (element) => {
   const { type, x1, y1, x2, y2 } = element;
   if (type === "rectangle") {
     const minX = Math.min(x1, x2);
@@ -78,7 +84,7 @@ const adjustElementCoordinates = element => {
   }
 };
 
-const cursorForPosition = position => {
+const cursorForPosition = (position) => {
   switch (position) {
     case "tl":
     case "br":
@@ -111,12 +117,13 @@ const resizedCoordinates = (clientX, clientY, position, coordinates) => {
   }
 };
 
-const useHistory = initialState => {
+const useHistory = (initialState) => {
   const [index, setIndex] = useState(0);
   const [history, setHistory] = useState([initialState]);
 
   const setState = (action, overwrite = false) => {
-    const newState = typeof action === "function" ? action(history[index]) : action;
+    const newState =
+      typeof action === "function" ? action(history[index]) : action;
     if (overwrite) {
       const historyCopy = [...history];
       historyCopy[index] = newState;
@@ -124,18 +131,19 @@ const useHistory = initialState => {
     } else {
       const updatedState = [...history].slice(0, index + 1);
       setHistory([...updatedState, newState]);
-      setIndex(prevState => prevState + 1);
+      setIndex((prevState) => prevState + 1);
     }
   };
 
-  const clear = () => index > 0 && setIndex(prevstate => prevstate = 0);
-  const undo = () => index > 0 && setIndex(prevState => prevState - 1);
-  const redo = () => index < history.length - 1 && setIndex(prevState => prevState + 1);
+  const clear = () => index > 0 && setIndex((prevstate) => (prevstate = 0));
+  const undo = () => index > 0 && setIndex((prevState) => prevState - 1);
+  const redo = () =>
+    index < history.length - 1 && setIndex((prevState) => prevState + 1);
 
   return [history[index], setState, undo, redo, clear];
 };
 
-const getSvgPathFromStroke = stroke => {
+const getSvgPathFromStroke = (stroke) => {
   if (!stroke.length) return "";
 
   const d = stroke.reduce(
@@ -172,11 +180,11 @@ const drawElement = (roughCanvas, context, element) => {
   }
 };
 
-const adjustmentRequired = type => ["line", "rectangle"].includes(type);
+const adjustmentRequired = (type) => ["line", "rectangle"].includes(type);
 
 const DrawingCanvas = () => {
   const canvasRef = useRef(null);
-  const [color, setColor] = useState('#FF0000');
+  const [color, setColor] = useState("#FF0000");
   const [elements, setElements, undo, redo, clear] = useHistory([]);
   const [action, setAction] = useState("none");
   const [tool, setTool] = useState("text");
@@ -192,7 +200,7 @@ const DrawingCanvas = () => {
 
       const roughCanvas = rough.canvas(canvas);
 
-      elements.forEach(element => {
+      elements.forEach((element) => {
         if (action === "writing" && selectedElement.id === element.id) return;
         drawElement(roughCanvas, context, element);
       });
@@ -200,7 +208,7 @@ const DrawingCanvas = () => {
   }, [elements, action, selectedElement]);
 
   useEffect(() => {
-    const undoRedoFunction = event => {
+    const undoRedoFunction = (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "z") {
         if (event.shiftKey) {
           redo();
@@ -233,11 +241,14 @@ const DrawingCanvas = () => {
         elementsCopy[id] = createElement(id, x1, y1, x2, y2, type);
         break;
       case "pencil":
-        elementsCopy[id].points = [...elementsCopy[id].points, { x: x2, y: y2 }];
+        elementsCopy[id].points = [
+          ...elementsCopy[id].points,
+          { x: x2, y: y2 },
+        ];
         break;
       case "text":
-        const canvas = document.getElementById("canvas")
-        if (!canvas) return
+        const canvas = document.getElementById("canvas");
+        if (!canvas) return;
         const textWidth = canvas
           .getContext("2d")
           .measureText(options.text).width;
@@ -254,7 +265,7 @@ const DrawingCanvas = () => {
     setElements(elementsCopy, true);
   };
 
-  const handleMouseDown = event => {
+  const handleMouseDown = (event) => {
     if (action === "writing") return;
 
     const { clientX, clientY } = event;
@@ -262,15 +273,15 @@ const DrawingCanvas = () => {
       const element = getElementAtPosition(clientX, clientY, elements);
       if (element) {
         if (element.type === "pencil") {
-          const xOffsets = element.points.map(point => clientX - point.x);
-          const yOffsets = element.points.map(point => clientY - point.y);
+          const xOffsets = element.points.map((point) => clientX - point.x);
+          const yOffsets = element.points.map((point) => clientY - point.y);
           setSelectedElement({ ...element, xOffsets, yOffsets });
         } else {
           const offsetX = clientX - element.x1;
           const offsetY = clientY - element.y1;
           setSelectedElement({ ...element, offsetX, offsetY });
         }
-        setElements(prevState => prevState);
+        setElements((prevState) => prevState);
 
         if (element.position === "inside") {
           setAction("moving");
@@ -280,18 +291,25 @@ const DrawingCanvas = () => {
       }
     } else {
       const id = elements.length;
-      const element = createElement(id, clientX, clientY, clientX, clientY, tool);
-      setElements(prevState => [...prevState, element]);
+      const element = createElement(
+        id,
+        clientX,
+        clientY,
+        clientX,
+        clientY,
+        tool
+      );
+      setElements((prevState) => [...prevState, element]);
       setSelectedElement(element);
 
       setAction(tool === "text" ? "writing" : "drawing");
     }
   };
 
-  const handleMouseMove = event => {
+  const handleMouseMove = (event) => {
     const { clientX, clientY } = event;
     if (action === "drawing") {
-      if (!canvasRef.current) return
+      if (!canvasRef.current) return;
       const context = canvasRef.current.getContext("2d");
       const index = elements.length - 1;
       const { x1, y1 } = elements[index];
@@ -315,16 +333,29 @@ const DrawingCanvas = () => {
         const newX1 = clientX - offsetX;
         const newY1 = clientY - offsetY;
         const options = type === "text" ? { text: selectedElement.text } : {};
-        updateElement(id, newX1, newY1, newX1 + width, newY1 + height, type, options);
+        updateElement(
+          id,
+          newX1,
+          newY1,
+          newX1 + width,
+          newY1 + height,
+          type,
+          options
+        );
       }
     } else if (action === "resizing") {
       const { id, type, position, ...coordinates } = selectedElement;
-      const { x1, y1, x2, y2 } = resizedCoordinates(clientX, clientY, position, coordinates);
+      const { x1, y1, x2, y2 } = resizedCoordinates(
+        clientX,
+        clientY,
+        position,
+        coordinates
+      );
       updateElement(id, x1, y1, x2, y2, type);
     }
   };
 
-  const handleMouseUp = event => {
+  const handleMouseUp = (event) => {
     const { clientX, clientY } = event;
     if (selectedElement) {
       if (
@@ -338,7 +369,10 @@ const DrawingCanvas = () => {
 
       const index = selectedElement.id;
       const { id, type } = elements[index];
-      if ((action === "drawing" || action === "resizing") && adjustmentRequired(type)) {
+      if (
+        (action === "drawing" || action === "resizing") &&
+        adjustmentRequired(type)
+      ) {
         const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
         updateElement(id, x1, y1, x2, y2, type);
       }
@@ -353,7 +387,7 @@ const DrawingCanvas = () => {
   // const Color = ({ color }: { color: string }) => {
   //   const snap = useSnapshot(state);
 
-  const handleBlur = event => {
+  const handleBlur = (event) => {
     const { id, x1, y1, type } = selectedElement;
     setAction("none");
     setSelectedElement(null);
@@ -362,8 +396,8 @@ const DrawingCanvas = () => {
 
   const saveImageToLocal = async (event) => {
     const link = event.currentTarget;
-    link.setAttribute('download', 'canvas.png');
-    const image = canvasRef.current.toDataURL('image/png');
+    link.setAttribute("download", "canvas.png");
+    const image = canvasRef.current.toDataURL("image/png");
     console.log(image);
 
     try {
@@ -372,7 +406,7 @@ const DrawingCanvas = () => {
       const writeable = await file.createWritable();
       await writeable.write(image);
       await writeable.close();
-      link.setAttribute('href', handle.nativeURL);
+      link.setAttribute("href", handle.nativeURL);
     } catch (error) {
       console.error(error);
     }
@@ -381,50 +415,46 @@ const DrawingCanvas = () => {
   const [selectedColor, setSelectedColor] = useState("#000000");
 
   function handleColorChange(newColor) {
-    console.log(newColor)
+    console.log(newColor);
     setColor(newColor.hex);
   }
 
   return (
-    <div style={{ width: '100%' }}>
-
-      <div style={{ fontSize: '2em' }}>
-        {/* 
-        <CirclePicker onChange={handleColorChange} color={color} /> */}
-
-        <input
-          type="radio"
-          id="pencil"
-          checked={tool === "pencil"}
-          onChange={() => setTool("pencil")}
-        />
-        <label htmlFor="pencil">Pencil</label>
-      </div>
-      <div></div>
+    <div className="palette-tools">
       <div>
+        <div>
+          {/* <CirclePicker onChange={handleColorChange} color={color} />  */}
 
-        <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-        <label htmlFor="line">Line</label>
+          <input
+            type="radio"
+            id="pencil"
+            checked={tool === "pencil"}
+            onChange={() => setTool("pencil")}
+          />
+          <label htmlFor="pencil">Pencil</label>
+        </div>
+        <div></div>
+        <div>
+          <input
+            type="radio"
+            id="line"
+            checked={tool === "line"}
+            onChange={() => setTool("line")}
+          />
+          <label htmlFor="line">Line</label>
+        </div>
+        <div></div>
+        <div>
+          <input
+            type="radio"
+            id="rectangle"
+            checked={tool === "rectangle"}
+            onChange={() => setTool("rectangle")}
+          />
+
+          <label htmlFor="rectangle">Rectangle</label>
+        </div>
       </div>
-      <div></div>
-      <div>
-
-        <input
-          type="radio"
-          id="rectangle"
-          checked={tool === "rectangle"}
-          onChange={() => setTool("rectangle")}
-        />
-
-        <label htmlFor="rectangle">Rectangle</label>
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'center', position: 'absolute', bottom: 50, padding: 10, width: '100%' }}>
-        <button onClick={undo}>Undo</button>
-        <button onClick={redo}>Redo</button>
-        <button onClick={clear}>Clear</button>
-      </div>
-
       {action === "writing" ? (
         <textarea
           ref={textAreaRef}
@@ -446,21 +476,33 @@ const DrawingCanvas = () => {
         />
       ) : null}
       <div>
-        <canvas className="canvas-container"
+        <canvas
+          className="canvas-container"
           ref={canvasRef}
           id="canvas"
-          // width={window.innerWidth}
-          // height={window.innerHeight}
+          width={window.innerWidth}
+          height={window.innerHeight}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
-        >
-        </canvas>
-        {/* <a id="download_image_link" href="download_link" onClick={saveImageToLocal}>Submit</a> */}
+        ></canvas>
+        <div className="canvas-buttons">
+          <button onClick={undo}>Undo</button>
+          <button onClick={redo}>Redo</button>
+          <button onClick={clear}>Clear</button>
+          <buttonclass className="story-button">
+            <a
+              id="download_image_link"
+              href="download_link"
+              onClick={saveImageToLocal}
+            >
+              Save
+            </a>
+          </buttonclass>
+        </div>
       </div>
     </div>
   );
 };
-
 
 export default DrawingCanvas;
