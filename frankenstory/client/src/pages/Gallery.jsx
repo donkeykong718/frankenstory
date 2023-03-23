@@ -7,6 +7,8 @@ import Thumbnail from '../components/Gallery/Thumbnail'
 // import Sidebar from '../components/side-bar/side-bar'
 
 import "../components/Gallery/gallery.css"
+import LabBackdrop from './laboratory1920a.jpg'
+
 
 
 //   const workspace = document.querySelector(".workspace");
@@ -57,17 +59,23 @@ function Gallery() {
   // }
 
   return (
-    <div>
-      <div className='gallery-page'>
-        <h1>Gallery</h1>
-        <ul className="gallery-list">
-          {finstories.map((story, index) => (<Thumbnail story={story} key={index}
-          />))}
-        </ul>
-        {/* {selection &&
-          <div>{pictureBook(featured)}</div>} */}
-      </div>
+    <div style={{ backgroundImage: `url(${LabBackdrop})` }} className='gallery-page'>
+      <h1
+        style={{
+          color: '#A6CFD5',
+          textAlign: 'center',
+          margin: '60px',
+          fontSize: '80px',
+          textShadow: '#963484 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px'
+        }}
 
+      >Gallery</h1>
+      <ul className="gallery-list">
+        {finstories.map((story, index) => (<Thumbnail story={story} key={index} index={index}
+        />))}
+      </ul>
+      {/* {selection &&
+          <div>{pictureBook(featured)}</div>} */}
     </div>
   )
 
