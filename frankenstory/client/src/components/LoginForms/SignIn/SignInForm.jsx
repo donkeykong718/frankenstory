@@ -7,12 +7,13 @@ import { signin, signup, getUser } from "../../../services/users";
 import { UserContext } from "../../../App";
 // import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 
-const SignInForm = ({ isShowLogin }) => {
+const SignInForm = ({ isShowLogin, modal, setModal }) => {
   const { user, setUser } = useContext(UserContext);
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
   const [stage, setStage] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [responseMsg, setResponseMsg] = useState("");
 
   let currentUser = user;
 
@@ -21,14 +22,20 @@ const SignInForm = ({ isShowLogin }) => {
     setLoading(true);
     const response = await signin(text, password);
     console.log(response);
+    setResponseMsg("You are logged in!");
     setLoading(false);
+
+    setTimeout(() => setModal(false), 2000);
   }
   async function handleSignup(e) {
     e.preventDefault();
     setLoading(true);
     const response = await signup(text, password);
     console.log(response);
+    setResponseMsg("You are signed up!");
     setLoading(false);
+
+    setTimeout(() => setModal(false), 2000);
   }
 
   // function closeForm() {
@@ -57,7 +64,6 @@ const SignInForm = ({ isShowLogin }) => {
               <div>
                 <img
                   src={Frank}
-                  onClick=""
                   className="addNew"
                   alt="Create New"
                 />
@@ -107,7 +113,7 @@ const SignInForm = ({ isShowLogin }) => {
               <form onSubmit={handleSignup}>
                 {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
                 <h1 className="login-text">Sign Up</h1>
-
+                
                 <label>Username</label>
 
                 <br></br>
@@ -138,15 +144,64 @@ const SignInForm = ({ isShowLogin }) => {
                   <label>
                     {"Need an account?"}
                     <br />
-                    <span className="highlight" onClick={() => setStage(false)}>
-                      Go to Signin
+                    <span className="highlight" onClick={() => setStage(true)}>
+                      Go to Signup
                     </span>
                     {" instead."}
                   </label>
                 </div>
+                {responseMsg && <p>{responseMsg}</p>}
               </form>
-            </>
-          )}
+            ) : (
+              <>
+                <form onSubmit={handleSignup}>
+                  {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
+                  <h1 className="login-text">Sign Up</h1>
+
+                  <label>Username</label>
+
+                  <br></br>
+
+                  <input
+                    type="text"
+                    value={text}
+                    name="username"
+                    onChange={(e) => setText(e.target.value)}
+                    className="login-box"
+                  />
+                  <br></br>
+
+                  <label>Password</label>
+                  <br></br>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    name="password"
+                    className="login-box"
+                  />
+                  <br></br>
+
+                  <input type="submit" value="LOGIN" className="login-btn" />
+
+                  <div>
+                    <label>
+                      {"Need an account?"}
+                      <br />
+                      <span
+                        className="highlight"
+                        onClick={() => setStage(false)}
+                      >
+                        Go to Signin
+                      </span>
+                      {" instead."}
+                    </label>
+                  </div>
+                  {responseMsg && <p>{responseMsg}</p>}
+                </form>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
