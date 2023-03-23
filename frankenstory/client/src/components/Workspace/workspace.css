@@ -42,17 +42,38 @@
 }
 
 .drawPrompt {
-  font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid black;
+  font-family: 'Schoolbell', cursive;
+  color: #4b4237;
+  /* border: 1px solid #963484; */
   width: 70vw;
   height: fit-content;
-  padding: 10px;
+  padding: 25px;
   margin: 0px 0 10px 0;
+  border: 2px solid #963484;
+  margin: 0;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  background: transparent;
 }
 
+
+
+.drawPrompt:hover {
+box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, .3);
+}
+
+.drawPrompt:lined.thick {
+border: solid 9px #41403E;
+}
 .turnCounter {
   font-size: 2em;
-  color: green;
+  background-image: linear-gradient(180deg, #963484, #4b4237);
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 }
 
 .instructions {
@@ -60,6 +81,8 @@
   font-weight: bold;
   margin: 10px;
   font-size: x-large;
+  padding-top: 25px;
+
 }
 
 .submit-button {

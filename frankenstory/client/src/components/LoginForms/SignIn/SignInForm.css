@@ -19,6 +19,7 @@
   font-family: 'Creepster', display;
   font-size: xxx-large;
   text-shadow: 2px 2px #963484;
+  white-space: nowrap;
   }
 
 .loginicon:hover{

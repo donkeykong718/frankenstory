@@ -62,6 +62,7 @@ function Gallery() {
     >
       <h1
         style={{
+fontFamily: 'Creepster',
           color: "#A6CFD5",
           textAlign: "center",
           margin: "60px",
@@ -71,12 +72,10 @@ function Gallery() {
       >
         Gallery
       </h1>
-      {/* <ul className="gallery-list">
+      <ul className="gallery-list">
         {finstories.map((story, index) => (<Thumbnail story={story} key={index} index={index}
         />))}
-      </ul> */}
-      {/* {selection &&
-          <div>{pictureBook(featured)}</div>} */}
+      </ul> 
     </div>
   );
 }
