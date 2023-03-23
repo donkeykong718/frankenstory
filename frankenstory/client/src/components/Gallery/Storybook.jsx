@@ -10,7 +10,6 @@ export default function Storybook({ story }) {
   console.log('Storybook has been called')
 
   const flickityOptions = {
-    initialIndex: 2,
     cellAlign: 'left',
     contain: true
   }

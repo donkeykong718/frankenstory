@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 
+body {
+  background: #EEE;
+}
+
 #main-container {
   position: relative;
   max-height: 100vh;
@@ -18,8 +22,11 @@
 }
 
 .gallery-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 50px;
+  grid-auto-rows: minmax(250px, auto);
+  /* flex-wrap: wrap; */
   position: relative;
   justify-content: center;
   align-content: center;
@@ -27,33 +34,25 @@
 
 .storybook {
   position: absolute;
+  grid-row: 1;
+  grid-column: 3;
   box-sizing: border-box;
   background: #EEE;
-  border: solid #D2BF55 2px;
+  /* border: solid #D2BF55 2px; */
   border-radius: 10px;
-  margin: auto;
-  padding: 20px;
+  height: 850px;
+  width: 890px;
+  padding: 50px;
   z-index: 1;
-  width: 250px;
-  height: 400px;
   filter: brightness(150%);
-  /* max-width: 75vw; */
-  /* height: fit-content;
-  width: 400px; 
-  /* width: 40%;
-  text-align: center; */
-  /* top: 25%;
-  left: 50%; */
-  /* padding: 20px;
-  transform: translate(-50%, -20%); */
-  box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.15);
-  /* overflow: hidden; */
+  transform: translateY(-20%);
+  box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.4);
 }
 
 .frame {
-  height: 200px;
-  width: 100%;
-  margin-right: 10px;
+  height: 750px;
+  width: 750px;
+  margin-right: 50px;
   background: #8C8;
   border: 2px solid red;
 }
@@ -65,11 +64,11 @@
 }
 
 .flickity-prev-next-button .arrow {
-  fill: white;
+  fill: black;
 }
 
 .flickity-prev-next-button.no-svg {
-  color: white;
+  color: black;
 }
 
 .flickity-prev-next-button:hover {
@@ -132,6 +131,7 @@ li {
   height: 90vh;
   /* border: 1px purple solid; */
   overflow: hidden;
+  background: #EEE;
 }
 
 .gallery-page {
@@ -150,7 +150,7 @@ li {
   height: 100%;
   overflow: hidden;
   z-index: 2;
-  background: white;
+  background: #EEE;
 }
 
 
@@ -167,7 +167,7 @@ li {
   height: 100%;
   overflow: hidden;
   z-index: 2;
-  background: white;
+  background: #EEE;
 }
 
 .slideleft {
