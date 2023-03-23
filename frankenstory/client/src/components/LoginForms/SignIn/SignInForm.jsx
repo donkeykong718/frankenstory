@@ -57,7 +57,6 @@ const SignInForm = ({ isShowLogin }) => {
               <div>
                 <img
                   src={Frank}
-                  onClick=""
                   className="addNew"
                   alt="Create New"
                 />

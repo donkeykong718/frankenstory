@@ -7,8 +7,10 @@
   margin: 0;
   box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  background: transparent;
-
+  background-image: url('Paper.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-image: url('./frankenstory/client/src/components/SketchCanvas/Paper.jpeg') */
 }
 
 .canvas-container:hover {
