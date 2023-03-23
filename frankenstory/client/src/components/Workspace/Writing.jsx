@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import * as backendFunctions from '../../services/stories'
 import { StoryContext } from '../../App';
+import Storybook from '../Gallery/Storybook'
 
 export default function Writing({ story }) {
 
@@ -11,7 +12,7 @@ export default function Writing({ story }) {
   // console.log(currentUser);
 
 
-
+  const [alive, setAlive] = useState(false);
   const [temp, setTemp] = useState(story);
   const [input, setInput] = useState();
   const [count, setCount] = useState(0);
@@ -27,6 +28,8 @@ export default function Writing({ story }) {
   // let display;
 
   let imgSrc = framesArray[framesArray.length - 1].text
+  console.log('The image source is:')
+  console.log(imgSrc)
 
   // if (framesArray[framesArray.length - 1].text !== null) { display = framesArray[framesArray.length - 1].text; }
   // else { display = 'ERROR' }
@@ -90,7 +93,7 @@ export default function Writing({ story }) {
     storyUpdate['turn'] = storyUpdate.turn + 1;
     // frames = storyUpdate;
 
-    if (storyUpdate.turn > 8) {
+    if (storyUpdate.turn > 4) {
       storyUpdate['completed'] = true;
     }
 
@@ -106,14 +109,16 @@ export default function Writing({ story }) {
     // console.log(storyUpdate);
 
     await backendFunctions.updateStory(current._id, storyUpdate);
-    closeCurtains();
-    setTimeout(() => setCurrent({}), 1000);
+
     // if (storyUpdate.turn <= 8) {
     // window.location.reload(false);
     // }
-    if (storyUpdate.turn > 8) {
-      //do something 
-      console.log('Do something')
+    if (storyUpdate.turn <= 4) {
+      closeCurtains();
+      setTimeout(() => setCurrent({}), 1000);
+    }
+    else if (storyUpdate.turn > 4) {
+      setAlive(true);
     }
 
   }
@@ -127,17 +132,20 @@ export default function Writing({ story }) {
 
   return (
     <div className='workspace'>
-      <div className='promptHeader'>
-        <p className='turnCounter'>Turn # {turn}</p>
-        <img id='writePrompt' src={imgSrc} alt="a terrible drawing" />
-      </div>
-      <p className='instructions' >Write what you think might follow this image, then click submit. </p>
-      <p>{400 - count}/400 characters remaining</p>
-      <form onSubmit={handleTextSubmit}>
-        <textarea maxLength={400} className='text-display' placeholder="Write a story based on the above image."
-          onChange={handleTextChange} name="text" />
-        <button className='submit-button'>Submit</button>
-      </form>
+      {(alive === false) ? <>
+        <div className='promptHeader'>
+          <p className='turnCounter'>Turn # {turn}</p>
+          <img id='writePrompt' src={imgSrc} alt="a terrible drawing" />
+        </div>
+        <p className='instructions' >Write what you think might follow this image, then click submit. </p>
+        <p>{400 - count}/400 characters remaining</p>
+        <form onSubmit={handleTextSubmit}>
+          <textarea maxLength={400} className='text-display' placeholder="Write a story based on the above image."
+            onChange={handleTextChange} name="text" />
+          <button className='submit-button'>Submit</button>
+        </form>
+      </>
+        : <Storybook story={current} isAlive={alive} />}
     </div>
   )
 }

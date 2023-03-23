@@ -4,7 +4,7 @@ import Flickity from 'react-flickity-component'
 import 'flickity/dist/flickity.css';
 
 
-export default function Storybook({ story }) {
+export default function Storybook({ story, isAlive }) {
 
   const { title, frames } = story;
   console.log('Storybook has been called')
@@ -23,6 +23,7 @@ export default function Storybook({ story }) {
       reloadOnUpdate // default false
       static // default false
     >
+      {isAlive ? <div className='frame'>It's aliiiive!!!</div> : <></>}
       <div className='frame'>{title}</div>
       {frames.map((frame, index) => (<Frame frame={frame} key={index}
       />))}

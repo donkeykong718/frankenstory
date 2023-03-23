@@ -61,8 +61,8 @@ export default function Drawing({ story }) {
     storyUpdate['turn'] = storyUpdate.turn + 1;
 
     let newItem;
-    if (currentUser._id !== 0) { newItem = { text: input, user: currentUser._id } }
-    else newItem = { text: input, user: null };
+    if (currentUser._id !== 0) { newItem = { text: canvas.toDataURL(), user: currentUser._id } }
+    else newItem = { text: canvas.toDataURL(), user: null };
     framesArray.push(newItem);
     // console.log(`Frames array is ${framesArray}`);
     storyUpdate['frames'] = framesArray;

@@ -1,5 +1,5 @@
 import "./gallery.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Storybook from "./Storybook";
 
 export default function Thumbnail({ story, index }) {
@@ -38,14 +38,14 @@ export default function Thumbnail({ story, index }) {
         className="thumbnail"
       >
         <h3>{title}</h3>
-        {frames[6].text.length > 400 ? (
-          <img src={frames[6].text} alt="thumbnail" />
+        {frames[3].text.length > 400 ? (
+          <img src={frames[3].text} alt="thumbnail" />
         ) : (
-          <p>{frames[6].text}</p>
+          <p>{frames[3].text}</p>
         )}
         <button onClick={handleSelection}>Select story</button>
       </div>
-      {select === story ? <Storybook story={story} /> : <></>}
+      {select === story ? <Storybook story={story} isAlive={false} /> : <></>}
     </>
   );
 }
