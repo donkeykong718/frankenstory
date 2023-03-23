@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import * as backendFunctions from "../../services/stories";
 import ListStories from "./ListStories";
 import prompts from "../../prompts.json";
-import { StoryContext, UserContext } from "../../App";
+import { StoryContext, UserContext, GameContext } from "../../App";
 
 import "./side-bar.css";
 
@@ -17,11 +17,28 @@ import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 function Sidebar() {
   const { current, setCurrent } = useContext(StoryContext);
   const { user, setUser } = useContext(UserContext);
+  const { playing, setPlaying } = useContext(GameContext)
 
   let currentUser = JSON.parse(localStorage.getItem('user'));
   if (!currentUser) { currentUser = { _id: '0', username: 'guest' } }
   // console.log('The curent user in the SideBar is:')
   // console.log(currentUser._id);
+
+  const openCurtains = () => {
+    const curtainL = document.getElementById('curtain-L');
+    const curtainR = document.getElementById('curtain-R');
+
+    if (!playing) {
+      const mainContainer = document.getElementById('main-container');
+
+      curtainL.classList.add('slideleft');
+      curtainR.classList.add('sideright');
+      setTimeout(() => mainContainer.classList.add('slideup'), 1500)
+    }
+
+    curtainL.classList.add('slideleft');
+    curtainR.classList.add('sideright');
+  }
 
 
   const randomIndex = Math.floor(Math.random() * prompts.length);
@@ -85,6 +102,7 @@ function Sidebar() {
     // console.log("The current story is:");
     // console.log(currentStory);
     setCurrent(currentStory);
+    openCurtains();
   };
 
   return (

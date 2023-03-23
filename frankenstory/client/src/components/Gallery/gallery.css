@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
 
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+
 body {
   background: #EEE;
 }
@@ -181,6 +183,27 @@ li {
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.alive {
+  font-family: 'Creepster', sans-serif;
+  color: #963484;
+  font-size: 3em;
+  text-shadow: 5px 5px 10px #A6CFD5;
+  background-color: #D2BF55;
+  animation-name: itsalive;
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+}
+
+@keyframes itsalive {
+  from {
+    font-size: 0;
+  }
+
+  to {
+    font-size: 4em;
+  }
 }
 
 #curtain-L {
