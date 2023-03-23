@@ -27,7 +27,7 @@
 }
 
 .highlight {
-  color: greenyellow
+  color: #963484;
 }
 
 .login-form{
@@ -41,11 +41,34 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* background: content-box radial-gradient(#963484, #A6CFD5);} */
   background-color: #FFF;
   pointer-events: auto;
-  border: solid; 
-  border: 1px solid #963484; box-shadow: #1E90FF;
+  border: 1px, solid, #963484; 
+  box-shadow: #1E90FF;
+  padding: 20px 20px;
+  transition: 1s;
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+  
+}
+
+.login-btn:hover{
+  transform: scale(1.03);
+  letter-spacing: 4px;
+  background-color: #7FFFD4;
+  color: #1E90FF;
+}
+
+.show {
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+}
+
+.show.active {
+  transform: translateY(100px) scale(0) rotateY(180deg);
+  opacity: 0;
 }
 
 .form-box{
@@ -68,7 +91,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 5vh;
+  padding-top: 4vh;
   padding-bottom: 3vh;
   display: flex;
   flex-direction: column;
@@ -77,7 +100,7 @@
   font-weight: lighter;
   color: #D2BF55;
   font-weight: 600;
-  font-size: 32px;
+  font-size: 90px;
   font-family: 'Creepster', display;
   text-shadow: #963484 1px 1px 0px, rgb(170, 170, 170) 2px 2px 0px;
 }
