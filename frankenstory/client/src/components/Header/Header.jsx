@@ -8,11 +8,9 @@ import LogoImg from "./Header assets/Frank_logo.svg";
 import { UserContext, GameContext, StoryContext } from "../../App";
 import FrankAddNew from "../side-bar/side-bar assets/FrankAddNew2.svg";
 
-
 function Header({ handleLoginClick }) {
-
   const { playing, setPlaying } = useContext(GameContext);
-  const { current, setCurrent } = useContext(StoryContext)
+  const { current, setCurrent } = useContext(StoryContext);
   const [modal, setModal] = useState(false);
 
   const modalRef = useRef(null);
@@ -54,34 +52,38 @@ function Header({ handleLoginClick }) {
   const handleLogOut = () => {
     localStorage.clear();
 
-    setUser({ _id: 0, username: 'guest' });
-  }
+    setUser({ _id: 0, username: "guest" });
+  };
 
   const handleGallery = () => {
-
-    const curtainL = document.getElementById('curtain-L');
-    const curtainR = document.getElementById('curtain-R');
+    const curtainL = document.getElementById("curtain-L");
+    const curtainR = document.getElementById("curtain-R");
 
     if (!playing) {
-      const mainContainer = document.getElementById('main-container');
+      const mainContainer = document.getElementById("main-container");
 
-      curtainL.classList.add('slideleft');
-      curtainR.classList.add('sideright');
-      setTimeout(() => mainContainer.classList.add('slideup'), 1500)
+      curtainL.classList.add("slideleft");
+      curtainR.classList.add("sideright");
+      setTimeout(() => mainContainer.classList.add("slideup"), 1500);
     }
 
-    if (curtainL.classList.contains('slideleft') === false) { curtainL.classList.add('slideleft'); }
-    if (curtainR.classList.contains('slideright') === false) { curtainR.classList.add('sideright'); }
+    if (curtainL.classList.contains("slideleft") === false) {
+      curtainL.classList.add("slideleft");
+    }
+    if (curtainR.classList.contains("slideright") === false) {
+      curtainR.classList.add("sideright");
+    }
 
-    if (current) { setCurrent({}) };
-
-  }
+    if (current) {
+      setCurrent({});
+    }
+  };
 
   return (
     <>
       {modal && (
         <div ref={modalRef}>
-          <SignInForm />
+          <SignInForm modal={modal} setModal={setModal} />
         </div>
       )}
 
@@ -93,17 +95,24 @@ function Header({ handleLoginClick }) {
         {/* <ul className="header-list">
           <li>Logged in as: {username}</li> */}
 
-
         <div className="navbar">
           {/* <div onClick={createStory}>
         <img src={FrankAddNew}  className="addNew" alt="Create New" />Create New FrankenStory! </div> */}
-          <div onClick={handleGallery} className="loginicon">Gallery</div>
-          <div onClick={handleClick} className="loginicon">Sign In</div>
-          <div onClick={handleLogOut} className='loginicon'>Log Out</div>
+          <div onClick={handleGallery} className="loginicon">
+            Gallery
+          </div>
+          <div onClick={handleClick} className="loginicon">
+            Sign In
+          </div>
+          <div onClick={handleLogOut} className="loginicon">
+            Log Out
+          </div>
         </div>
 
         <div className="navbar2">
-          <div className="username-welcome">Welcome, {userDetails.username}</div>
+          <div className="username-welcome">
+            Welcome, {userDetails.username}
+          </div>
         </div>
       </div>
     </>
