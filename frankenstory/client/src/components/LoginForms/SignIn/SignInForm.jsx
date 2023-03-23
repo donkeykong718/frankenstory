@@ -1,5 +1,9 @@
 import React from "react";
 import "./SignInForm.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { signin, signup } from "../../../services/users";
+import Frank from "../SignIn/FRANK.png";
 import { useEffect, useState, useContext } from "react";
 import { signin, signup, getUser } from "../../../services/users";
 import { UserContext } from "../../../App";
@@ -29,6 +33,7 @@ const SignInForm = ({ isShowLogin }) => {
     setLoading(false);
 
   }
+  
   // function closeForm() {
   //   // get the parent element of the login form
   //   const loginForm = document.querySelector('.login-form').parentElement;
@@ -52,7 +57,7 @@ const SignInForm = ({ isShowLogin }) => {
         {!stage ?
           <form onSubmit={handleSubmit}>
             <div></div>
-            {/* <div><img src={FrankAddNew} onClick="" className="addNew" alt="Create New" /></div> */}
+            <div><img src={Frank} onClick="" className="addNew" alt="Create New" /></div>
 
             <h1 className="login-text">Sign In</h1>
 
@@ -92,6 +97,35 @@ const SignInForm = ({ isShowLogin }) => {
             </div>
           </form>
           : <>
+                  <form onSubmit={handleSignup}>
+                  <div><img src={Frank} onClick="" className="addNew" alt="Create New" /></div>
+
+          <div></div>
+          <h1 className="login-text">Sign Up</h1>
+
+          <label>Username</label>
+
+          <br></br>
+
+          <input
+            type="text"
+            value={text}
+            name="username"
+            onChange={(e) => setText(e.target.value)}
+            className="login-box"
+          />
+          <br></br>
+
+          <label>Password</label>
+          <br></br>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            className="login-box"
+          />
+          <br></br>
             <form onSubmit={handleSignup}>
               {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
               <div></div>

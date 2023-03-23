@@ -13,6 +13,7 @@
   max-height: calc(100vh - 9rem);
   overflow-y: auto;
   z-index: 3;
+  
 }
 
 .sidebar.open {
@@ -35,6 +36,7 @@
   padding: 10px;
   font-family: 'Schoolbell', cursive;
   text-align: center;
+  
 
   /* border-bottom: 1px solid #ccc; */
 }
@@ -69,7 +71,7 @@
 }
 
 .addNew {
-  width: 100px;
+  width: 160px;
   margin: 0 auto;
   display: flex;
   align-items: center;
