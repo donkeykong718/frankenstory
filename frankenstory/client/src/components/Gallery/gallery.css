@@ -115,6 +115,7 @@ body {
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
+  padding-top: 25px;
 }
 
 #welcome-box {
