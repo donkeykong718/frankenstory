@@ -43,7 +43,9 @@ function App() {
         <Route path="/" element={
           <StoryContext.Provider value={{ current, setCurrent }}>
             <UserContext.Provider value={{ user, setUser }}>
-              <Header />
+              <div id='headerbox'>
+                <Header />
+              </div>
             </UserContext.Provider>
             <Sidebar />
             {Object.keys(current).length === 0 ? <Landing /> : <Workspace />}
@@ -53,7 +55,7 @@ function App() {
         <Route path="/user/sign-in" element={<UserContext.Provider value={{ user, setUser }}>
           <SignIn />
         </UserContext.Provider>} /> */}
-        <Route path="/story/gallery/" element={<Gallery />} />
+        {/* <Route path="/story/gallery/" element={<Gallery />} /> */}
 
       </Routes>
     </>

@@ -11,6 +11,8 @@ export default function Frame({ frame }) {
   text.length > 400 ? type = 'image' : type = 'text';
   console.log(type);
 
+  let contributor;
+
   const Contributor = async () => {
 
     if (user !== null) {
@@ -20,18 +22,16 @@ export default function Frame({ frame }) {
     return contributor;
   }
 
-  let contributor = Contributor();
+  contributor = Contributor();
 
   if (contributor !== 'guest') { contributor = contributor.username }
 
 
   return (
     <div className="frame">
-      <div>
-        {type === 'image' ? <img src={text} alt="" /> : <p>{text}</p>
-        }
-        {contributor && <p>Created by: {contributor}</p>}
-      </div>
+      {type === 'image' ? <img src={text} alt="" /> : <p>{text}</p>
+      }
+      {contributor && <p>Created by: {contributor}</p>}
     </div>
 
   )

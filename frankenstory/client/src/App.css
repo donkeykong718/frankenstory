@@ -5,8 +5,14 @@
   background-color: #DBFCFF;
 }
 
+#headerbox {
+  position: fixed;
+  z-index: 3;
+}
+
 .App {
   text-align: center;
+  background: #EEE;
 }
 
 .App-logo {
@@ -39,6 +45,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

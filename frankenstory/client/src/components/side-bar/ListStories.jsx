@@ -99,11 +99,10 @@ function ListStories({ story }) {
 
   return (
     <div className="story-list">
-      {/* <p>Story ID: {_id}</p> */}
       <li className="current-turn"><img src={circle} className="completionCircle" alt="" />
       </li>
       {valid ?
-        <p>Next up:
+        <p style={{ textAlign: 'center', fontSize: '1.5em' }}>Turn # {turn} <br></br>
           {turn % 2 === 0 ? <span> writing </span> : <span> drawing </span>}
           {/* <span>frame </span>
         {Math.floor(turn / 2)} */}
