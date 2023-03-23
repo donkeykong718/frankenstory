@@ -21,12 +21,6 @@ const SignInForm = ({ isShowLogin }) => {
     console.log(response);
     
   }
-  // function closeForm() {
-  //   // get the parent element of the login form
-  //   const loginForm = document.querySelector('.login-form').parentElement;
-  //   // remove the "active" class from the parent element to hide the form
-  //   loginForm.classList.remove('active');
-  // }
   
   return (
     <div className={`${isShowLogin ? "active" : ""} show`}>
@@ -75,7 +69,8 @@ const SignInForm = ({ isShowLogin }) => {
         </form>
           : <>
                   <form onSubmit={handleSignup}>
-          {/* <div className="logo-box"><img src={LogoImg} alt="" /> FrankenStory</div> */}
+                  <div><img src={Frank} onClick="" className="addNew" alt="Create New" /></div>
+
           <div></div>
           <h1 className="login-text">Sign Up</h1>
 
