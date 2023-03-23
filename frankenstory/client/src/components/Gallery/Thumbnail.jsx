@@ -1,5 +1,5 @@
 import "./gallery.css";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Storybook from "./Storybook";
 
 export default function Thumbnail({ story, index }) {

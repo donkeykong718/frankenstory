@@ -71,12 +71,10 @@ function Gallery() {
       >
         Gallery
       </h1>
-      {/* <ul className="gallery-list">
+      <ul className="gallery-list">
         {finstories.map((story, index) => (<Thumbnail story={story} key={index} index={index}
         />))}
-      </ul> */}
-      {/* {selection &&
-          <div>{pictureBook(featured)}</div>} */}
+      </ul> 
     </div>
   );
 }

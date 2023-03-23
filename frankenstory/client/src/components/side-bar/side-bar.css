@@ -3,7 +3,7 @@
 
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 350px;
   left: -200px;
   width: 200px;
   height: 100vh;
@@ -13,6 +13,7 @@
   max-height: calc(100vh - 9rem);
   overflow-y: auto;
   z-index: 3;
+
 }
 
 .sidebar.open {
