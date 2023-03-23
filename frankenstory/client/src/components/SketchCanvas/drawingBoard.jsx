@@ -397,19 +397,8 @@ const DrawingCanvas = () => {
   const saveImageToLocal = async (event) => {
     const link = event.currentTarget;
     link.setAttribute("download", "canvas.png");
-    const image = canvasRef.current.toDataURL("image/png");
+    const image = canvasRef.current("image/png");
     console.log(image);
-
-    try {
-      const handle = await window.showSaveFilePicker();
-      const file = await handle.getFile();
-      const writeable = await file.createWritable();
-      await writeable.write(image);
-      await writeable.close();
-      link.setAttribute("href", handle.nativeURL);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const [selectedColor, setSelectedColor] = useState("#000000");
