@@ -62,6 +62,7 @@ function Gallery() {
     >
       <h1
         style={{
+fontFamily: 'Creepster',
           color: "#A6CFD5",
           textAlign: "center",
           margin: "60px",

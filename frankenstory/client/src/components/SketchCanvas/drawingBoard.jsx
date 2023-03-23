@@ -490,6 +490,7 @@ const DrawingCanvas = () => {
           <button onClick={undo}>Undo</button>
           <button onClick={redo}>Redo</button>
           <button onClick={clear}>Clear</button>
+          
           <buttonclass className="story-button">
             <a
               id="download_image_link"
