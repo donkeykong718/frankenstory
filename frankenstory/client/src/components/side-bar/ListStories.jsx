@@ -1,7 +1,7 @@
 import * as backendFunctions from '../../services/stories';
 // import { getUser } from '../../services/users'
 import { useEffect, useState, useContext } from 'react'
-import { StoryContext } from '../../App';
+import { StoryContext, GameContext } from '../../App';
 
 import CompletionCircle_1 from './side-bar assets/CompletionCircle_1.svg'
 import CompletionCircle_2 from './side-bar assets/CompletionCircle_2.svg'
@@ -19,6 +19,7 @@ function ListStories({ story }) {
   if (!currentUser) { currentUser = { _id: 0, username: 'guest' } }
 
   const { current, setCurrent } = useContext(StoryContext);
+  const { playing, setPlaying } = useContext(GameContext)
 
   const [circle, setCircle] = useState();
   const [valid, setValid] = useState(true);
@@ -42,11 +43,30 @@ function ListStories({ story }) {
     else setValid(true);
   }, []);
 
+  const openCurtains = () => {
+    const curtainL = document.getElementById('curtain-L');
+    const curtainR = document.getElementById('curtain-R');
+
+    if (!playing) {
+      const mainContainer = document.getElementById('main-container');
+
+      curtainL.classList.add('slideleft');
+      curtainR.classList.add('sideright');
+      setTimeout(() => mainContainer.classList.add('slideup'), 1500)
+    }
+
+    curtainL.classList.add('slideleft');
+    curtainR.classList.add('sideright');
+  }
+
+
   const handleGetStory = async () => {
     const currentStory = await backendFunctions.getStory(_id)
     setCurrent(currentStory);
-    console.log("Current story is")
-    console.log(current);
+    openCurtains();
+    // console.log("Current story is")
+    // console.log(current);
+
     // onSelection(currentStory);
   }
 
@@ -99,16 +119,18 @@ function ListStories({ story }) {
 
   return (
     <div className="story-list">
-      <li className="current-turn"><img src={circle} className="completionCircle" alt="" />
+      {valid ? <><li className="current-turn"><img src={circle} className="completionCircle" alt="" />
       </li>
-      {valid ?
         <p style={{ textAlign: 'center', fontSize: '1.5em' }}>Turn # {turn} <br></br>
           {turn % 2 === 0 ? <span> writing </span> : <span> drawing </span>}
-          {/* <span>frame </span>
-        {Math.floor(turn / 2)} */}
-        </p> : <p>Not Available. You already contributed.</p>}
-      {/* <p>Most recent contribution by: {lastUser}</p> */}
-      {valid ? <button onClick={handleGetStory}>Select story</button> : <button type="button" disabled>Select story</button>}
+        </p>
+        <button onClick={handleGetStory}>Select story</button></>
+        : <>
+          <li className="current-turn"><img style={{ filter: 'brightness(50%' }} src={circle} className="completionCircle" alt="" />
+          </li>
+          <p style={{ textAlign: 'center', fontSize: '1.25em', color: 'darkgray' }}>Not Available.<br></br>
+            You already contributed.</p>
+          <br></br> </>}
     </div>
   )
 }

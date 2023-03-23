@@ -10,9 +10,14 @@
   z-index: 3;
 }
 
+#footer {
+  position: fixed;
+  z-index: 3;
+}
+
+
 .App {
   text-align: center;
-  background: #EEE;
 }
 
 .App-logo {

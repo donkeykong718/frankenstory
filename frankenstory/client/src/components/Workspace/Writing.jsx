@@ -76,6 +76,13 @@ export default function Writing({ story }) {
   //   setCurrent(newStory);
   // }
 
+  const closeCurtains = () => {
+    const curtainL = document.getElementById('curtain-L');
+    const curtainR = document.getElementById('curtain-R');
+    curtainL.classList.remove('slideleft');
+    curtainR.classList.remove('sideright');
+  }
+
   const handleTextSubmit = async (e) => {
     e.preventDefault();
 
@@ -99,8 +106,16 @@ export default function Writing({ story }) {
     // console.log(storyUpdate);
 
     await backendFunctions.updateStory(current._id, storyUpdate);
-    setCurrent({});
-    if (storyUpdate.turn <= 8) { window.location.reload(false); }
+    closeCurtains();
+    setTimeout(() => setCurrent({}), 1000);
+    // if (storyUpdate.turn <= 8) {
+    // window.location.reload(false);
+    // }
+    if (storyUpdate.turn > 8) {
+      //do something 
+      console.log('Do something')
+    }
+
   }
 
   // let newStory;

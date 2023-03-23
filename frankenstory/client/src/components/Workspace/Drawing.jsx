@@ -39,28 +39,11 @@ export default function Drawing({ story }) {
     // setTemp(storyUpdate)
   }
 
-  const handleTextSubmit = async (e) => {
-    e.preventDefault();
-
-    let storyUpdate = story;
-    storyUpdate['turn'] = storyUpdate.turn + 1;
-    if (storyUpdate.turn > 8) {
-      storyUpdate['completed'] = true;
-    }
-    // frames = storyUpdate;
-    console.log(`Input is ${input}`);
-
-    let newItem;
-    if (currentUser._id !== 0) { newItem = { text: input, user: currentUser._id } }
-    else newItem = { text: input, user: null };
-    framesArray.push(newItem);
-    console.log(`Frames array is ${framesArray}`);
-    storyUpdate['frames'] = framesArray;
-    console.log(storyUpdate);
-    // setTemp(storyUpdate);
-    await backendFunctions.updateStory(current._id, storyUpdate);
-    setCurrent({});
-    window.location.reload(false);
+  const closeCurtains = () => {
+    const curtainL = document.getElementById('curtain-L');
+    const curtainR = document.getElementById('curtain-R');
+    curtainL.classList.remove('slideleft');
+    curtainR.classList.remove('sideright');
   }
 
   const handleDrawing = async () => {
@@ -71,21 +54,23 @@ export default function Drawing({ story }) {
       console.log(canvas.toDataURL())
       // saveAs(blob, "image.png");
     });
+    if (!input) { input = 'Whoops, you didn\'t draw anything.' }
     console.log('The handle drawing ran.')
 
     let storyUpdate = story;
     storyUpdate['turn'] = storyUpdate.turn + 1;
 
     let newItem;
-    if (currentUser._id !== 0) { newItem = { text: canvas.toDataURL(), user: currentUser._id } }
-    else newItem = { text: canvas.toDataURL(), user: null };
+    if (currentUser._id !== 0) { newItem = { text: input, user: currentUser._id } }
+    else newItem = { text: input, user: null };
     framesArray.push(newItem);
     // console.log(`Frames array is ${framesArray}`);
     storyUpdate['frames'] = framesArray;
     console.log(storyUpdate);
     // setTemp(storyUpdate);
     await backendFunctions.updateStory(current._id, storyUpdate);
-    setCurrent({});
+    closeCurtains();
+    setTimeout(() => setCurrent({}), 1000);
     // window.location.reload(false);
   }
 

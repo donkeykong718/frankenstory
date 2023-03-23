@@ -29,7 +29,7 @@ export default function Frame({ frame }) {
 
   return (
     <div className="frame">
-      {type === 'image' ? <img src={text} alt="" /> : <p>{text}</p>
+      {type === 'image' ? <img src={text} alt="" /> : <p style={{ fontFamily: 'Schoolbell' }}>{text}</p>
       }
       {contributor && <p>Created by: {contributor}</p>}
     </div>
